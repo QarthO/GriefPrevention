@@ -57,7 +57,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
@@ -232,7 +231,7 @@ public abstract class DataStore
             }
             catch (Exception e)
             {
-                GriefPrevention.AddLogEntry("Failed to read from the soft mute data file: " + e.toString());
+                GriefPrevention.AddLogEntry("Failed to read from the soft mute data file: " + e);
                 e.printStackTrace();
             }
 
@@ -263,7 +262,7 @@ public abstract class DataStore
         }
         catch (Exception e)
         {
-            GriefPrevention.AddLogEntry("Failed to read from the banned words data file: " + e.toString());
+            GriefPrevention.AddLogEntry("Failed to read from the banned words data file: " + e);
             e.printStackTrace();
             return new ArrayList<>();
         }
