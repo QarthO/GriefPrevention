@@ -65,7 +65,7 @@ public class FakeBlockVisualization extends BlockBoundaryVisualization
             case SUBDIVISION -> Material.WHITE_WOOL.createBlockData();
             case INITIALIZE_ZONE, NATURE_RESTORATION_ZONE -> Material.DIAMOND_BLOCK.createBlockData();
             case CONFLICT_ZONE -> Material.NETHERRACK.createBlockData();
-            default -> Material.GOLD_BLOCK.createBlockData();
+            default -> Material.RED_WOOL.createBlockData();
         });
     }
 
