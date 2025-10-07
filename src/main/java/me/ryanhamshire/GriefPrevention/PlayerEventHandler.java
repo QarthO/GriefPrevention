@@ -38,7 +38,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Tag;
 import org.bukkit.World;
@@ -121,10 +120,6 @@ class PlayerEventHandler implements Listener
     //number of milliseconds in a day
     private final long MILLISECONDS_IN_DAY = 1000 * 60 * 60 * 24;
 
-    //vehicle owner key
-    private final NamespacedKey VEHICLE_OWNER;
-    private final NamespacedKey RIDEABLE_OWNER;
-
     //timestamps of login and logout notifications in the last minute
     private final ArrayList<Long> recentLoginLogoutNotifications = new ArrayList<>();
 
@@ -149,8 +144,6 @@ class PlayerEventHandler implements Listener
     {
         this.dataStore = dataStore;
         this.instance = plugin;
-        this.VEHICLE_OWNER = new NamespacedKey(instance, "vehicle_owner");
-        this.RIDEABLE_OWNER = new NamespacedKey(instance, "rideable_owner");
         // Initialize empty on load so never null just in case. Reload after plugins enable.
         this.bannedWordFinder = new WordFinder(List.of());
         this.pvpBlockedCommands = new MonitoredCommands(List.of());
@@ -1163,11 +1156,13 @@ class PlayerEventHandler implements Listener
             
             // Checks if vehicle has owner.
             // See: {@link VehicleHandler}
-            PersistentDataContainer pdc = vehicle.getPersistentDataContainer();
-            if(!pdc.has(VEHICLE_OWNER)) return;
 
-            // ignore checks if vehicle owner is the player
-            String playerId = pdc.get(VEHICLE_OWNER, PersistentDataType.STRING);
+            // gets pdc from vehicle
+            PersistentDataContainer pdc = vehicle.getPersistentDataContainer();
+            if(!pdc.has(instance.VEHICLE_OWNER)) return;
+
+            // ignore checks if vehicle's owner is the player interacting
+            String playerId = pdc.get(instance.VEHICLE_OWNER, PersistentDataType.STRING);
             if(player.getUniqueId().toString().equals(playerId)) return;
 
             //if the entity is in a claim
@@ -1222,11 +1217,13 @@ class PlayerEventHandler implements Listener
 
             // Checks if rideable has owner.
             // See: {@link RideableHandler}
-            PersistentDataContainer pdc = entity.getPersistentDataContainer();
-            if(!pdc.has(RIDEABLE_OWNER)) return;
 
-            // ignore checks if rideable owner is the player
-            String playerId = pdc.get(RIDEABLE_OWNER, PersistentDataType.STRING);
+            // gets pdc from rideable
+            PersistentDataContainer pdc = entity.getPersistentDataContainer();
+            if(!pdc.has(instance.RIDEABLE_OWNER)) return;
+
+            // ignore checks if rideable's owner is the player interacting
+            String playerId = pdc.get(instance.RIDEABLE_OWNER, PersistentDataType.STRING);
             if(player.getUniqueId().toString().equals(playerId)) return;
 
             Claim claim = this.dataStore.getClaimAt(entity.getLocation(), false, playerData.lastClaim);
