@@ -1159,7 +1159,11 @@ class PlayerEventHandler implements Listener
 
             // gets pdc from vehicle
             PersistentDataContainer pdc = vehicle.getPersistentDataContainer();
-            if(!pdc.has(instance.VEHICLE_OWNER)) return;
+            if(pdc.has(instance.VEHICLE_OWNER)) {
+                // ignore checks if vehicle's owner is the player interacting
+                String playerId = pdc.get(instance.VEHICLE_OWNER, PersistentDataType.STRING);
+                if(player.getUniqueId().toString().equals(playerId)) return;
+            }
 
             // ignore checks if vehicle's owner is the player interacting
             String playerId = pdc.get(instance.VEHICLE_OWNER, PersistentDataType.STRING);
@@ -1214,17 +1218,16 @@ class PlayerEventHandler implements Listener
         if (instance.config_claims_preventTheft && entity instanceof Creature && itemInHand.getType() == Material.LEAD)
         {
 
-
             // Checks if rideable has owner.
             // See: {@link RideableHandler}
 
             // gets pdc from rideable
             PersistentDataContainer pdc = entity.getPersistentDataContainer();
-            if(!pdc.has(instance.RIDEABLE_OWNER)) return;
-
-            // ignore checks if rideable's owner is the player interacting
-            String playerId = pdc.get(instance.RIDEABLE_OWNER, PersistentDataType.STRING);
-            if(player.getUniqueId().toString().equals(playerId)) return;
+            if(pdc.has(instance.RIDEABLE_OWNER)) {
+                // ignore checks if rideable's owner is the player interacting
+                String playerId = pdc.get(instance.RIDEABLE_OWNER, PersistentDataType.STRING);
+                if(player.getUniqueId().toString().equals(playerId)) return;
+            }
 
             Claim claim = this.dataStore.getClaimAt(entity.getLocation(), false, playerData.lastClaim);
             if (claim != null)
