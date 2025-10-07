@@ -157,9 +157,10 @@
                     <version>3.0.0</version>
                     <configuration>
                         <java>
-                        <googleJavaFormat>
-                            <version>1.29.0</version>
-                        </googleJavaFormat>
+                            <eclipse>
+                                <version>4.26.0</version>
+                                <file>${project.basedir}/eclipse-format.xml</file>
+                            </eclipse>
                         </java>
                     </configuration>
                     <executions>
