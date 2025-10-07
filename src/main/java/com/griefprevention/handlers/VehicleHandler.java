@@ -14,7 +14,7 @@ import me.ryanhamshire.GriefPrevention.GriefPrevention;
 public class VehicleHandler implements Listener{
 
     private final NamespacedKey VEHICLE_OWNER = new NamespacedKey(GriefPrevention.instance, "vehicle_owner");
-
+    
     @EventHandler (ignoreCancelled = true)
     public void onExitVehicle(VehicleExitEvent event) {
 

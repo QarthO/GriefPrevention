@@ -123,6 +123,7 @@ class PlayerEventHandler implements Listener
 
     //vehicle owner key
     private final NamespacedKey VEHICLE_OWNER;
+    private final NamespacedKey RIDEABLE_OWNER;
 
     //timestamps of login and logout notifications in the last minute
     private final ArrayList<Long> recentLoginLogoutNotifications = new ArrayList<>();
@@ -149,6 +150,7 @@ class PlayerEventHandler implements Listener
         this.dataStore = dataStore;
         this.instance = plugin;
         this.VEHICLE_OWNER = new NamespacedKey(instance, "vehicle_owner");
+        this.RIDEABLE_OWNER = new NamespacedKey(instance, "rideable_owner");
         // Initialize empty on load so never null just in case. Reload after plugins enable.
         this.bannedWordFinder = new WordFinder(List.of());
         this.pvpBlockedCommands = new MonitoredCommands(List.of());
@@ -1216,6 +1218,17 @@ class PlayerEventHandler implements Listener
         //if preventing theft, prevent leashing claimed creatures
         if (instance.config_claims_preventTheft && entity instanceof Creature && itemInHand.getType() == Material.LEAD)
         {
+
+
+            // Checks if rideable has owner.
+            // See: {@link RideableHandler}
+            PersistentDataContainer pdc = entity.getPersistentDataContainer();
+            if(!pdc.has(RIDEABLE_OWNER)) return;
+
+            // ignore checks if rideable owner is the player
+            String playerId = pdc.get(RIDEABLE_OWNER, PersistentDataType.STRING);
+            if(player.getUniqueId().toString().equals(playerId)) return;
+
             Claim claim = this.dataStore.getClaimAt(entity.getLocation(), false, playerData.lastClaim);
             if (claim != null)
             {
