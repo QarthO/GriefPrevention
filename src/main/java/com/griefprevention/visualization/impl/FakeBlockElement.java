@@ -3,6 +3,7 @@ package com.griefprevention.visualization.impl;
 import org.bukkit.World;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
+
 import org.jetbrains.annotations.NotNull;
 
 import com.griefprevention.util.IntVector;

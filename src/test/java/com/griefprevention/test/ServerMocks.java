@@ -14,6 +14,7 @@ import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.Server;
+
 import org.jetbrains.annotations.NotNull;
 
 public final class ServerMocks

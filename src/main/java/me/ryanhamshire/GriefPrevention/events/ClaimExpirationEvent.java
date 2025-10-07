@@ -2,6 +2,7 @@ package me.ryanhamshire.GriefPrevention.events;
 
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
+
 import org.jetbrains.annotations.NotNull;
 
 import me.ryanhamshire.GriefPrevention.Claim;

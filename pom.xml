@@ -119,13 +119,13 @@
                 <configuration>
                     <java>
                         <eclipse>
-                            <version>4.26.0</version>
+                            <version>4.37</version>
                             <file>${project.basedir}/eclipse-format.xml</file>
                         </eclipse>
                         <removeUnusedImports/>
                         <importOrder>
                             <wildcardsLast>true</wildcardsLast>
-                            <order>java,javax,org,com,net,io,gg</order>
+                            <order>java,javax,org.bukkit,org,com.griefprevention,com.destroystokyo,com,io.papermc,io</order>
                             <semanticSort>false</semanticSort>
                         </importOrder>
                     </java>

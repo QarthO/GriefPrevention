@@ -1,6 +1,7 @@
 package com.griefprevention.visualization;
 
 import org.bukkit.World;
+
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

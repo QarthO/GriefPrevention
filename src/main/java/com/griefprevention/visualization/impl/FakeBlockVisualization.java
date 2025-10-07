@@ -9,6 +9,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Lightable;
+
 import org.jetbrains.annotations.NotNull;
 
 import com.griefprevention.util.IntVector;
@@ -49,8 +50,7 @@ public class FakeBlockVisualization extends BlockBoundaryVisualization
         {
             case SUBDIVISION -> Material.IRON_BLOCK.createBlockData();
             case INITIALIZE_ZONE -> Material.DIAMOND_BLOCK.createBlockData();
-            case CONFLICT_ZONE ->
-            {
+            case CONFLICT_ZONE -> {
                 BlockData fakeData = Material.REDSTONE_ORE.createBlockData();
                 ((Lightable) fakeData).setLit(true);
                 yield fakeData;

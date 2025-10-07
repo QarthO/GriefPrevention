@@ -1,6 +1,7 @@
 package me.ryanhamshire.GriefPrevention.events;
 
 import org.bukkit.command.CommandSender;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

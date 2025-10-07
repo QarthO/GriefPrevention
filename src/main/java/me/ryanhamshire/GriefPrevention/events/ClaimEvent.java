@@ -1,6 +1,7 @@
 package me.ryanhamshire.GriefPrevention.events;
 
 import org.bukkit.event.Event;
+
 import org.jetbrains.annotations.NotNull;
 
 import me.ryanhamshire.GriefPrevention.Claim;
