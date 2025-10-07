@@ -1006,7 +1006,6 @@ public class GriefPrevention extends JavaPlugin
 
         // If properties file exists, use it - old config has already been migrated.
         if (databasePropsFile.exists() && databasePropsFile.isFile())
-        
         {
             try (FileReader reader = new FileReader(databasePropsFile, StandardCharsets.UTF_8))
             {
