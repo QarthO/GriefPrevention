@@ -4,7 +4,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Vehicle;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -28,11 +27,5 @@ public class VehicleHandler implements Listener{
         Vehicle vehicle = event.getVehicle();
         vehicle.getPersistentDataContainer().set(instance.VEHICLE_OWNER, PersistentDataType.STRING, playerId);
     }
-
-    public void onEnterVehicle(VehicleEnterEvent event) {
-
-        // only care about players
-        if(!(event.getEntered() instanceof Player player)) return;
-
-    }
+    
 }
