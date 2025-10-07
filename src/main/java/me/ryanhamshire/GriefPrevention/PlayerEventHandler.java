@@ -1154,16 +1154,14 @@ class PlayerEventHandler implements Listener
         if (instance.config_claims_preventTheft && entity instanceof Vehicle vehicle)
         {
             
-            // Checks if vehicle has owner.
-            // See: {@link VehicleHandler}
-
-            // gets pdc from vehicle
+            // lets player enter their own vehicles
+            // See {@link VehicleHandler} to see how vehicle owners are set
             PersistentDataContainer pdc = vehicle.getPersistentDataContainer();
             if(pdc.has(instance.VEHICLE_OWNER)) {
-                // ignore checks if vehicle's owner is the player interacting
                 String playerId = pdc.get(instance.VEHICLE_OWNER, PersistentDataType.STRING);
                 if(player.getUniqueId().toString().equals(playerId)) return;
             }
+            
 
             //if the entity is in a claim
             Claim claim = this.dataStore.getClaimAt(entity.getLocation(), false, null);
@@ -1186,6 +1184,15 @@ class PlayerEventHandler implements Listener
         //if the entity is an animal, apply container rules
         if ((instance.config_claims_preventTheft && (entity instanceof Animals || entity instanceof Fish)) || (entity.getType() == EntityType.VILLAGER && instance.config_claims_villagerTradingRequiresTrust))
         {
+
+            // lets player interact with their own animals
+            // See {@link RideableHandler} to see how animal owners are set (only on dismount)
+            PersistentDataContainer pdc = entity.getPersistentDataContainer();
+            if(pdc.has(instance.RIDEABLE_OWNER)) {
+                String playerId = pdc.get(instance.RIDEABLE_OWNER, PersistentDataType.STRING);
+                if(player.getUniqueId().toString().equals(playerId)) return;
+            }
+
             //if the entity is in a claim
             Claim claim = this.dataStore.getClaimAt(entity.getLocation(), false, null);
             if (claim != null)
@@ -1214,10 +1221,8 @@ class PlayerEventHandler implements Listener
         if (instance.config_claims_preventTheft && entity instanceof Creature && itemInHand.getType() == Material.LEAD)
         {
 
-            // Checks if rideable has owner.
-            // See: {@link RideableHandler}
-
-            // gets pdc from rideable
+            // lets player leash their own rideables
+            // See {@link RideableHandler} to see how rideable owners are set
             PersistentDataContainer pdc = entity.getPersistentDataContainer();
             if(pdc.has(instance.RIDEABLE_OWNER)) {
                 // ignore checks if rideable's owner is the player interacting
