@@ -112,6 +112,26 @@
                     <reuseForks>false</reuseForks>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <java>
+                        <eclipse>
+                            <version>4.26.0</version>
+                            <file>${project.basedir}/eclipse-format.xml</file>
+                        </eclipse>
+                    </java>
+                </configuration>
+                <executions>
+                    <execution>
+                    <goals>
+                        <goal>check</goal>
+                    </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
 
         <pluginManagement>
@@ -150,27 +170,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>3.1.4</version>
-                </plugin>
-                <plugin>
-                    <groupId>com.diffplug.spotless</groupId>
-                    <artifactId>spotless-maven-plugin</artifactId>
-                    <version>3.0.0</version>
-                    <configuration>
-                        <java>
-                            <eclipse>
-                                <version>4.26.0</version>
-                                <file>${project.basedir}/eclipse-format.xml</file>
-                            </eclipse>
-                        </java>
-                    </configuration>
-                    <executions>
-                        <execution>
-                        <goals>
-                            <goal>apply</goal>
-                            <goal>check</goal>
-                        </goals>
-                        </execution>
-                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
