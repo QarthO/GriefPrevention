@@ -9,8 +9,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * An {@link org.bukkit.event.Event Event} called when GriefPrevention prevents PvP combat.
- * If cancelled, GriefPrevention will allow the event to complete normally.
+ * An {@link org.bukkit.event.Event Event} called when GriefPrevention prevents
+ * PvP combat. If cancelled, GriefPrevention will allow the event to complete
+ * normally.
  */
 public class PreventPvPEvent extends ClaimEvent implements Cancellable
 {
@@ -33,7 +34,8 @@ public class PreventPvPEvent extends ClaimEvent implements Cancellable
     }
 
     /**
-     * Get the attacking {@link Player}. May be {@code null} for damage from area of effect clouds and similar.
+     * Get the attacking {@link Player}. May be {@code null} for damage from area of
+     * effect clouds and similar.
      *
      * @return the attacker
      */
@@ -43,8 +45,8 @@ public class PreventPvPEvent extends ClaimEvent implements Cancellable
     }
 
     /**
-     * Get the {@link Entity} being attacked. This may be a {@link Player}
-     * or {@link org.bukkit.entity.Tameable Tameable}.
+     * Get the {@link Entity} being attacked. This may be a {@link Player} or
+     * {@link org.bukkit.entity.Tameable Tameable}.
      *
      * @return the {@code Entity} being attacked
      */

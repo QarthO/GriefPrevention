@@ -5,9 +5,11 @@ import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * An {@link org.bukkit.event.Event Event} called when a {@link Claim} is deleted.
+ * An {@link org.bukkit.event.Event Event} called when a {@link Claim} is
+ * deleted.
  *
- * <p>This event is not called when a claim is resized.
+ * <p>
+ * This event is not called when a claim is resized.
  *
  * @author Tux2
  */

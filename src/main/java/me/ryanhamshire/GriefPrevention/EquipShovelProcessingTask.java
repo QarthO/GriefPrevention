@@ -28,7 +28,7 @@ import org.bukkit.inventory.EquipmentSlot;
 //otherwise, it's spammy when players mouse-wheel past the shovel in their hot bars
 class EquipShovelProcessingTask implements Runnable
 {
-    //player data
+    // player data
     private final Player player;
 
     public EquipShovelProcessingTask(Player player)
@@ -39,38 +39,40 @@ class EquipShovelProcessingTask implements Runnable
     @Override
     public void run()
     {
-        //if he's not holding the golden shovel anymore, do nothing
-        if (GriefPrevention.instance.getItemInHand(player, EquipmentSlot.HAND).getType() != GriefPrevention.instance.config_claims_modificationTool)
+        // if he's not holding the golden shovel anymore, do nothing
+        if (GriefPrevention.instance.getItemInHand(player, EquipmentSlot.HAND)
+                .getType() != GriefPrevention.instance.config_claims_modificationTool)
             return;
 
         PlayerData playerData = GriefPrevention.instance.dataStore.getPlayerData(player.getUniqueId());
 
-        //reset any work he might have been doing
+        // reset any work he might have been doing
         playerData.lastShovelLocation = null;
         playerData.claimResizing = null;
 
-        //always reset to basic claims mode
+        // always reset to basic claims mode
         if (playerData.shovelMode != ShovelMode.Basic)
         {
             playerData.shovelMode = ShovelMode.Basic;
             GriefPrevention.sendMessage(player, TextMode.Info, Messages.ShovelBasicClaimMode);
         }
 
-        //tell him how many claim blocks he has available
+        // tell him how many claim blocks he has available
         int remainingBlocks = playerData.getRemainingClaimBlocks();
         GriefPrevention.sendMessage(player, TextMode.Instr, Messages.RemainingBlocks, String.valueOf(remainingBlocks));
 
-        //link to a video demo of land claiming, based on world type
+        // link to a video demo of land claiming, based on world type
         if (GriefPrevention.instance.creativeRulesApply(player.getLocation()))
         {
-            GriefPrevention.sendMessage(player, TextMode.Instr, Messages.CreativeBasicsVideo2, DataStore.CREATIVE_VIDEO_URL);
-        }
-        else if (GriefPrevention.instance.claimsEnabledForWorld(player.getWorld()))
+            GriefPrevention.sendMessage(player, TextMode.Instr, Messages.CreativeBasicsVideo2,
+                    DataStore.CREATIVE_VIDEO_URL);
+        } else if (GriefPrevention.instance.claimsEnabledForWorld(player.getWorld()))
         {
-            GriefPrevention.sendMessage(player, TextMode.Instr, Messages.SurvivalBasicsVideo2, DataStore.SURVIVAL_VIDEO_URL);
+            GriefPrevention.sendMessage(player, TextMode.Instr, Messages.SurvivalBasicsVideo2,
+                    DataStore.SURVIVAL_VIDEO_URL);
         }
 
-        //if standing in a claim owned by the player, visualize it
+        // if standing in a claim owned by the player, visualize it
         Claim claim = GriefPrevention.instance.dataStore.getClaimAt(player.getLocation(), true, playerData.lastClaim);
         if (claim != null && claim.checkPermission(player, ClaimPermission.Edit, null) == null)
         {

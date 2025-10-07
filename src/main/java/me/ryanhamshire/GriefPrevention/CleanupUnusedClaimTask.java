@@ -43,31 +43,34 @@ class CleanupUnusedClaimTask implements Runnable
     public void run()
     {
 
-
-        //determine area of the default chest claim
+        // determine area of the default chest claim
         int areaOfDefaultClaim = 0;
         if (GriefPrevention.instance.config_claims_automaticClaimsForNewPlayersRadius >= 0)
         {
-            areaOfDefaultClaim = (int) Math.pow(GriefPrevention.instance.config_claims_automaticClaimsForNewPlayersRadius * 2 + 1, 2);
+            areaOfDefaultClaim = (int) Math
+                    .pow(GriefPrevention.instance.config_claims_automaticClaimsForNewPlayersRadius * 2 + 1, 2);
         }
 
-        //if this claim is a chest claim and those are set to expire
-        if (ownerData.getClaims().size() == 1 && claim.getArea() <= areaOfDefaultClaim && GriefPrevention.instance.config_claims_chestClaimExpirationDays > 0)
+        // if this claim is a chest claim and those are set to expire
+        if (ownerData.getClaims().size() == 1 && claim.getArea() <= areaOfDefaultClaim
+                && GriefPrevention.instance.config_claims_chestClaimExpirationDays > 0)
         {
-            //if the owner has been gone at least a week, and if he has ONLY the new player claim, it will be removed
+            // if the owner has been gone at least a week, and if he has ONLY the new player
+            // claim, it will be removed
             Calendar sevenDaysAgo = Calendar.getInstance();
             sevenDaysAgo.add(Calendar.DATE, -GriefPrevention.instance.config_claims_chestClaimExpirationDays);
             if (sevenDaysAgo.getTime().after(new Date(ownerInfo.getLastPlayed())))
             {
-                if (expireEventCanceled())
-                    return;
+                if (expireEventCanceled()) return;
                 GriefPrevention.instance.dataStore.deleteClaim(claim, true, true);
 
-                GriefPrevention.AddLogEntry(" " + claim.getOwnerName() + "'s new player claim expired.", CustomLogEntryTypes.AdminActivity);
+                GriefPrevention.AddLogEntry(" " + claim.getOwnerName() + "'s new player claim expired.",
+                        CustomLogEntryTypes.AdminActivity);
             }
         }
 
-        //if configured to always remove claims after some inactivity period without exceptions...
+        // if configured to always remove claims after some inactivity period without
+        // exceptions...
         else if (GriefPrevention.instance.config_claims_expirationDays > 0)
         {
             Calendar earliestPermissibleLastLogin = Calendar.getInstance();
@@ -75,23 +78,26 @@ class CleanupUnusedClaimTask implements Runnable
 
             if (earliestPermissibleLastLogin.getTime().after(new Date(ownerInfo.getLastPlayed())))
             {
-                if (expireEventCanceled())
-                    return;
-                //make a copy of this player's claim list
+                if (expireEventCanceled()) return;
+                // make a copy of this player's claim list
                 Vector<Claim> claims = new Vector<>(ownerData.getClaims());
 
-                //delete them
+                // delete them
                 GriefPrevention.instance.dataStore.deleteClaimsForPlayer(claim.ownerID, true);
-                GriefPrevention.AddLogEntry(" All of " + claim.getOwnerName() + "'s claims have expired.", CustomLogEntryTypes.AdminActivity);
-                GriefPrevention.AddLogEntry("earliestPermissibleLastLogin#getTime: " + earliestPermissibleLastLogin.getTime(), CustomLogEntryTypes.Debug, true);
-                GriefPrevention.AddLogEntry("ownerInfo#getLastPlayed: " + ownerInfo.getLastPlayed(), CustomLogEntryTypes.Debug, true);
+                GriefPrevention.AddLogEntry(" All of " + claim.getOwnerName() + "'s claims have expired.",
+                        CustomLogEntryTypes.AdminActivity);
+                GriefPrevention.AddLogEntry(
+                        "earliestPermissibleLastLogin#getTime: " + earliestPermissibleLastLogin.getTime(),
+                        CustomLogEntryTypes.Debug, true);
+                GriefPrevention.AddLogEntry("ownerInfo#getLastPlayed: " + ownerInfo.getLastPlayed(),
+                        CustomLogEntryTypes.Debug, true);
             }
         }
     }
 
     public boolean expireEventCanceled()
     {
-        //see if any other plugins don't want this claim deleted
+        // see if any other plugins don't want this claim deleted
         ClaimExpirationEvent event = new ClaimExpirationEvent(this.claim);
         Bukkit.getPluginManager().callEvent(event);
         return event.isCancelled();

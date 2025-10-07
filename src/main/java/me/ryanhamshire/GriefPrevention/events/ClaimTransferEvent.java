@@ -9,8 +9,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 /**
- * An {@link org.bukkit.event.Event Event} called when a {@link Claim} is transferred.
- * If cancelled, the resulting changes will not be made.
+ * An {@link org.bukkit.event.Event Event} called when a {@link Claim} is
+ * transferred. If cancelled, the resulting changes will not be made.
  *
  * @author bertek41 on 10/30/2021
  */
@@ -26,14 +26,15 @@ public class ClaimTransferEvent extends ClaimEvent implements Cancellable
      * @param claim the {@link Claim} being transferred
      * @param newOwner the {@link UUID} of the new owner
      */
-    public ClaimTransferEvent(@NotNull Claim claim, @Nullable UUID newOwner) {
+    public ClaimTransferEvent(@NotNull Claim claim, @Nullable UUID newOwner)
+    {
         super(claim);
         this.newOwner = newOwner;
     }
 
     /**
-     * Get the {@link UUID} of the new owner of the claim.
-     * This may be {@code null} to indicate an administrative claim.
+     * Get the {@link UUID} of the new owner of the claim. This may be {@code null}
+     * to indicate an administrative claim.
      *
      * @return the {@code UUID} of the new owner
      */
@@ -43,8 +44,8 @@ public class ClaimTransferEvent extends ClaimEvent implements Cancellable
     }
 
     /**
-     * Set the {@link UUID} of the new owner of the claim.
-     * This may be {@code null} to indicate an administrative claim.
+     * Set the {@link UUID} of the new owner of the claim. This may be {@code null}
+     * to indicate an administrative claim.
      *
      * @param newOwner the {@code UUID} of the new owner
      */

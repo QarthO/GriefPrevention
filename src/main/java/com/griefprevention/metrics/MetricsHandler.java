@@ -20,8 +20,9 @@ public class MetricsHandler
         try
         {
             addSimplePie("bukkit_implementation", plugin.getServer().getVersion().split("-")[1]);
+        } catch (Throwable ignored)
+        {
         }
-        catch (Throwable ignored) {}
     }
 
     private void addSimplePie(String id, boolean value)
@@ -31,8 +32,7 @@ public class MetricsHandler
 
     private void addSimplePie(String id, String value)
     {
-        metrics.addCustomChart(new Metrics.SimplePie(id, new Callable<String>()
-        {
+        metrics.addCustomChart(new Metrics.SimplePie(id, new Callable<String>() {
             @Override
             public String call() throws Exception
             {

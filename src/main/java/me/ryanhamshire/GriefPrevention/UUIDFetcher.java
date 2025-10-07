@@ -28,10 +28,10 @@ class UUIDFetcher
     private final List<String> names;
     private final boolean rateLimiting;
 
-    //cache for username -> uuid lookups
+    // cache for username -> uuid lookups
     static HashMap<String, UUID> lookupCache;
 
-    //record of username -> proper casing updates
+    // record of username -> proper casing updates
     static HashMap<String, String> correctedNames;
 
     public UUIDFetcher(List<String> names, boolean rateLimiting)
@@ -71,7 +71,7 @@ class UUIDFetcher
             }
         }
 
-        //try to get correct casing from local data
+        // try to get correct casing from local data
         GriefPrevention.AddLogEntry("Checking local server data to get correct casing for player names...");
         for (int i = 0; i < names.size(); i++)
         {
@@ -84,7 +84,7 @@ class UUIDFetcher
             }
         }
 
-        //look for local uuid's first
+        // look for local uuid's first
         GriefPrevention.AddLogEntry("Checking local server data for UUIDs already seen...");
         for (int i = 0; i < names.size(); i++)
         {
@@ -99,22 +99,21 @@ class UUIDFetcher
 
         names.removeIf(Objects::isNull);
 
-        //for online mode, call Mojang to resolve the rest
+        // for online mode, call Mojang to resolve the rest
         if (GriefPrevention.instance.getServer().getOnlineMode())
         {
             Pattern validNamePattern = Pattern.compile("^\\w+$");
 
             // Don't bother requesting UUIDs for invalid names from Mojang.
-            names.removeIf(name ->
-            {
-                if (name.length() >= 3 && name.length() <= 16 && validNamePattern.matcher(name).find())
-                    return false;
+            names.removeIf(name -> {
+                if (name.length() >= 3 && name.length() <= 16 && validNamePattern.matcher(name).find()) return false;
 
                 GriefPrevention.AddLogEntry(String.format("Cannot convert invalid name: %s", name));
                 return true;
             });
 
-            GriefPrevention.AddLogEntry("Calling Mojang to get UUIDs for remaining unresolved players (this is the slowest step)...");
+            GriefPrevention.AddLogEntry(
+                    "Calling Mojang to get UUIDs for remaining unresolved players (this is the slowest step)...");
 
             for (int i = 0; i * PROFILES_PER_REQUEST < names.size(); i++)
             {
@@ -123,38 +122,40 @@ class UUIDFetcher
                 do
                 {
                     HttpURLConnection connection = createConnection();
-                    String body = gson.toJson(names.subList(i * PROFILES_PER_REQUEST, Math.min((i + 1) * PROFILES_PER_REQUEST, names.size())));
+                    String body = gson.toJson(names.subList(i * PROFILES_PER_REQUEST,
+                            Math.min((i + 1) * PROFILES_PER_REQUEST, names.size())));
                     writeBody(connection, body);
                     retry = false;
                     array = null;
                     try
                     {
                         array = gson.fromJson(new InputStreamReader(connection.getInputStream()), JsonArray.class);
-                    }
-                    catch (Exception e)
+                    } catch (Exception e)
                     {
-                        //in case of error 429 too many requests, pause and then retry later
+                        // in case of error 429 too many requests, pause and then retry later
                         if (e.getMessage().contains("429"))
                         {
                             retry = true;
 
-                            //if this is the first time we're sending anything, the batch size must be too big
-                            //try reducing it
+                            // if this is the first time we're sending anything, the batch size must be too
+                            // big
+                            // try reducing it
                             if (i == 0 && PROFILES_PER_REQUEST > 1)
                             {
-                                GriefPrevention.AddLogEntry("Batch size " + PROFILES_PER_REQUEST + " seems too large.  Looking for a workable batch size...");
+                                GriefPrevention.AddLogEntry("Batch size " + PROFILES_PER_REQUEST
+                                        + " seems too large.  Looking for a workable batch size...");
                                 PROFILES_PER_REQUEST = Math.max(PROFILES_PER_REQUEST - 5, 1);
                             }
 
-                            //otherwise, keep the batch size which has worked for previous iterations
-                            //but wait a little while before trying again.
+                            // otherwise, keep the batch size which has worked for previous iterations
+                            // but wait a little while before trying again.
                             else
                             {
-                                GriefPrevention.AddLogEntry("Mojang says we're sending requests too fast.  Will retry every 30 seconds until we succeed...");
+                                GriefPrevention.AddLogEntry(
+                                        "Mojang says we're sending requests too fast.  Will retry every 30 seconds until we succeed...");
                                 Thread.sleep(30000);
                             }
-                        }
-                        else
+                        } else
                         {
                             throw e;
                         }
@@ -178,7 +179,7 @@ class UUIDFetcher
             }
         }
 
-        //for offline mode, generate UUIDs for the rest
+        // for offline mode, generate UUIDs for the rest
         else
         {
             GriefPrevention.AddLogEntry("Generating offline mode UUIDs for remaining unresolved players...");
@@ -215,7 +216,8 @@ class UUIDFetcher
 
     private static UUID getUUID(String id)
     {
-        return UUID.fromString(id.substring(0, 8) + "-" + id.substring(8, 12) + "-" + id.substring(12, 16) + "-" + id.substring(16, 20) + "-" + id.substring(20, 32));
+        return UUID.fromString(id.substring(0, 8) + "-" + id.substring(8, 12) + "-" + id.substring(12, 16) + "-"
+                + id.substring(16, 20) + "-" + id.substring(20, 32));
     }
 
     public static byte[] toBytes(UUID uuid)
@@ -229,9 +231,7 @@ class UUIDFetcher
     public static UUID fromBytes(byte[] array)
     {
         if (array.length != 16)
-        {
-            throw new IllegalArgumentException("Illegal byte array length: " + array.length);
-        }
+        { throw new IllegalArgumentException("Illegal byte array length: " + array.length); }
         ByteBuffer byteBuffer = ByteBuffer.wrap(array);
         long mostSignificant = byteBuffer.getLong();
         long leastSignificant = byteBuffer.getLong();
@@ -243,8 +243,9 @@ class UUIDFetcher
         UUID result = lookupCache.get(name);
         if (result == null)
         {
-            //throw up our hands and report the problem in the logs
-            //this player will lose his land claim blocks, but claims will stay in place as admin claims
+            // throw up our hands and report the problem in the logs
+            // this player will lose his land claim blocks, but claims will stay in place as
+            // admin claims
             throw new IllegalArgumentException(name);
         }
 

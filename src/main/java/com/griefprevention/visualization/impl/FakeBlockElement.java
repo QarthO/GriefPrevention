@@ -16,10 +16,7 @@ final class FakeBlockElement extends BlockElement
     private final @NotNull BlockData realBlock;
     private final @NotNull BlockData visualizedBlock;
 
-    FakeBlockElement(
-            @NotNull IntVector intVector,
-            @NotNull BlockData realBlock,
-            @NotNull BlockData visualizedBlock)
+    FakeBlockElement(@NotNull IntVector intVector, @NotNull BlockData realBlock, @NotNull BlockData visualizedBlock)
     {
         super(intVector);
         this.realBlock = realBlock;
@@ -55,10 +52,9 @@ final class FakeBlockElement extends BlockElement
     public int hashCode()
     {
         /*
-         * We specifically use the BlockElement hashcode because we
-         * want elements at conflicting locations to be overwritten
-         * by the last element added - elements are stored in a Set
-         * and corners are added last.
+         * We specifically use the BlockElement hashcode because we want elements at
+         * conflicting locations to be overwritten by the last element added - elements
+         * are stored in a Set and corners are added last.
          */
         return super.hashCode();
     }

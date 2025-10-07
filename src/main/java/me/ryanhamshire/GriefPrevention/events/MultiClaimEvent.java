@@ -21,8 +21,7 @@ public abstract class MultiClaimEvent extends Event
         if (claims == null)
         {
             this.claims = new HashSet<>();
-        }
-        else
+        } else
         {
             this.claims = new HashSet<>(claims);
         }

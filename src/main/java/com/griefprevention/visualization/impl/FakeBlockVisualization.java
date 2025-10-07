@@ -16,8 +16,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Consumer;
 
 /**
- * A {@link BoundaryVisualization} implementation that displays clientside blocks along
- * {@link com.griefprevention.visualization.Boundary Boundaries}.
+ * A {@link BoundaryVisualization} implementation that displays clientside
+ * blocks along {@link com.griefprevention.visualization.Boundary Boundaries}.
  */
 public class FakeBlockVisualization extends BlockBoundaryVisualization
 {
@@ -28,13 +28,16 @@ public class FakeBlockVisualization extends BlockBoundaryVisualization
      * Construct a new {@code FakeBlockVisualization}.
      *
      * @param world the {@link World} being visualized in
-     * @param visualizeFrom the {@link IntVector} representing the world coordinate being visualized from
+     * @param visualizeFrom the {@link IntVector} representing the world coordinate
+     *            being visualized from
      * @param height the height of the visualization
      */
-    public FakeBlockVisualization(@NotNull World world, @NotNull IntVector visualizeFrom, int height) {
+    public FakeBlockVisualization(@NotNull World world, @NotNull IntVector visualizeFrom, int height)
+    {
         super(world, visualizeFrom, height);
 
-        // Water is considered transparent based on whether the visualization is initiated in water.
+        // Water is considered transparent based on whether the visualization is
+        // initiated in water.
         waterTransparent = visualizeFrom.toBlock(world).getType() == Material.WATER;
     }
 
@@ -45,7 +48,8 @@ public class FakeBlockVisualization extends BlockBoundaryVisualization
         {
             case SUBDIVISION -> Material.IRON_BLOCK.createBlockData();
             case INITIALIZE_ZONE -> Material.DIAMOND_BLOCK.createBlockData();
-            case CONFLICT_ZONE -> {
+            case CONFLICT_ZONE ->
+            {
                 BlockData fakeData = Material.REDSTONE_ORE.createBlockData();
                 ((Lightable) fakeData).setLit(true);
                 yield fakeData;
@@ -53,7 +57,6 @@ public class FakeBlockVisualization extends BlockBoundaryVisualization
             default -> Material.GLOWSTONE.createBlockData();
         });
     }
-
 
     @Override
     protected @NotNull Consumer<@NotNull IntVector> addSideElements(@NotNull Boundary boundary)
@@ -70,7 +73,8 @@ public class FakeBlockVisualization extends BlockBoundaryVisualization
     }
 
     /**
-     * Create a {@link Consumer} that adds an appropriate {@link FakeBlockElement} for the given {@link IntVector}.
+     * Create a {@link Consumer} that adds an appropriate {@link FakeBlockElement}
+     * for the given {@link IntVector}.
      *
      * @param fakeData the fake {@link BlockData}
      * @return the function for determining a visible fake block location
@@ -81,12 +85,14 @@ public class FakeBlockVisualization extends BlockBoundaryVisualization
             // Obtain visible location from starting point.
             Block visibleLocation = getVisibleLocation(vector);
             // Create an element using our fake data and the determined block's real data.
-            elements.add(new FakeBlockElement(new IntVector(visibleLocation), visibleLocation.getBlockData(), fakeData));
+            elements.add(
+                    new FakeBlockElement(new IntVector(visibleLocation), visibleLocation.getBlockData(), fakeData));
         };
     }
 
     /**
-     * Find a location that should be visible to players. This causes the visualization to "cling" to the ground.
+     * Find a location that should be visible to players. This causes the
+     * visualization to "cling" to the ground.
      *
      * @param vector the {@link IntVector} of the display location
      * @return the located {@link Block}
@@ -96,9 +102,8 @@ public class FakeBlockVisualization extends BlockBoundaryVisualization
         Block block = vector.toBlock(world);
         BlockFace direction = (isTransparent(block)) ? BlockFace.DOWN : BlockFace.UP;
 
-        while (block.getY() >= world.getMinHeight() &&
-                block.getY() < world.getMaxHeight() - 1 &&
-                (!isTransparent(block.getRelative(BlockFace.UP)) || isTransparent(block)))
+        while (block.getY() >= world.getMinHeight() && block.getY() < world.getMaxHeight() - 1
+                && (!isTransparent(block.getRelative(BlockFace.UP)) || isTransparent(block)))
         {
             block = block.getRelative(direction);
         }
@@ -107,7 +112,8 @@ public class FakeBlockVisualization extends BlockBoundaryVisualization
     }
 
     /**
-     * Helper method for determining if a {@link Block} is transparent from the top down.
+     * Helper method for determining if a {@link Block} is transparent from the top
+     * down.
      *
      * @param block the {@code Block}
      * @return true if transparent
@@ -119,17 +125,14 @@ public class FakeBlockVisualization extends BlockBoundaryVisualization
         // Custom per-material definitions.
         switch (blockMaterial)
         {
-            case WATER:
+            case WATER :
                 return waterTransparent;
-            case SNOW:
+            case SNOW :
                 return false;
         }
 
-        if (blockMaterial.isAir()
-                || Tag.FENCES.isTagged(blockMaterial)
-                || Tag.FENCE_GATES.isTagged(blockMaterial)
-                || Tag.SIGNS.isTagged(blockMaterial)
-                || Tag.WALLS.isTagged(blockMaterial)
+        if (blockMaterial.isAir() || Tag.FENCES.isTagged(blockMaterial) || Tag.FENCE_GATES.isTagged(blockMaterial)
+                || Tag.SIGNS.isTagged(blockMaterial) || Tag.WALLS.isTagged(blockMaterial)
                 || Tag.WALL_SIGNS.isTagged(blockMaterial))
             return true;
 

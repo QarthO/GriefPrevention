@@ -9,11 +9,15 @@ import org.jetbrains.annotations.NotNull;
 /**
  * An {@link Event} called when a {@link Claim} is changed.
  *
- * <p>If cancelled, the resulting changes will not be made.
+ * <p>
+ * If cancelled, the resulting changes will not be made.
  *
- * <p>Note that the {@link #getTo() new claim} will not necessarily be added to the datastore! Most implementations
- * apply changes to the {@link #getFrom() existing claim} for better compatibility with add-ons holding instances.
- * Additionally, while the new claim is modifiable, modifications will not necessarily be respected by implementations.
+ * <p>
+ * Note that the {@link #getTo() new claim} will not necessarily be added to the
+ * datastore! Most implementations apply changes to the {@link #getFrom()
+ * existing claim} for better compatibility with add-ons holding instances.
+ * Additionally, while the new claim is modifiable, modifications will not
+ * necessarily be respected by implementations.
  */
 public class ClaimChangeEvent extends Event implements Cancellable
 {

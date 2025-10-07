@@ -18,7 +18,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * An {@link org.bukkit.event.Event Event} called when a {@link Player} receives {@link Claim} visuals.
+ * An {@link org.bukkit.event.Event Event} called when a {@link Player} receives
+ * {@link Claim} visuals.
  *
  * @deprecated Replaced with {@link BoundaryVisualizationEvent}
  */
@@ -32,7 +33,8 @@ public class VisualizationEvent extends PlayerEvent
     private final boolean visualizingNearbyClaims;
 
     /**
-     * Construct a new {@code VisualizationEvent} for a single {@link Claim} and its children.
+     * Construct a new {@code VisualizationEvent} for a single {@link Claim} and its
+     * children.
      *
      * @param player the {@link Player} receiving visuals
      * @param visualization the {@link Visualization} to send
@@ -54,7 +56,8 @@ public class VisualizationEvent extends PlayerEvent
      * @param visualization the {@link Visualization} to send
      * @param claims the {@code Claims} being visualized without subdivisions
      */
-    public VisualizationEvent(@NotNull Player player, @Nullable Visualization visualization, @NotNull Collection<Claim> claims)
+    public VisualizationEvent(@NotNull Player player, @Nullable Visualization visualization,
+            @NotNull Collection<Claim> claims)
     {
         this(player, visualization, claims, false);
     }
@@ -65,9 +68,11 @@ public class VisualizationEvent extends PlayerEvent
      * @param player the {@link Player} receiving visuals
      * @param visualization the {@link Visualization} to send
      * @param claims the {@code Claims} being visualized without subdivisions
-     * @param visualizingNearbyClaims whether the visualization includes area claims or just the target location
+     * @param visualizingNearbyClaims whether the visualization includes area claims
+     *            or just the target location
      */
-    public VisualizationEvent(@NotNull Player player, @Nullable Visualization visualization, @NotNull Collection<Claim> claims, boolean visualizingNearbyClaims)
+    public VisualizationEvent(@NotNull Player player, @Nullable Visualization visualization,
+            @NotNull Collection<Claim> claims, boolean visualizingNearbyClaims)
     {
         super(player);
         this.visualization = visualization;
@@ -89,7 +94,8 @@ public class VisualizationEvent extends PlayerEvent
     /**
      * Get the {@link Claim Claims} displayed by the {@link Visualization}.
      *
-     * <p>The {@link Collection} is unmodifiable, manipulation is not allowed.
+     * <p>
+     * The {@link Collection} is unmodifiable, manipulation is not allowed.
      *
      * @return an unmodifiable {@code Collection} of {@code Claims}
      */
@@ -129,11 +135,9 @@ public class VisualizationEvent extends PlayerEvent
             Plugin plugin = listener.getPlugin();
 
             if (nags.add(plugin.getName()))
-                plugin.getLogger().severe(() ->
-                        plugin.getName()
-                                + " registered a listener for the now-defunct VisualizationEvent. Please ask "
-                                + plugin.getDescription().getAuthors()
-                                + " to update to the BoundaryVisualizationEvent.");
+                plugin.getLogger().severe(() -> plugin.getName()
+                        + " registered a listener for the now-defunct VisualizationEvent. Please ask "
+                        + plugin.getDescription().getAuthors() + " to update to the BoundaryVisualizationEvent.");
         }
     };
 

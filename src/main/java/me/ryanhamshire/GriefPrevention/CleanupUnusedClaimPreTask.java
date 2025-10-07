@@ -38,14 +38,15 @@ class CleanupUnusedClaimPreTask implements Runnable
     @Override
     public void run()
     {
-        //get the data
+        // get the data
         PlayerData ownerData = GriefPrevention.instance.dataStore.getPlayerDataFromStorage(ownerID);
         OfflinePlayer ownerInfo = Bukkit.getServer().getOfflinePlayer(ownerID);
 
-        GriefPrevention.AddLogEntry("Looking for expired claims.  Checking data for " + ownerID.toString(), CustomLogEntryTypes.Debug, true);
+        GriefPrevention.AddLogEntry("Looking for expired claims.  Checking data for " + ownerID.toString(),
+                CustomLogEntryTypes.Debug, true);
 
-        //expiration code uses last logout timestamp to decide whether to expire claims
-        //don't expire claims for online players
+        // expiration code uses last logout timestamp to decide whether to expire claims
+        // don't expire claims for online players
         if (ownerInfo.isOnline())
         {
             GriefPrevention.AddLogEntry("Player is online. Ignoring.", CustomLogEntryTypes.Debug, true);
@@ -53,15 +54,21 @@ class CleanupUnusedClaimPreTask implements Runnable
         }
         if (ownerInfo.getLastPlayed() <= 0)
         {
-            GriefPrevention.AddLogEntry("Player is new or not in the server's cached userdata. Ignoring. getLastPlayed = " + ownerInfo.getLastPlayed(), CustomLogEntryTypes.Debug, true);
+            GriefPrevention
+                    .AddLogEntry("Player is new or not in the server's cached userdata. Ignoring. getLastPlayed = "
+                            + ownerInfo.getLastPlayed(), CustomLogEntryTypes.Debug, true);
             return;
         }
 
-        //skip claims belonging to exempted players based on block totals in config
+        // skip claims belonging to exempted players based on block totals in config
         int bonusBlocks = ownerData.getBonusClaimBlocks();
-        if (bonusBlocks >= GriefPrevention.instance.config_claims_expirationExemptionBonusBlocks || bonusBlocks + ownerData.getAccruedClaimBlocks() >= GriefPrevention.instance.config_claims_expirationExemptionTotalBlocks)
+        if (bonusBlocks >= GriefPrevention.instance.config_claims_expirationExemptionBonusBlocks
+                || bonusBlocks + ownerData
+                        .getAccruedClaimBlocks() >= GriefPrevention.instance.config_claims_expirationExemptionTotalBlocks)
         {
-            GriefPrevention.AddLogEntry("Player exempt from claim expiration based on claim block counts vs. config file settings.", CustomLogEntryTypes.Debug, true);
+            GriefPrevention.AddLogEntry(
+                    "Player exempt from claim expiration based on claim block counts vs. config file settings.",
+                    CustomLogEntryTypes.Debug, true);
             return;
         }
 
@@ -78,11 +85,14 @@ class CleanupUnusedClaimPreTask implements Runnable
 
         if (claimToExpire == null)
         {
-            GriefPrevention.AddLogEntry("Unable to find a claim to expire for " + ownerID.toString(), CustomLogEntryTypes.Debug, false);
+            GriefPrevention.AddLogEntry("Unable to find a claim to expire for " + ownerID.toString(),
+                    CustomLogEntryTypes.Debug, false);
             return;
         }
 
-        //pass it back to the main server thread, where it's safe to delete a claim if needed
-        Bukkit.getScheduler().scheduleSyncDelayedTask(GriefPrevention.instance, new CleanupUnusedClaimTask(claimToExpire, ownerData, ownerInfo), 1L);
+        // pass it back to the main server thread, where it's safe to delete a claim if
+        // needed
+        Bukkit.getScheduler().scheduleSyncDelayedTask(GriefPrevention.instance,
+                new CleanupUnusedClaimTask(claimToExpire, ownerData, ownerInfo), 1L);
     }
 }

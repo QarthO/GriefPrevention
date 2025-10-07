@@ -30,16 +30,13 @@ public class TrustChangedEvent extends MultiClaimEvent implements Cancellable
      *
      * @param changer the {@link Player} causing the trust changes
      * @param claims the affected {@code Claims}
-     * @param claimPermission the new {@link ClaimPermission} to assign or {@code null} if trust is removed
+     * @param claimPermission the new {@link ClaimPermission} to assign or
+     *            {@code null} if trust is removed
      * @param given whether trust is being given or taken
      * @param identifier the identifier whose trust is being affected
      */
-    public TrustChangedEvent(
-            @NotNull Player changer,
-            @Nullable List<Claim> claims,
-            @Nullable ClaimPermission claimPermission,
-            boolean given,
-            @NotNull String identifier)
+    public TrustChangedEvent(@NotNull Player changer, @Nullable List<Claim> claims,
+            @Nullable ClaimPermission claimPermission, boolean given, @NotNull String identifier)
     {
         super(claims);
         this.changer = changer;
@@ -53,16 +50,13 @@ public class TrustChangedEvent extends MultiClaimEvent implements Cancellable
      *
      * @param changer the {@link Player} causing the trust changes
      * @param claim the affected {@code Claim}
-     * @param claimPermission the new {@link ClaimPermission} to assign or {@code null} if trust is removed
+     * @param claimPermission the new {@link ClaimPermission} to assign or
+     *            {@code null} if trust is removed
      * @param given whether trust is being given or taken
      * @param identifier the identifier whose trust is being affected
      */
-    public TrustChangedEvent(
-            @NotNull Player changer,
-            @NotNull Claim claim,
-            @Nullable ClaimPermission claimPermission,
-            boolean given,
-            @NotNull String identifier)
+    public TrustChangedEvent(@NotNull Player changer, @NotNull Claim claim, @Nullable ClaimPermission claimPermission,
+            boolean given, @NotNull String identifier)
     {
         super(Collections.singleton(claim));
         this.changer = changer;
@@ -82,7 +76,8 @@ public class TrustChangedEvent extends MultiClaimEvent implements Cancellable
     }
 
     /**
-     * Get the {@link ClaimPermission} assigned or {@code null} if permission is being removed.
+     * Get the {@link ClaimPermission} assigned or {@code null} if permission is
+     * being removed.
      *
      * @return the claim permission
      */
@@ -102,8 +97,8 @@ public class TrustChangedEvent extends MultiClaimEvent implements Cancellable
     }
 
     /**
-     * Get the identifier of the receiver of this action.
-     * Possible values: "public", "all", a {@link java.util.UUID UUID} in string form, a permission
+     * Get the identifier of the receiver of this action. Possible values: "public",
+     * "all", a {@link java.util.UUID UUID} in string form, a permission
      *
      * @return the identifier
      */

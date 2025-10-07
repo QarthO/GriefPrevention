@@ -12,8 +12,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * An immutable integer-based vector.
  */
-public record IntVector(int x, int y, int z)
-{
+public record IntVector(int x, int y, int z) {
 
     /**
      * Construct a new {@code IntVector} representing the specified {@link Block}.
@@ -26,7 +25,8 @@ public record IntVector(int x, int y, int z)
     }
 
     /**
-     * Construct a new {@code IntVector} representing the specified {@link Location}.
+     * Construct a new {@code IntVector} representing the specified
+     * {@link Location}.
      *
      * @param location the {@code Location}
      */
@@ -46,7 +46,8 @@ public record IntVector(int x, int y, int z)
     }
 
     /**
-     * Get a {@link Block} representing the {@code IntVector} in the specified {@link World}.
+     * Get a {@link Block} representing the {@code IntVector} in the specified
+     * {@link World}.
      *
      * @param world the {@code World}
      * @return the corresponding {@code Block}
@@ -57,7 +58,8 @@ public record IntVector(int x, int y, int z)
     }
 
     /**
-     * Get a {@link Location} representing the {@code IntVector} in the specified {@link World}, if any.
+     * Get a {@link Location} representing the {@code IntVector} in the specified
+     * {@link World}, if any.
      *
      * @param world the optional {@code World}
      * @return the corresponding {@code Location}
@@ -120,8 +122,8 @@ public record IntVector(int x, int y, int z)
     }
 
     /**
-     * Check if the {@link org.bukkit.Chunk Chunk} containing the {@link Block} at the {@code IntVector's} coordinates
-     * is loaded.
+     * Check if the {@link org.bukkit.Chunk Chunk} containing the {@link Block} at
+     * the {@code IntVector's} coordinates is loaded.
      *
      * @param world the {@link World}
      * @return true if the block is loaded

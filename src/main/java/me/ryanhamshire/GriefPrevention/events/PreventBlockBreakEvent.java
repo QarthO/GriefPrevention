@@ -8,7 +8,8 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * @deprecated Listen to {@link ClaimPermissionCheckEvent} and check if
- * {@link ClaimPermissionCheckEvent#getTriggeringEvent()} {@code instanceof} {@link BlockBreakEvent}.
+ *             {@link ClaimPermissionCheckEvent#getTriggeringEvent()}
+ *             {@code instanceof} {@link BlockBreakEvent}.
  */
 @Deprecated(forRemoval = true, since = "17.0.0")
 public class PreventBlockBreakEvent extends Event implements Cancellable

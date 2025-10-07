@@ -36,8 +36,7 @@ public class BlockEventHandlerTest
     static void beforeAll()
     {
         Server server = ServerMocks.newServer();
-        doAnswer(invocation ->
-        {
+        doAnswer(invocation -> {
             Tag<?> tag = mock();
             doReturn(Set.of()).when(tag).getValues();
             return tag;
@@ -45,7 +44,7 @@ public class BlockEventHandlerTest
         Bukkit.setServer(server);
 
         // Touch class to load material list.
-        //noinspection ResultOfMethodCallIgnored
+        // noinspection ResultOfMethodCallIgnored
         BlockEventHandler.class.getName();
     }
 

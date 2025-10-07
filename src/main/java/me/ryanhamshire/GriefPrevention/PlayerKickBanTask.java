@@ -27,16 +27,16 @@ import org.bukkit.entity.Player;
 //but they CAN schedule a task to run in the main thread to do that job
 class PlayerKickBanTask implements Runnable
 {
-    //player to kick or ban
+    // player to kick or ban
     private final Player player;
 
-    //message to send player.
+    // message to send player.
     private final String reason;
 
-    //source of ban
+    // source of ban
     private final String source;
 
-    //whether to ban
+    // whether to ban
     private final boolean ban;
 
     public PlayerKickBanTask(Player player, String reason, String source, boolean ban)
@@ -60,10 +60,9 @@ class PlayerKickBanTask implements Runnable
 
         if (this.ban)
         {
-            //ban
+            // ban
             GriefPrevention.banPlayer(this.player, this.reason, this.source);
-        }
-        else if (this.player.isOnline())
+        } else if (this.player.isOnline())
         {
             this.player.kickPlayer(this.reason);
         }

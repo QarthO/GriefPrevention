@@ -27,24 +27,27 @@ import java.util.function.Supplier;
 public final class ProtectionHelper
 {
 
-    private ProtectionHelper() {}
+    private ProtectionHelper()
+    {
+    }
 
     /**
-     * Check the {@link ClaimPermission} state for a {@link Player} at a particular {@link Location}.
+     * Check the {@link ClaimPermission} state for a {@link Player} at a particular
+     * {@link Location}.
      *
-     * <p>This respects ignoring claims, wilderness rules, etc.</p>
+     * <p>
+     * This respects ignoring claims, wilderness rules, etc.
+     * </p>
      *
      * @param player the person performing the action
      * @param location the affected {@link Location}
      * @param permission the required permission
      * @param trigger the triggering {@link Event}, if any
-     * @return the denial message supplier, or {@code null} if the action is not denied
+     * @return the denial message supplier, or {@code null} if the action is not
+     *         denied
      */
-    public static @Nullable Supplier<String> checkPermission(
-            @NotNull Player player,
-            @NotNull Location location,
-            @NotNull ClaimPermission permission,
-            @Nullable Event trigger)
+    public static @Nullable Supplier<String> checkPermission(@NotNull Player player, @NotNull Location location,
+            @NotNull ClaimPermission permission, @Nullable Event trigger)
     {
         World world = location.getWorld();
         if (world == null || !GriefPrevention.instance.claimsEnabledForWorld(world)) return null;
@@ -56,7 +59,6 @@ public final class ProtectionHelper
 
         Claim claim = GriefPrevention.instance.dataStore.getClaimAt(location, false, playerData.lastClaim);
 
-
         // If there is no claim here, use wilderness rules.
         if (claim == null)
         {
@@ -64,19 +66,19 @@ public final class ProtectionHelper
             if (mode == ClaimsMode.Creative || mode == ClaimsMode.SurvivalRequiringClaims)
             {
                 // Allow placing chest if it would create an automatic claim.
-                if (trigger instanceof BlockPlaceEvent placeEvent
-                        && placeEvent.getBlock().getType() == Material.CHEST
+                if (trigger instanceof BlockPlaceEvent placeEvent && placeEvent.getBlock().getType() == Material.CHEST
                         && playerData.getClaims().isEmpty()
                         && GriefPrevention.instance.config_claims_automaticClaimsForNewPlayersRadius > -1)
                     return null;
 
                 // If claims are required, provide relevant information.
-                return () ->
-                {
+                return () -> {
                     String reason = GriefPrevention.instance.dataStore.getMessage(Messages.NoBuildOutsideClaims);
                     if (player.hasPermission("griefprevention.ignoreclaims"))
-                        reason += "  " + GriefPrevention.instance.dataStore.getMessage(Messages.IgnoreClaimsAdvertisement);
-                    reason += "  " + GriefPrevention.instance.dataStore.getMessage(Messages.CreativeBasicsVideo2, DataStore.CREATIVE_VIDEO_URL);
+                        reason += "  "
+                                + GriefPrevention.instance.dataStore.getMessage(Messages.IgnoreClaimsAdvertisement);
+                    reason += "  " + GriefPrevention.instance.dataStore.getMessage(Messages.CreativeBasicsVideo2,
+                            DataStore.CREATIVE_VIDEO_URL);
                     return reason;
                 };
             }

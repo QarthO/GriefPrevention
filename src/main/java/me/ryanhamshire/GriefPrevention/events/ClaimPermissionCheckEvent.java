@@ -14,8 +14,9 @@ import java.util.UUID;
 import java.util.function.Supplier;
 
 /**
- * An {@link Event} called when a {@link Claim} requires a specific level of trust.
- * If the denial reason is {@code null}, the trust requirements are met and the action is allowed.
+ * An {@link Event} called when a {@link Claim} requires a specific level of
+ * trust. If the denial reason is {@code null}, the trust requirements are met
+ * and the action is allowed.
  */
 public class ClaimPermissionCheckEvent extends ClaimEvent implements Cancellable
 {
@@ -33,10 +34,7 @@ public class ClaimPermissionCheckEvent extends ClaimEvent implements Cancellable
      * @param required the {@link ClaimPermission} level required
      * @param triggeringEvent the {@link Event} triggering the permission check
      */
-    public ClaimPermissionCheckEvent(
-            @NotNull Player checked,
-            @NotNull Claim claim,
-            @NotNull ClaimPermission required,
+    public ClaimPermissionCheckEvent(@NotNull Player checked, @NotNull Claim claim, @NotNull ClaimPermission required,
             @Nullable Event triggeringEvent)
     {
         this(checked, checked.getUniqueId(), claim, required, triggeringEvent);
@@ -50,21 +48,14 @@ public class ClaimPermissionCheckEvent extends ClaimEvent implements Cancellable
      * @param required the {@link ClaimPermission} level required
      * @param triggeringEvent the {@link Event} triggering the permission check
      */
-    public ClaimPermissionCheckEvent(
-            @NotNull UUID checked,
-            @NotNull Claim claim,
-            @NotNull ClaimPermission required,
+    public ClaimPermissionCheckEvent(@NotNull UUID checked, @NotNull Claim claim, @NotNull ClaimPermission required,
             @Nullable Event triggeringEvent)
     {
         this(Bukkit.getPlayer(checked), checked, claim, required, triggeringEvent);
     }
 
-    private ClaimPermissionCheckEvent(
-            @Nullable Player checkedPlayer,
-            @NotNull UUID checkedUUID,
-            @NotNull Claim claim,
-            @NotNull ClaimPermission required,
-            @Nullable Event triggeringEvent)
+    private ClaimPermissionCheckEvent(@Nullable Player checkedPlayer, @NotNull UUID checkedUUID, @NotNull Claim claim,
+            @NotNull ClaimPermission required, @Nullable Event triggeringEvent)
     {
         super(claim);
         this.checkedPlayer = checkedPlayer;
@@ -134,16 +125,15 @@ public class ClaimPermissionCheckEvent extends ClaimEvent implements Cancellable
         if (!cancelled)
         {
             this.cancelReason = null;
-        }
-        else
+        } else
         {
             this.cancelReason = () -> "";
         }
     }
 
     /**
-     * Get the reason the ClaimPermission check failed.
-     * If the check did not fail, the message will be null.
+     * Get the reason the ClaimPermission check failed. If the check did not fail,
+     * the message will be null.
      *
      * @return the denial reason or null if permission is granted
      */

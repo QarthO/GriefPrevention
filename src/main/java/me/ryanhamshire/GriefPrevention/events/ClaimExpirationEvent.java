@@ -6,9 +6,11 @@ import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * An {@link org.bukkit.event.Event Event} for when a {@link Claim} is deleted due to owner inactivity.
+ * An {@link org.bukkit.event.Event Event} for when a {@link Claim} is deleted
+ * due to owner inactivity.
  *
- * <p>If cancelled, deletion will be prevented.
+ * <p>
+ * If cancelled, deletion will be prevented.
  */
 public class ClaimExpirationEvent extends ClaimEvent implements Cancellable
 {

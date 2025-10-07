@@ -7,7 +7,8 @@ import org.bukkit.event.player.PlayerEvent;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * An {@link org.bukkit.event.Event Event} called when GriefPrevention kicks or bans a {@link Player}.
+ * An {@link org.bukkit.event.Event Event} called when GriefPrevention kicks or
+ * bans a {@link Player}.
  *
  * @author BillyGalbreath on 03/10/2017
  */

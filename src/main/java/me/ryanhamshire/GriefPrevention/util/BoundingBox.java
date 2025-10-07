@@ -18,10 +18,12 @@ import java.util.Objects;
 /**
  * A mutable block-based axis-aligned bounding box.
  *
- * <p>This is a rectangular box defined by minimum and maximum corners
- * that can be used to represent a collection of blocks.
+ * <p>
+ * This is a rectangular box defined by minimum and maximum corners that can be
+ * used to represent a collection of blocks.
  *
- * <p>While similar to Bukkit's {@link org.bukkit.util.BoundingBox BoundingBox},
+ * <p>
+ * While similar to Bukkit's {@link org.bukkit.util.BoundingBox BoundingBox},
  * this implementation is much more focused on performance and does not use as
  * many input sanitization operations.
  */
@@ -65,7 +67,8 @@ public class BoundingBox implements Cloneable
         Iterator<BlockState> iterator = blocks.iterator();
         // Initialize bounding box with first block
         BlockState state = iterator.next();
-        BoundingBox box = new BoundingBox(state.getX(), state.getY(), state.getZ(), state.getX(), state.getY(), state.getZ(), false);
+        BoundingBox box = new BoundingBox(state.getX(), state.getY(), state.getZ(), state.getX(), state.getY(),
+                state.getZ(), false);
 
         // Fill in rest of bounding box with remaining blocks.
         while (iterator.hasNext())
@@ -93,14 +96,15 @@ public class BoundingBox implements Cloneable
      * @param x2 the X coordinate of the second corner
      * @param y2 the Y coordinate of the second corner
      * @param z2 the Z coordinate of the second corner
-     * @param verify whether or not to verify that the provided corners are in fact the minimum corners
+     * @param verify whether or not to verify that the provided corners are in fact
+     *            the minimum corners
      */
-    protected BoundingBox(int x1, int y1, int z1, int x2, int y2, int z2, boolean verify) {
+    protected BoundingBox(int x1, int y1, int z1, int x2, int y2, int z2, boolean verify)
+    {
         if (verify)
         {
             verify(x1, y1, z1, x2, y2, z2);
-        }
-        else
+        } else
         {
             this.minX = x1;
             this.maxX = x2;
@@ -131,12 +135,12 @@ public class BoundingBox implements Cloneable
      *
      * @param pos1 the position of the first corner
      * @param pos2 the position of the second corner
-     * @param verify whether or not to verify that the provided corners are in fact the minimum corners
+     * @param verify whether or not to verify that the provided corners are in fact
+     *            the minimum corners
      */
     private BoundingBox(@NotNull Location pos1, @NotNull Location pos2, boolean verify)
     {
-        this(pos1.getBlockX(), pos1.getBlockY(), pos1.getBlockZ(),
-                pos2.getBlockX(), pos2.getBlockY(), pos2.getBlockZ(),
+        this(pos1.getBlockX(), pos1.getBlockY(), pos1.getBlockZ(), pos2.getBlockX(), pos2.getBlockY(), pos2.getBlockZ(),
                 verify);
     }
 
@@ -170,8 +174,8 @@ public class BoundingBox implements Cloneable
      */
     public BoundingBox(@NotNull Vector pos1, @NotNull Vector pos2)
     {
-        this(pos1.getBlockX(), pos1.getBlockY(), pos1.getBlockZ(),
-                pos2.getBlockX(), pos2.getBlockY(), pos2.getBlockZ(), true);
+        this(pos1.getBlockX(), pos1.getBlockY(), pos1.getBlockZ(), pos2.getBlockX(), pos2.getBlockY(), pos2.getBlockZ(),
+                true);
     }
 
     /**
@@ -196,27 +200,27 @@ public class BoundingBox implements Cloneable
     }
 
     /**
-     * Construct a new bounding box representing the given Bukkit {@link org.bukkit.util.BoundingBox BoundingBox}.
+     * Construct a new bounding box representing the given Bukkit
+     * {@link org.bukkit.util.BoundingBox BoundingBox}.
      *
      * @param boundingBox the Bukkit bounding box
      */
     public BoundingBox(@NotNull org.bukkit.util.BoundingBox boundingBox)
     {
-        this((int) boundingBox.getMinX(),
-                (int) boundingBox.getMinY(),
-                (int) boundingBox.getMinZ(),
-                // Since Bukkit bounding boxes are inclusive of upper bounds, subtract a small number.
-                // This ensures that a full block Bukkit bounding boxes yield correct equivalents.
+        this((int) boundingBox.getMinX(), (int) boundingBox.getMinY(), (int) boundingBox.getMinZ(),
+                // Since Bukkit bounding boxes are inclusive of upper bounds, subtract a small
+                // number.
+                // This ensures that a full block Bukkit bounding boxes yield correct
+                // equivalents.
                 // Uses Math.max to account for degenerate boxes.
                 (int) Math.max(boundingBox.getMinX(), boundingBox.getMaxX() - .0001),
                 (int) Math.max(boundingBox.getMinY(), boundingBox.getMaxY() - .0001),
-                (int) Math.max(boundingBox.getMinZ(), boundingBox.getMaxZ() - .0001),
-                false);
+                (int) Math.max(boundingBox.getMinZ(), boundingBox.getMaxZ() - .0001), false);
     }
 
     /**
-     * Sets bounds of this bounding box to the specified values.
-     * Ensures that the minimum and maximum corners are set from the correct respective values.
+     * Sets bounds of this bounding box to the specified values. Ensures that the
+     * minimum and maximum corners are set from the correct respective values.
      *
      * @param x1 the first X value
      * @param y1 the first Y value
@@ -225,13 +229,13 @@ public class BoundingBox implements Cloneable
      * @param y2 the second Y value
      * @param z2 the second Z value
      */
-    private void verify(int x1, int y1, int z1, int x2, int y2, int z2) {
+    private void verify(int x1, int y1, int z1, int x2, int y2, int z2)
+    {
         if (x1 < x2)
         {
             this.minX = x1;
             this.maxX = x2;
-        }
-        else
+        } else
         {
             this.minX = x2;
             this.maxX = x1;
@@ -240,8 +244,7 @@ public class BoundingBox implements Cloneable
         {
             this.minY = y1;
             this.maxY = y2;
-        }
-        else
+        } else
         {
             this.minY = y2;
             this.maxY = y1;
@@ -250,8 +253,7 @@ public class BoundingBox implements Cloneable
         {
             this.minZ = z1;
             this.maxZ = z2;
-        }
-        else
+        } else
         {
             this.minZ = z2;
             this.maxZ = z1;
@@ -371,8 +373,9 @@ public class BoundingBox implements Cloneable
     /**
      * Gets the center of the bounding box on the X axis.
      *
-     * <p>Note that center coordinates are world coordinates
-     * while all of the other coordinates are block coordinates.
+     * <p>
+     * Note that center coordinates are world coordinates while all of the other
+     * coordinates are block coordinates.
      *
      * @return the center of the X axis
      */
@@ -384,8 +387,9 @@ public class BoundingBox implements Cloneable
     /**
      * Gets the center of the bounding box on the Y axis.
      *
-     * <p>Note that center coordinates are world coordinates
-     * while all of the other coordinates are block coordinates.
+     * <p>
+     * Note that center coordinates are world coordinates while all of the other
+     * coordinates are block coordinates.
      *
      * @return the center of the X axis
      */
@@ -397,8 +401,9 @@ public class BoundingBox implements Cloneable
     /**
      * Gets the center of the bounding box on the Z axis.
      *
-     * <p>Note that center coordinates are world coordinates
-     * while all of the other coordinates are block coordinates.
+     * <p>
+     * Note that center coordinates are world coordinates while all of the other
+     * coordinates are block coordinates.
      *
      * @return the center of the X axis
      */
@@ -410,8 +415,9 @@ public class BoundingBox implements Cloneable
     /**
      * Gets the center of the bounding box as a vector.
      *
-     * <p>Note that center coordinates are world coordinates
-     * while all of the other coordinates are block coordinates.
+     * <p>
+     * Note that center coordinates are world coordinates while all of the other
+     * coordinates are block coordinates.
      *
      * @return the center of the X axis
      */
@@ -423,7 +429,8 @@ public class BoundingBox implements Cloneable
     /**
      * Gets the area of the base of the bounding box.
      *
-     * <p>The base is the lowest plane defined by the X and Z axis.
+     * <p>
+     * The base is the lowest plane defined by the X and Z axis.
      *
      * @return the area of the base of the bounding box
      */
@@ -458,12 +465,17 @@ public class BoundingBox implements Cloneable
     }
 
     /**
-     * Changes the size the bounding box in the direction specified by the Minecraft blockface.
+     * Changes the size the bounding box in the direction specified by the Minecraft
+     * blockface.
      *
-     * <p>If the specified directional magnitude is negative, the box is contracted instead.
+     * <p>
+     * If the specified directional magnitude is negative, the box is contracted
+     * instead.
      *
-     * <p>When contracting, the box does not care if the contraction would cause a negative side length.
-     * In these cases, the lowest point is redefined by the new location of the maximum corner instead.
+     * <p>
+     * When contracting, the box does not care if the contraction would cause a
+     * negative side length. In these cases, the lowest point is redefined by the
+     * new location of the maximum corner instead.
      *
      * @param direction the direction to change size in
      * @param magnitude the magnitude of the resizing
@@ -482,29 +494,28 @@ public class BoundingBox implements Cloneable
         if (modX == 0 && modY == 0 && modZ == 0) return;
 
         // Modify correct point.
-        if (direction.getModX() > 0)
-            this.maxX += modX;
+        if (direction.getModX() > 0) this.maxX += modX;
         else
             this.minX += modX;
-        if (direction.getModY() > 0)
-            this.maxY += modY;
+        if (direction.getModY() > 0) this.maxY += modY;
         else
             this.minY += modY;
-        if (direction.getModZ() > 0)
-            this.maxZ += modZ;
+        if (direction.getModZ() > 0) this.maxZ += modZ;
         else
             this.minZ += modZ;
 
         // If box is contracting, re-verify points in case corners have swapped.
-        if (magnitude < 0)
-            verify(this.minX, this.minY, this.minZ, this.maxX, this.maxY, this.maxZ);
+        if (magnitude < 0) verify(this.minX, this.minY, this.minZ, this.maxX, this.maxY, this.maxZ);
     }
 
     /**
-     * Moves the bounding box in the direction specified by the Minecraft BlockFace and magnitude.
+     * Moves the bounding box in the direction specified by the Minecraft BlockFace
+     * and magnitude.
      *
-     * <p>Note that a negative direction will move in the opposite direction
-     * to the extent that the following example returns true:
+     * <p>
+     * Note that a negative direction will move in the opposite direction to the
+     * extent that the following example returns true:
+     * 
      * <pre>
      * public boolean testBoxMove(BoundingBox box, BlockFace face, int magnitude)
      * {
@@ -616,9 +627,9 @@ public class BoundingBox implements Cloneable
      * @param maxZ the maximum X value to check for containment
      * @return true if the specified values are inside the bounding box
      */
-    private boolean contains2dInternal(int minX, int minZ, int maxX, int maxZ) {
-        return minX >= this.minX && maxX <= this.maxX
-                && minZ >= this.minZ && maxZ <= this.maxZ;
+    private boolean contains2dInternal(int minX, int minZ, int maxX, int maxZ)
+    {
+        return minX >= this.minX && maxX <= this.maxX && minZ >= this.minZ && maxZ <= this.maxZ;
     }
 
     /**
@@ -678,7 +689,8 @@ public class BoundingBox implements Cloneable
     }
 
     /**
-     * Checks if the bounding box contains another bounding box consisting of the positions specified.
+     * Checks if the bounding box contains another bounding box consisting of the
+     * positions specified.
      *
      * @param x1 the X coordinate of the first position
      * @param z1 the Z coordinate of the first position
@@ -690,19 +702,23 @@ public class BoundingBox implements Cloneable
     {
         int minX;
         int maxX;
-        if (x1 < x2) {
+        if (x1 < x2)
+        {
             minX = x1;
             maxX = x2;
-        } else {
+        } else
+        {
             minX = x2;
             maxX = x1;
         }
         int minZ;
         int maxZ;
-        if (z1 < z2) {
+        if (z1 < z2)
+        {
             minZ = z1;
             maxZ = z2;
-        } else {
+        } else
+        {
             minZ = z2;
             maxZ = z1;
         }
@@ -734,8 +750,7 @@ public class BoundingBox implements Cloneable
      */
     private boolean containsInternal(int minX, int minY, int minZ, int maxX, int maxY, int maxZ)
     {
-        return contains2dInternal(minX, minZ, maxX, maxZ)
-                && minY >= this.minY && maxY <= this.maxY;
+        return contains2dInternal(minX, minZ, maxX, maxZ) && minY >= this.minY && maxY <= this.maxY;
     }
 
     /**
@@ -796,7 +811,8 @@ public class BoundingBox implements Cloneable
     }
 
     /**
-     * Checks if the bounding box contains another bounding box consisting of the positions specified.
+     * Checks if the bounding box contains another bounding box consisting of the
+     * positions specified.
      *
      * @param x1 the X coordinate of the first position
      * @param y1 the Y coordinate of the first position
@@ -830,30 +846,27 @@ public class BoundingBox implements Cloneable
      */
     public boolean intersects(@NotNull BoundingBox other)
     {
-        // For help visualizing test cases, try https://silentmatt.com/rectangle-intersection/
-        return this.minX <= other.maxX && this.maxX >= other.minX
-                && this.minY <= other.maxY && this.maxY >= other.minY
+        // For help visualizing test cases, try
+        // https://silentmatt.com/rectangle-intersection/
+        return this.minX <= other.maxX && this.maxX >= other.minX && this.minY <= other.maxY && this.maxY >= other.minY
                 && this.minZ <= other.maxZ && this.maxZ >= other.minZ;
     }
 
     /**
-     * Gets a bounding box containing the intersection of the bounding box with another.
+     * Gets a bounding box containing the intersection of the bounding box with
+     * another.
      *
      * @param other the other bounding box
-     * @return the bounding box representing overlapping area or null if the boxes do not overlap.
+     * @return the bounding box representing overlapping area or null if the boxes
+     *         do not overlap.
      */
     public @Nullable BoundingBox intersection(@NotNull BoundingBox other)
     {
         if (!intersects(other)) return null;
 
-        return new BoundingBox(
-                Math.max(this.minX, other.minX),
-                Math.max(this.minY, other.minY),
-                Math.max(this.minZ, other.minZ),
-                Math.min(this.maxX, other.maxX),
-                Math.min(this.maxY, other.maxY),
-                Math.min(this.maxZ, other.maxZ),
-                false);
+        return new BoundingBox(Math.max(this.minX, other.minX), Math.max(this.minY, other.minY),
+                Math.max(this.minZ, other.minZ), Math.min(this.maxX, other.maxX), Math.min(this.maxY, other.maxY),
+                Math.min(this.maxZ, other.maxZ), false);
     }
 
     @Override
@@ -862,12 +875,8 @@ public class BoundingBox implements Cloneable
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BoundingBox other = (BoundingBox) o;
-        return this.minX == other.minX
-                && this.minY == other.minY
-                && this.minZ == other.minZ
-                && this.maxX == other.maxX
-                && this.maxY == other.maxY
-                && this.maxZ == other.maxZ;
+        return this.minX == other.minX && this.minY == other.minY && this.minZ == other.minZ && this.maxX == other.maxX
+                && this.maxY == other.maxY && this.maxZ == other.maxZ;
     }
 
     @Override
@@ -879,14 +888,8 @@ public class BoundingBox implements Cloneable
     @Override
     public @NotNull String toString()
     {
-        return "BoundingBox{" +
-                "minX=" + minX +
-                ", minY=" + minY +
-                ", minZ=" + minZ +
-                ", maxX=" + maxX +
-                ", maxY=" + maxY +
-                ", maxZ=" + maxZ +
-                '}';
+        return "BoundingBox{" + "minX=" + minX + ", minY=" + minY + ", minZ=" + minZ + ", maxX=" + maxX + ", maxY="
+                + maxY + ", maxZ=" + maxZ + '}';
     }
 
     @Override
@@ -895,8 +898,7 @@ public class BoundingBox implements Cloneable
         try
         {
             return (BoundingBox) super.clone();
-        }
-        catch (CloneNotSupportedException e)
+        } catch (CloneNotSupportedException e)
         {
             throw new Error(e);
         }

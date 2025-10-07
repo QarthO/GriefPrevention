@@ -24,11 +24,12 @@ class WordFinder
         String patternString = patternBuilder.toString();
         if (patternString.length() > 1)
         {
-            //trim extraneous leading pipe (|)
+            // trim extraneous leading pipe (|)
             patternString = patternString.substring(1);
         }
         // No words are defined, match nothing.
-        else return;
+        else
+            return;
 
         this.pattern = Pattern.compile(patternString, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
     }

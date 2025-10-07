@@ -8,7 +8,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * An {@link org.bukkit.event.Event Event} called when a user is rescued from a {@link Claim}.
+ * An {@link org.bukkit.event.Event Event} called when a user is rescued from a
+ * {@link Claim}.
  */
 public class SaveTrappedPlayerEvent extends ClaimEvent implements Cancellable
 {
@@ -26,8 +27,8 @@ public class SaveTrappedPlayerEvent extends ClaimEvent implements Cancellable
     }
 
     /**
-     * Get the destination that the user will be sent to. This is {@code null} by default,
-     * indicating that GriefPrevention will search for a safe location.
+     * Get the destination that the user will be sent to. This is {@code null} by
+     * default, indicating that GriefPrevention will search for a safe location.
      *
      * @return the destination to send the {@code Player} to
      */

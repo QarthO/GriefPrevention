@@ -6,7 +6,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * An {@link org.bukkit.event.Event Event} called when a {@link Claim} is resized.
+ * An {@link org.bukkit.event.Event Event} called when a {@link Claim} is
+ * resized.
  */
 public class ClaimResizeEvent extends ClaimChangeEvent
 {
@@ -16,7 +17,8 @@ public class ClaimResizeEvent extends ClaimChangeEvent
     /**
      * Construct a new {@code ClaimResizeEvent}.
      *
-     * <p>The actor causing modification may not be present if done by plugins.
+     * <p>
+     * The actor causing modification may not be present if done by plugins.
      *
      * @param from the unmodified {@link Claim}
      * @param to the resulting {@code Claim}
@@ -29,7 +31,8 @@ public class ClaimResizeEvent extends ClaimChangeEvent
     }
 
     /**
-     * Get the {@link CommandSender} modifying the {@link Claim}. May be {@code null} if caused by a plugin.
+     * Get the {@link CommandSender} modifying the {@link Claim}. May be
+     * {@code null} if caused by a plugin.
      *
      * @return the actor causing creation
      */

@@ -29,5 +29,7 @@ public final class TextMode
     public final static ChatColor Err = ChatColor.RED;
     public final static ChatColor Success = ChatColor.GREEN;
 
-    private TextMode() {}
+    private TextMode()
+    {
+    }
 }

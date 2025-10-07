@@ -25,6 +25,7 @@ import org.bukkit.block.data.BlockData;
 /**
  * Represents a fake {@link org.bukkit.block.Block Block} sent to a
  * {@link org.bukkit.entity.Player Player} as part of a {@link Visualization}
+ * 
  * @deprecated replaced by {@link BlockElement}
  */
 @Deprecated(forRemoval = true, since = "16.18")

@@ -8,8 +8,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * An {@link Event} called when GriefPrevention protects items after a death.
- * If cancelled, GriefPrevention will allow the event to complete normally.
+ * An {@link Event} called when GriefPrevention protects items after a death. If
+ * cancelled, GriefPrevention will allow the event to complete normally.
  */
 public class ProtectDeathDropsEvent extends Event implements Cancellable
 {

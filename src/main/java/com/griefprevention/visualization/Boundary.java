@@ -8,14 +8,11 @@ import org.jetbrains.annotations.Nullable;
 /**
  * A data holder defining an area to be visualized.
  */
-public record Boundary(
-        @NotNull BoundingBox bounds,
-        @NotNull VisualizationType type,
-        @Nullable Claim claim)
-{
+public record Boundary(@NotNull BoundingBox bounds, @NotNull VisualizationType type, @Nullable Claim claim) {
 
     /**
-     * Construct a new {@code Boundary} for a {@link BoundingBox} with the given visualization style.
+     * Construct a new {@code Boundary} for a {@link BoundingBox} with the given
+     * visualization style.
      *
      * @param bounds the {@code BoundingBox}
      * @param type the {@link VisualizationType}
@@ -26,7 +23,8 @@ public record Boundary(
     }
 
     /**
-     * Construct a new {@code Boundary} for a {@link Claim} with the given visualization style.
+     * Construct a new {@code Boundary} for a {@link Claim} with the given
+     * visualization style.
      *
      * @param claim the {@code Claim}
      * @param type the {@link VisualizationType}

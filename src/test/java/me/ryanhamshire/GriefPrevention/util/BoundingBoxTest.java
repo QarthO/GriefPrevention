@@ -49,8 +49,7 @@ public class BoundingBoxTest
     @Test
     public void testResize()
     {
-        testBlockfaceFunction(BoundingBox::resize,
-                new BoundingBox(0, 0, -10, 10, 10, 10));
+        testBlockfaceFunction(BoundingBox::resize, new BoundingBox(0, 0, -10, 10, 10, 10));
     }
 
     private void testBlockfaceFunction(TriConsumer<BoundingBox, BlockFace, Integer> function, BoundingBox boxB)
@@ -74,15 +73,15 @@ public class BoundingBoxTest
         }
     }
 
-    private interface TriConsumer<T, U, V> {
+    private interface TriConsumer<T, U, V>
+    {
         void apply(T t, U u, V v);
     }
 
     @Test
     public void testMove()
     {
-        testBlockfaceFunction(BoundingBox::move,
-                new BoundingBox(0, 0, -10, 10, 10, 0));
+        testBlockfaceFunction(BoundingBox::move, new BoundingBox(0, 0, -10, 10, 10, 0));
 
         BoundingBox boxA = new BoundingBox(0, 0, 0, 10, 10, 10);
         BoundingBox boxB = boxA.clone();
@@ -164,7 +163,8 @@ public class BoundingBoxTest
     }
 
     @Test
-    void testContainment2d() {
+    void testContainment2d()
+    {
         // Vertical
         BoundingBox boxA = new BoundingBox(0, 0, 0, 20, 10, 20);
         BoundingBox boxB = boxA.clone();

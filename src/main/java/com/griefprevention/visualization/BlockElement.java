@@ -21,7 +21,8 @@ public abstract class BlockElement
      *
      * @param coordinate the in-world coordinate of the element
      */
-    public BlockElement(@NotNull IntVector coordinate) {
+    public BlockElement(@NotNull IntVector coordinate)
+    {
         this.coordinate = coordinate;
     }
 
@@ -44,7 +45,8 @@ public abstract class BlockElement
     protected abstract void draw(@NotNull Player player, @NotNull World world);
 
     /**
-     * Stop the display of the element for a {@link Player} in a particular {@link World}.
+     * Stop the display of the element for a {@link Player} in a particular
+     * {@link World}.
      *
      * @param player the {@code Player} visualizing the element
      * @param world the {@code World} the element is displayed in

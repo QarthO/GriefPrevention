@@ -20,11 +20,12 @@ public abstract class BlockBoundaryVisualization extends BoundaryVisualization
     protected final Collection<BlockElement> elements = new HashSet<>();
 
     /**
-     * Construct a new {@code BlockBoundaryVisualization} with a step size of {@code 10} and a display radius of
-     * {@code 75}.
+     * Construct a new {@code BlockBoundaryVisualization} with a step size of
+     * {@code 10} and a display radius of {@code 75}.
      *
      * @param world the {@link World} being visualized in
-     * @param visualizeFrom the {@link IntVector} representing the world coordinate being visualized from
+     * @param visualizeFrom the {@link IntVector} representing the world coordinate
+     *            being visualized from
      * @param height the height of the visualization
      */
     protected BlockBoundaryVisualization(@NotNull World world, @NotNull IntVector visualizeFrom, int height)
@@ -36,16 +37,14 @@ public abstract class BlockBoundaryVisualization extends BoundaryVisualization
      * Construct a new {@code BlockBoundaryVisualization}.
      *
      * @param world the {@link World} being visualized in
-     * @param visualizeFrom the {@link IntVector} representing the world coordinate being visualized from
+     * @param visualizeFrom the {@link IntVector} representing the world coordinate
+     *            being visualized from
      * @param height the height of the visualization
      * @param step the distance between individual side elements
-     * @param displayZoneRadius the radius in which elements are visible from the visualization location
+     * @param displayZoneRadius the radius in which elements are visible from the
+     *            visualization location
      */
-    protected BlockBoundaryVisualization(
-            @NotNull World world,
-            @NotNull IntVector visualizeFrom,
-            int height,
-            int step,
+    protected BlockBoundaryVisualization(@NotNull World world, @NotNull IntVector visualizeFrom, int height, int step,
             int displayZoneRadius)
     {
         super(world, visualizeFrom, height);
@@ -56,7 +55,8 @@ public abstract class BlockBoundaryVisualization extends BoundaryVisualization
     }
 
     @Override
-    protected void apply(@NotNull Player player, @NotNull PlayerData playerData) {
+    protected void apply(@NotNull Player player, @NotNull PlayerData playerData)
+    {
         super.apply(player, playerData);
         elements.forEach(element -> element.draw(player, world));
     }
@@ -76,7 +76,8 @@ public abstract class BlockBoundaryVisualization extends BoundaryVisualization
         Consumer<@NotNull IntVector> addSide = addSideElements(boundary);
 
         // North and south boundaries
-        for (int x = Math.max(area.getMinX() + step, displayZone.getMinX()); x < area.getMaxX() - step / 2 && x < displayZone.getMaxX(); x += step)
+        for (int x = Math.max(area.getMinX() + step, displayZone.getMinX()); x < area.getMaxX() - step / 2
+                && x < displayZone.getMaxX(); x += step)
         {
             addDisplayed(displayZone, new IntVector(x, height, area.getMaxZ()), addSide);
             addDisplayed(displayZone, new IntVector(x, height, area.getMinZ()), addSide);
@@ -91,7 +92,8 @@ public abstract class BlockBoundaryVisualization extends BoundaryVisualization
         }
 
         // East and west boundaries
-        for (int z = Math.max(area.getMinZ() + step, displayZone.getMinZ()); z < area.getMaxZ() - step / 2 && z < displayZone.getMaxZ(); z += step)
+        for (int z = Math.max(area.getMinZ() + step, displayZone.getMinZ()); z < area.getMaxZ() - step / 2
+                && z < displayZone.getMaxZ(); z += step)
         {
             addDisplayed(displayZone, new IntVector(area.getMinX(), height, z), addSide);
             addDisplayed(displayZone, new IntVector(area.getMaxX(), height, z), addSide);
@@ -112,7 +114,8 @@ public abstract class BlockBoundaryVisualization extends BoundaryVisualization
     }
 
     /**
-     * Create a {@link Consumer} that adds a corner element for the given {@link IntVector}.
+     * Create a {@link Consumer} that adds a corner element for the given
+     * {@link IntVector}.
      *
      * @param boundary the {@code Boundary}
      * @return the corner element consumer
@@ -120,7 +123,8 @@ public abstract class BlockBoundaryVisualization extends BoundaryVisualization
     protected abstract @NotNull Consumer<@NotNull IntVector> addCornerElements(@NotNull Boundary boundary);
 
     /**
-     * Create a {@link Consumer} that adds a side element for the given {@link IntVector}.
+     * Create a {@link Consumer} that adds a side element for the given
+     * {@link IntVector}.
      *
      * @param boundary the {@code Boundary}
      * @return the side element consumer
@@ -139,12 +143,11 @@ public abstract class BlockBoundaryVisualization extends BoundaryVisualization
      * @param coordinate the coordinate being displayed
      * @param addElement the function for obtaining the element displayed
      */
-    protected void addDisplayed(
-            @NotNull BoundingBox displayZone,
-            @NotNull IntVector coordinate,
+    protected void addDisplayed(@NotNull BoundingBox displayZone, @NotNull IntVector coordinate,
             @NotNull Consumer<@NotNull IntVector> addElement)
     {
-        if (isAccessible(displayZone, coordinate)) {
+        if (isAccessible(displayZone, coordinate))
+        {
             addElement.accept(coordinate);
         }
     }
@@ -152,13 +155,13 @@ public abstract class BlockBoundaryVisualization extends BoundaryVisualization
     @Override
     public void revert(@Nullable Player player)
     {
-        // If the player cannot visualize the blocks, they should already be effectively reverted.
+        // If the player cannot visualize the blocks, they should already be effectively
+        // reverted.
         if (!canVisualize(player))
-        {
-            return;
-        }
+        { return; }
 
-        // Elements do not track the boundary they're attached to - all elements are reverted individually instead.
+        // Elements do not track the boundary they're attached to - all elements are
+        // reverted individually instead.
         this.elements.forEach(element -> element.erase(player, world));
     }
 

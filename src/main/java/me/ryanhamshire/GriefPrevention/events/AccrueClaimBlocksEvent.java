@@ -7,8 +7,9 @@ import org.bukkit.event.player.PlayerEvent;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * An {@link org.bukkit.event.Event Event} called when a {@link Player} is about to receive claim blocks.
- * GriefPrevention calls this event 6 times hourly, once every 10 minutes.
+ * An {@link org.bukkit.event.Event Event} called when a {@link Player} is about
+ * to receive claim blocks. GriefPrevention calls this event 6 times hourly,
+ * once every 10 minutes.
  *
  * @author RoboMWM on 11/15/2016
  */
@@ -21,14 +22,16 @@ public class AccrueClaimBlocksEvent extends PlayerEvent implements Cancellable
     /**
      * Construct a new {@code AccrueClaimBlocksEvent}.
      *
-     * <p>Note that this event was designed for simple internal usage. Because of that,
-     * it is assumed GriefPrevention is handling block delivery at its standard rate of
-     * 6 times per hour.
-     * <br>To achieve a specific number of blocks to accrue, either multiply in advance or set
-     * using {@link #setBlocksToAccrue(int)} after construction.
+     * <p>
+     * Note that this event was designed for simple internal usage. Because of that,
+     * it is assumed GriefPrevention is handling block delivery at its standard rate
+     * of 6 times per hour. <br>
+     * To achieve a specific number of blocks to accrue, either multiply in advance
+     * or set using {@link #setBlocksToAccrue(int)} after construction.
      *
      * @param player the {@link Player} receiving accruals
-     * @param blocksToAccruePerHour the number of claim blocks to accrue multiplied by 6
+     * @param blocksToAccruePerHour the number of claim blocks to accrue multiplied
+     *            by 6
      * @see #setBlocksToAccruePerHour(int)
      * @deprecated Use {@link #AccrueClaimBlocksEvent(Player, int, boolean)} instead
      */
@@ -41,15 +44,17 @@ public class AccrueClaimBlocksEvent extends PlayerEvent implements Cancellable
     /**
      * Construct a new {@code AccrueClaimBlocksEvent}.
      *
-     * <p>Note that this event was designed for simple internal usage. Because of that,
-     * it is assumed GriefPrevention is handling block delivery at its standard rate of
-     * 6 times per hour.
-     * <br>To achieve a specific number of blocks to accrue, either multiply in advance or set
-     * using {@link #setBlocksToAccrue(int)} after construction.
-     * <br>This event is initialized as canceled if @param isIdle is set to true.
+     * <p>
+     * Note that this event was designed for simple internal usage. Because of that,
+     * it is assumed GriefPrevention is handling block delivery at its standard rate
+     * of 6 times per hour. <br>
+     * To achieve a specific number of blocks to accrue, either multiply in advance
+     * or set using {@link #setBlocksToAccrue(int)} after construction. <br>
+     * This event is initialized as canceled if @param isIdle is set to true.
      *
      * @param player the {@link Player} receiving accruals
-     * @param blocksToAccruePerHour the number of claim blocks to accrue multiplied by 6
+     * @param blocksToAccruePerHour the number of claim blocks to accrue multiplied
+     *            by 6
      * @param isIdle whether player is detected as idle
      * @see #setBlocksToAccruePerHour(int)
      */
@@ -58,8 +63,7 @@ public class AccrueClaimBlocksEvent extends PlayerEvent implements Cancellable
         super(player);
         this.blocksToAccrue = blocksToAccruePerHour / 6;
         this.isIdle = isIdle;
-        if (isIdle)
-            this.setCancelled(true);
+        if (isIdle) this.setCancelled(true);
     }
 
     /**
@@ -95,8 +99,8 @@ public class AccrueClaimBlocksEvent extends PlayerEvent implements Cancellable
     }
 
     /**
-     * Get whether the {@link Player} is idle. This can be used to modify accrual rate
-     * for players who are inactive.
+     * Get whether the {@link Player} is idle. This can be used to modify accrual
+     * rate for players who are inactive.
      *
      * @return whether the {@code Player} is idle
      */

@@ -87,11 +87,8 @@ class MonitoredCommandsTest
 
     private static Collection<Arguments> commandsAndPrefixes()
     {
-        return List.of(
-                Arguments.of(Command.class, null),
-                Arguments.of(BukkitCommand.class, "/bukkit:"),
-                Arguments.of(MinecraftCommand.class, "/minecraft:")
-        );
+        return List.of(Arguments.of(Command.class, null), Arguments.of(BukkitCommand.class, "/bukkit:"),
+                Arguments.of(MinecraftCommand.class, "/minecraft:"));
     }
 
     @Test
@@ -116,11 +113,7 @@ class MonitoredCommandsTest
     }
 
     @ParameterizedTest
-    @CsvSource({
-            "test,/test one two",
-            "test one,/test one two",
-            "test one two,/test one two"
-    })
+    @CsvSource({"test,/test one two", "test one,/test one two", "test one two,/test one two"})
     void commandWithArgs(String monitored, String executed)
     {
         Command command = mock();
@@ -133,11 +126,7 @@ class MonitoredCommandsTest
     }
 
     @ParameterizedTest
-    @CsvSource({
-            "test one,/test",
-            "test one,/test oops",
-            "test one,/test oh no"
-    })
+    @CsvSource({"test one,/test", "test one,/test oops", "test one,/test oh no"})
     void commandWithoutArgs(String monitored, String executed)
     {
         Command command = mock();
@@ -177,11 +166,8 @@ class MonitoredCommandsTest
 
         MonitoredCommands monitor = new MonitoredCommands(List.of("/test"));
 
-        List<String> expectedAliases = List.of(
-                "/test", "/tset",
-                "/testplugin:test", "/testplugin:tset",
-                "/minecraft:test", "/bukkit:test"
-        );
+        List<String> expectedAliases = List.of("/test", "/tset", "/testplugin:test", "/testplugin:tset",
+                "/minecraft:test", "/bukkit:test");
         for (String alias : expectedAliases)
         {
             assertTrue(monitor.isMonitoredCommand(new MonitorableCommand(alias)));
@@ -264,11 +250,10 @@ class MonitoredCommandsTest
 
         MonitoredCommands monitor = new MonitoredCommands(List.of("/test"));
 
-        List<String> expectedAliases = List.of(
-                "/test", "/testplugin:test",
-                "/testplugin:tset", // Prefixed copies of conflicted aliases must be registered.
-                "/minecraft:test", "/bukkit:test"
-        );
+        List<String> expectedAliases = List.of("/test", "/testplugin:test", "/testplugin:tset", // Prefixed copies of
+                                                                                                // conflicted aliases
+                                                                                                // must be registered.
+                "/minecraft:test", "/bukkit:test");
         for (String alias : expectedAliases)
         {
             assertTrue(monitor.isMonitoredCommand(new MonitorableCommand(alias)));
@@ -293,7 +278,8 @@ class MonitoredCommandsTest
     }
 
     /**
-     * Helper used to set command map used by MonitoredCommands rather than create a server implementation.
+     * Helper used to set command map used by MonitoredCommands rather than create a
+     * server implementation.
      *
      * @param commandMap the command map instance
      * @exception ReflectiveOperationException if setting fails
@@ -311,7 +297,8 @@ class MonitoredCommandsTest
         server = ServerMocks.newServer();
         Bukkit.setServer(server);
 
-        // Set up dummy GP instance with dummy logger to prevent NPE when MonitoredCommands class is loaded.
+        // Set up dummy GP instance with dummy logger to prevent NPE when
+        // MonitoredCommands class is loaded.
         GriefPrevention.instance = mock(GriefPrevention.class);
         Logger logger = mock(Logger.class);
         doReturn(logger).when(GriefPrevention.instance).getLogger();
@@ -320,15 +307,17 @@ class MonitoredCommandsTest
     @AfterAll
     static void afterAll()
     {
-        //noinspection DataFlowIssue
+        // noinspection DataFlowIssue
         GriefPrevention.instance = null;
         ServerMocks.unsetBukkitServer();
     }
 
     private static abstract class MinecraftCommand extends BukkitCommand
     {
-        // Mockito's mocks are constructed with a package matching that of the mocked object.
-        // This means that direct BukkitCommand mocking will always result in the bukkit prefix.
+        // Mockito's mocks are constructed with a package matching that of the mocked
+        // object.
+        // This means that direct BukkitCommand mocking will always result in the bukkit
+        // prefix.
         protected MinecraftCommand(@NotNull String name)
         {
             super(name);

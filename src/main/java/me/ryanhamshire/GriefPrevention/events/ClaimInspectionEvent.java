@@ -13,7 +13,8 @@ import java.util.Collection;
 import java.util.Collections;
 
 /**
- * An {@link org.bukkit.event.Event Event} called when a {@link Player} uses the claim inspection tool.
+ * An {@link org.bukkit.event.Event Event} called when a {@link Player} uses the
+ * claim inspection tool.
  *
  * @author FrankHeijden
  */
@@ -25,7 +26,8 @@ public class ClaimInspectionEvent extends PlayerEvent implements Cancellable
     private final boolean inspectingNearbyClaims;
 
     /**
-     * Construct a new {@code ClaimInspectionEvent} for a {@link Player} inspecting a {@link Block}.
+     * Construct a new {@code ClaimInspectionEvent} for a {@link Player} inspecting
+     * a {@link Block}.
      *
      * @param player the inspecting {@code Player}
      * @param inspectedBlock the inspected {@code Block}
@@ -39,8 +41,7 @@ public class ClaimInspectionEvent extends PlayerEvent implements Cancellable
         if (claim != null)
         {
             this.claims = Collections.singleton(claim);
-        }
-        else
+        } else
         {
             this.claims = Collections.emptyList();
         }
@@ -51,15 +52,14 @@ public class ClaimInspectionEvent extends PlayerEvent implements Cancellable
      * Construct a new {@code ClaimInspectionEvent}.
      *
      * @param player the inspecting {@link Player}
-     * @param inspectedBlock the inspected {@link Block} or {@code null} if no block was clicked
+     * @param inspectedBlock the inspected {@link Block} or {@code null} if no block
+     *            was clicked
      * @param claims a {@link Collection} of all claims inspected
-     * @param inspectingNearbyClaims whether the user is inspecting nearby claims ("shift-clicking")
+     * @param inspectingNearbyClaims whether the user is inspecting nearby claims
+     *            ("shift-clicking")
      */
-    public ClaimInspectionEvent(
-            @NotNull Player player,
-            @Nullable Block inspectedBlock,
-            @NotNull Collection<Claim> claims,
-            boolean inspectingNearbyClaims)
+    public ClaimInspectionEvent(@NotNull Player player, @Nullable Block inspectedBlock,
+            @NotNull Collection<Claim> claims, boolean inspectingNearbyClaims)
     {
         super(player);
         this.inspectedBlock = inspectedBlock;
@@ -68,7 +68,8 @@ public class ClaimInspectionEvent extends PlayerEvent implements Cancellable
     }
 
     /**
-     * Get the inspected {@link Block}. May be {@code null} if inspecting nearby claims.
+     * Get the inspected {@link Block}. May be {@code null} if inspecting nearby
+     * claims.
      *
      * @return the inspected {@code Block} or {@code null} if no block was clicked
      */
