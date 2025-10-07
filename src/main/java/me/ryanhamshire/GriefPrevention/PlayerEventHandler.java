@@ -1165,10 +1165,6 @@ class PlayerEventHandler implements Listener
                 if(player.getUniqueId().toString().equals(playerId)) return;
             }
 
-            // ignore checks if vehicle's owner is the player interacting
-            String playerId = pdc.get(instance.VEHICLE_OWNER, PersistentDataType.STRING);
-            if(player.getUniqueId().toString().equals(playerId)) return;
-
             //if the entity is in a claim
             Claim claim = this.dataStore.getClaimAt(entity.getLocation(), false, null);
             if (claim != null)
