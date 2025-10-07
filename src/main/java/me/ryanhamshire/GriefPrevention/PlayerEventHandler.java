@@ -18,19 +18,27 @@
 
 package me.ryanhamshire.GriefPrevention;
 
-import com.griefprevention.protection.ProtectionHelper;
-import com.griefprevention.util.command.MonitorableCommand;
-import com.griefprevention.util.command.MonitoredCommands;
-import com.griefprevention.visualization.BoundaryVisualization;
-import com.griefprevention.visualization.VisualizationType;
-import me.ryanhamshire.GriefPrevention.events.ClaimInspectionEvent;
-import me.ryanhamshire.GriefPrevention.util.BoundingBox;
+import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Supplier;
+import java.util.regex.Pattern;
+
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Tag;
 import org.bukkit.World;
@@ -86,24 +94,21 @@ import org.bukkit.event.raid.RaidTriggerEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.profile.PlayerProfile;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BlockIterator;
 import org.jetbrains.annotations.NotNull;
 
-import java.net.InetAddress;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Supplier;
-import java.util.regex.Pattern;
+import com.griefprevention.protection.ProtectionHelper;
+import com.griefprevention.util.command.MonitorableCommand;
+import com.griefprevention.util.command.MonitoredCommands;
+import com.griefprevention.visualization.BoundaryVisualization;
+import com.griefprevention.visualization.VisualizationType;
+
+import me.ryanhamshire.GriefPrevention.events.ClaimInspectionEvent;
+import me.ryanhamshire.GriefPrevention.util.BoundingBox;
 
 class PlayerEventHandler implements Listener
 {
@@ -115,6 +120,9 @@ class PlayerEventHandler implements Listener
 
     //number of milliseconds in a day
     private final long MILLISECONDS_IN_DAY = 1000 * 60 * 60 * 24;
+
+    //vehicle owner key
+    private final NamespacedKey VEHICLE_OWNER;
 
     //timestamps of login and logout notifications in the last minute
     private final ArrayList<Long> recentLoginLogoutNotifications = new ArrayList<>();
@@ -140,6 +148,7 @@ class PlayerEventHandler implements Listener
     {
         this.dataStore = dataStore;
         this.instance = plugin;
+        this.VEHICLE_OWNER = new NamespacedKey(instance, "vehicle_owner");
         // Initialize empty on load so never null just in case. Reload after plugins enable.
         this.bannedWordFinder = new WordFinder(List.of());
         this.pvpBlockedCommands = new MonitoredCommands(List.of());
@@ -1147,8 +1156,18 @@ class PlayerEventHandler implements Listener
         }
 
         //if the entity is a vehicle and we're preventing theft in claims
-        if (instance.config_claims_preventTheft && entity instanceof Vehicle)
+        if (instance.config_claims_preventTheft && entity instanceof Vehicle vehicle)
         {
+            
+            // Checks if vehicle has owner.
+            // See: {@link VehicleHandler}
+            PersistentDataContainer pdc = vehicle.getPersistentDataContainer();
+            if(!pdc.has(VEHICLE_OWNER)) return;
+
+            // ignore checks if vehicle owner is the player
+            String playerId = pdc.get(VEHICLE_OWNER, PersistentDataType.STRING);
+            if(player.getUniqueId().toString().equals(playerId)) return;
+
             //if the entity is in a claim
             Claim claim = this.dataStore.getClaimAt(entity.getLocation(), false, null);
             if (claim != null)
