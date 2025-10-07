@@ -1,11 +1,12 @@
 package me.ryanhamshire.GriefPrevention.events;
 
-import me.ryanhamshire.GriefPrevention.Claim;
 import org.bukkit.Warning;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import me.ryanhamshire.GriefPrevention.Claim;
 
 /**
  * @deprecated replaced by more descriptive {@link ClaimResizeEvent} and generic

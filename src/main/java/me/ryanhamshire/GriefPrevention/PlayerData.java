@@ -18,17 +18,18 @@
 
 package me.ryanhamshire.GriefPrevention;
 
-import com.griefprevention.visualization.BoundaryVisualization;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
-import org.jetbrains.annotations.Nullable;
-
 import java.net.InetAddress;
 import java.util.Calendar;
 import java.util.UUID;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
+import org.jetbrains.annotations.Nullable;
+
+import com.griefprevention.visualization.BoundaryVisualization;
 
 //holds all of GriefPrevention's player-tied data
 public class PlayerData

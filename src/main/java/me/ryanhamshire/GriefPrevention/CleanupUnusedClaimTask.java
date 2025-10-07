@@ -18,13 +18,14 @@
 
 package me.ryanhamshire.GriefPrevention;
 
-import me.ryanhamshire.GriefPrevention.events.ClaimExpirationEvent;
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
+
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
+
+import me.ryanhamshire.GriefPrevention.events.ClaimExpirationEvent;
 
 class CleanupUnusedClaimTask implements Runnable
 {

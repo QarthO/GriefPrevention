@@ -122,6 +122,12 @@
                             <version>4.26.0</version>
                             <file>${project.basedir}/eclipse-format.xml</file>
                         </eclipse>
+                        <removeUnusedImports/>
+                        <importOrder>
+                            <wildcardsLast>true</wildcardsLast>
+                            <order>java,javax,org,com,net,io,gg</order>
+                            <semanticSort>false</semanticSort>
+                        </importOrder>
                     </java>
                 </configuration>
                 <executions>

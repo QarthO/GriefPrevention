@@ -18,8 +18,13 @@
 
 package me.ryanhamshire.GriefPrevention;
 
-import com.griefprevention.protection.ProtectionHelper;
-import me.ryanhamshire.GriefPrevention.events.ProtectDeathDropsEvent;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+import java.util.function.Supplier;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ExplosionResult;
 import org.bukkit.Location;
@@ -69,12 +74,9 @@ import org.bukkit.projectiles.ProjectileSource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
-import java.util.function.Supplier;
+import com.griefprevention.protection.ProtectionHelper;
+
+import me.ryanhamshire.GriefPrevention.events.ProtectDeathDropsEvent;
 
 //handles events related to entities
 public class EntityEventHandler implements Listener

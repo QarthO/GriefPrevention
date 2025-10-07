@@ -1,12 +1,13 @@
 package com.griefprevention.visualization;
 
-import com.griefprevention.util.IntVector;
+import java.util.Objects;
+
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
+import com.griefprevention.util.IntVector;
 
 /**
  * An element of a {@link BlockBoundaryVisualization}.

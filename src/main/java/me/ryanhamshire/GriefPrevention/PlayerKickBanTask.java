@@ -18,9 +18,10 @@
 
 package me.ryanhamshire.GriefPrevention;
 
-import me.ryanhamshire.GriefPrevention.events.PlayerKickBanEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import me.ryanhamshire.GriefPrevention.events.PlayerKickBanEvent;
 
 //kicks or bans a player
 //need a task for this because async threads (like the chat event handlers) can't kick or ban.

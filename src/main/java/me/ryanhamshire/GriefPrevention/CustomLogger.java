@@ -18,10 +18,6 @@
 
 package me.ryanhamshire.GriefPrevention;
 
-import com.google.common.io.FileWriteMode;
-import com.google.common.io.Files;
-import org.bukkit.scheduler.BukkitScheduler;
-
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
@@ -29,6 +25,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.bukkit.scheduler.BukkitScheduler;
+
+import com.google.common.io.FileWriteMode;
+import com.google.common.io.Files;
 
 class CustomLogger
 {

@@ -18,9 +18,10 @@
 
 package me.ryanhamshire.GriefPrevention;
 
-import com.griefprevention.visualization.BlockElement;
 import org.bukkit.Location;
 import org.bukkit.block.data.BlockData;
+
+import com.griefprevention.visualization.BlockElement;
 
 /**
  * Represents a fake {@link org.bukkit.block.Block Block} sent to a

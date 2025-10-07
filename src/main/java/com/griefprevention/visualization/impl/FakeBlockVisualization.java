@@ -1,9 +1,7 @@
 package com.griefprevention.visualization.impl;
 
-import com.griefprevention.util.IntVector;
-import com.griefprevention.visualization.BlockBoundaryVisualization;
-import com.griefprevention.visualization.Boundary;
-import com.griefprevention.visualization.BoundaryVisualization;
+import java.util.function.Consumer;
+
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.World;
@@ -13,7 +11,10 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Lightable;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.Consumer;
+import com.griefprevention.util.IntVector;
+import com.griefprevention.visualization.BlockBoundaryVisualization;
+import com.griefprevention.visualization.Boundary;
+import com.griefprevention.visualization.BoundaryVisualization;
 
 /**
  * A {@link BoundaryVisualization} implementation that displays clientside

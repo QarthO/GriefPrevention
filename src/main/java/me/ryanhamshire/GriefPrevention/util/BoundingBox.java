@@ -1,7 +1,9 @@
 package me.ryanhamshire.GriefPrevention.util;
 
-import com.griefprevention.util.IntVector;
-import me.ryanhamshire.GriefPrevention.Claim;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Objects;
+
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -11,9 +13,9 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Objects;
+import com.griefprevention.util.IntVector;
+
+import me.ryanhamshire.GriefPrevention.Claim;
 
 /**
  * A mutable block-based axis-aligned bounding box.

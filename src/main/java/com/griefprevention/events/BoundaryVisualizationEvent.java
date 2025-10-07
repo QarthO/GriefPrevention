@@ -1,19 +1,21 @@
 package com.griefprevention.events;
 
+import java.util.Collection;
+import java.util.HashSet;
+
+import org.bukkit.entity.Player;
+import org.bukkit.event.HandlerList;
+import org.bukkit.event.player.PlayerEvent;
+import org.jetbrains.annotations.NotNull;
+
 import com.griefprevention.util.IntVector;
 import com.griefprevention.visualization.Boundary;
 import com.griefprevention.visualization.BoundaryVisualization;
 import com.griefprevention.visualization.VisualizationProvider;
 import com.griefprevention.visualization.impl.AntiCheatCompatVisualization;
 import com.griefprevention.visualization.impl.FakeBlockVisualization;
-import me.ryanhamshire.GriefPrevention.GriefPrevention;
-import org.bukkit.entity.Player;
-import org.bukkit.event.HandlerList;
-import org.bukkit.event.player.PlayerEvent;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
-import java.util.HashSet;
+import me.ryanhamshire.GriefPrevention.GriefPrevention;
 
 /**
  * An {@link org.bukkit.event.Event Event} called when a {@link Player} receives

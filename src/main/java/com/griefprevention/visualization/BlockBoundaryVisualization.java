@@ -1,16 +1,18 @@
 package com.griefprevention.visualization;
 
-import com.griefprevention.util.IntVector;
-import me.ryanhamshire.GriefPrevention.PlayerData;
-import me.ryanhamshire.GriefPrevention.util.BoundingBox;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.function.Consumer;
+
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.function.Consumer;
+import com.griefprevention.util.IntVector;
+
+import me.ryanhamshire.GriefPrevention.PlayerData;
+import me.ryanhamshire.GriefPrevention.util.BoundingBox;
 
 public abstract class BlockBoundaryVisualization extends BoundaryVisualization
 {

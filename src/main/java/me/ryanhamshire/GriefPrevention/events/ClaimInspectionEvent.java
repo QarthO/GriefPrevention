@@ -1,6 +1,8 @@
 package me.ryanhamshire.GriefPrevention.events;
 
-import me.ryanhamshire.GriefPrevention.Claim;
+import java.util.Collection;
+import java.util.Collections;
+
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
@@ -9,8 +11,7 @@ import org.bukkit.event.player.PlayerEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.Collections;
+import me.ryanhamshire.GriefPrevention.Claim;
 
 /**
  * An {@link org.bukkit.event.Event Event} called when a {@link Player} uses the

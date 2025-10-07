@@ -1,8 +1,8 @@
 package com.griefprevention.metrics;
 
-import me.ryanhamshire.GriefPrevention.GriefPrevention;
-
 import java.util.concurrent.Callable;
+
+import me.ryanhamshire.GriefPrevention.GriefPrevention;
 
 /**
  * Created on 3/2/2024.

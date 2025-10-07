@@ -18,10 +18,11 @@
 
 package me.ryanhamshire.GriefPrevention;
 
-import me.ryanhamshire.GriefPrevention.events.AccrueClaimBlocksEvent;
+import java.util.Collection;
+
 import org.bukkit.entity.Player;
 
-import java.util.Collection;
+import me.ryanhamshire.GriefPrevention.events.AccrueClaimBlocksEvent;
 
 //FEATURE: give players claim blocks for playing, as long as they're not away from their computer
 

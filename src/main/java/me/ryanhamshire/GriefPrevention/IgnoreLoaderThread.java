@@ -1,13 +1,12 @@
 package me.ryanhamshire.GriefPrevention;
 
-import com.google.common.io.Files;
-
 import java.io.File;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+
+import com.google.common.io.Files;
 
 //loads ignore data from file into a hash map
 class IgnoreLoaderThread extends Thread
