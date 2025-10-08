@@ -20,8 +20,10 @@ import org.jetbrains.annotations.Range;
 final class TabCompletions
 {
 
-    public static @NotNull List<String> integer(@NotNull String[] args,
-            @Range(from = 1, to = Integer.MAX_VALUE - 1) int maxDigits, boolean allowBelowOne)
+    public static @NotNull List<String> integer(
+            @NotNull String[] args,
+            @Range(from = 1, to = Integer.MAX_VALUE - 1) int maxDigits,
+            boolean allowBelowOne)
     {
         String prefix = asPrefix(args);
 
@@ -72,8 +74,10 @@ final class TabCompletions
     /**
      * Offer completions for visible players' names.
      *
-     * @param sender the sender
-     * @param args the existing command arguments
+     * @param sender
+     *            the sender
+     * @param args
+     *            the existing command arguments
      * @return the matching players' names
      */
     static @NotNull List<String> visiblePlayers(@Nullable CommandSender sender, @NotNull String[] args)
@@ -96,16 +100,24 @@ final class TabCompletions
     /**
      * Offer completions matching an array of options. Options can be filtered.
      *
-     * @param completable the array of completable options
-     * @param asString the method for converting an option to a String
-     * @param filter the filter to apply, or null for no filtering
-     * @param args the existing command arguments
+     * @param completable
+     *            the array of completable options
+     * @param asString
+     *            the method for converting an option to a String
+     * @param filter
+     *            the filter to apply, or null for no filtering
+     * @param args
+     *            the existing command arguments
      * @return a {@link List} of all matching completable options in {@code String}
      *         form
-     * @param <T> the type of the option
+     * @param <T>
+     *            the type of the option
      */
-    private static <T> @NotNull List<String> complete(T @NotNull [] completable, @NotNull Function<T, String> asString,
-            @Nullable Predicate<T> filter, @NotNull String[] args)
+    private static <T> @NotNull List<String> complete(
+            T @NotNull [] completable,
+            @NotNull Function<T, String> asString,
+            @Nullable Predicate<T> filter,
+            @NotNull String[] args)
     {
         String prefix = asPrefix(args);
 

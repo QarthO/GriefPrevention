@@ -33,9 +33,13 @@ import com.google.common.io.Files;
 
 class CustomLogger
 {
+
     private final SimpleDateFormat timestampFormat = new SimpleDateFormat("HH:mm");
+
     private final SimpleDateFormat filenameFormat = new SimpleDateFormat("yyyy_MM_dd");
+
     private final String logFolderPath = DataStore.dataLayerFolderPath + File.separator + "Logs";
+
     private final int secondsBetweenWrites = 300;
 
     // stringbuilder is not thread safe, stringbuffer is
@@ -57,9 +61,15 @@ class CustomLogger
             BukkitScheduler scheduler = GriefPrevention.instance.getServer().getScheduler();
             final long ticksPerSecond = 20L;
             final long ticksPerDay = ticksPerSecond * 60 * 60 * 24;
-            scheduler.runTaskTimerAsynchronously(GriefPrevention.instance, new EntryWriter(),
-                    this.secondsBetweenWrites * ticksPerSecond, this.secondsBetweenWrites * ticksPerSecond);
-            scheduler.runTaskTimerAsynchronously(GriefPrevention.instance, new ExpiredLogRemover(), ticksPerDay,
+            scheduler.runTaskTimerAsynchronously(
+                    GriefPrevention.instance,
+                    new EntryWriter(),
+                    this.secondsBetweenWrites * ticksPerSecond,
+                    this.secondsBetweenWrites * ticksPerSecond);
+            scheduler.runTaskTimerAsynchronously(
+                    GriefPrevention.instance,
+                    new ExpiredLogRemover(),
+                    ticksPerDay,
                     ticksPerDay);
         }
     }
@@ -164,7 +174,8 @@ class CustomLogger
                     // format
                     GriefPrevention.AddLogEntry(
                             "Ignoring an unexpected file in the abridged logs folder: " + file.getName(),
-                            CustomLogEntryTypes.Debug, true);
+                            CustomLogEntryTypes.Debug,
+                            true);
                 }
             }
         }
@@ -177,6 +188,7 @@ class CustomLogger
     // transfers the internal buffer to a log file
     private class EntryWriter implements Runnable
     {
+
         @Override
         public void run()
         {
@@ -186,6 +198,7 @@ class CustomLogger
 
     private class ExpiredLogRemover implements Runnable
     {
+
         @Override
         public void run()
         {

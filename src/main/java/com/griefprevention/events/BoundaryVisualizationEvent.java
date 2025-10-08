@@ -32,16 +32,21 @@ public class BoundaryVisualizationEvent extends PlayerEvent
     };
 
     private final @NotNull Collection<Boundary> boundaries;
+
     private final int height;
+
     private @NotNull VisualizationProvider provider;
 
     /**
      * Construct a new {@code BoundaryVisualizationEvent} for a group of
      * {@link Boundary Boundaries} using the default visualization provider.
      *
-     * @param player the {@link Player} receiving visuals
-     * @param boundaries the {@code Boundaries} to visualize
-     * @param height the height at which the visualization was initiated
+     * @param player
+     *            the {@link Player} receiving visuals
+     * @param boundaries
+     *            the {@code Boundaries} to visualize
+     * @param height
+     *            the height at which the visualization was initiated
      */
     public BoundaryVisualizationEvent(@NotNull Player player, @NotNull Collection<Boundary> boundaries, int height)
     {
@@ -53,10 +58,14 @@ public class BoundaryVisualizationEvent extends PlayerEvent
      * Construct a new {@code BoundaryVisualizationEvent} for a group of
      * {@link Boundary Boundaries}.
      *
-     * @param player the {@link Player} receiving visuals
-     * @param boundaries the {@code Boundaries} to visualize
-     * @param height the height at which the visualization was initiated
-     * @param provider the {@link VisualizationProvider}
+     * @param player
+     *            the {@link Player} receiving visuals
+     * @param boundaries
+     *            the {@code Boundaries} to visualize
+     * @param height
+     *            the height at which the visualization was initiated
+     * @param provider
+     *            the {@link VisualizationProvider}
      */
     public BoundaryVisualizationEvent(@NotNull Player player, @NotNull Collection<Boundary> boundaries, int height,
             @NotNull VisualizationProvider provider)
@@ -113,7 +122,8 @@ public class BoundaryVisualizationEvent extends PlayerEvent
      * Set the {@link VisualizationProvider} used to create the
      * {@link BoundaryVisualization} after event completion.
      *
-     * @param provider the {@code VisualizationProvider}
+     * @param provider
+     *            the {@code VisualizationProvider}
      */
     public void setProvider(@NotNull VisualizationProvider provider)
     {

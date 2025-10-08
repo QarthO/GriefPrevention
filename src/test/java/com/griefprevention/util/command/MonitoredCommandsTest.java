@@ -46,6 +46,7 @@ class MonitoredCommandsTest
 {
 
     private static Server server;
+
     private CommandMap commandMap;
 
     @BeforeEach
@@ -90,7 +91,9 @@ class MonitoredCommandsTest
 
     private static Collection<Arguments> commandsAndPrefixes()
     {
-        return List.of(Arguments.of(Command.class, null), Arguments.of(BukkitCommand.class, "/bukkit:"),
+        return List.of(
+                Arguments.of(Command.class, null),
+                Arguments.of(BukkitCommand.class, "/bukkit:"),
                 Arguments.of(MinecraftCommand.class, "/minecraft:"));
     }
 
@@ -169,8 +172,8 @@ class MonitoredCommandsTest
 
         MonitoredCommands monitor = new MonitoredCommands(List.of("/test"));
 
-        List<String> expectedAliases = List.of("/test", "/tset", "/testplugin:test", "/testplugin:tset",
-                "/minecraft:test", "/bukkit:test");
+        List<String> expectedAliases = List
+                .of("/test", "/tset", "/testplugin:test", "/testplugin:tset", "/minecraft:test", "/bukkit:test");
         for (String alias : expectedAliases)
         {
             assertTrue(monitor.isMonitoredCommand(new MonitorableCommand(alias)));
@@ -253,10 +256,14 @@ class MonitoredCommandsTest
 
         MonitoredCommands monitor = new MonitoredCommands(List.of("/test"));
 
-        List<String> expectedAliases = List.of("/test", "/testplugin:test", "/testplugin:tset", // Prefixed copies of
-                                                                                                // conflicted aliases
-                                                                                                // must be registered.
-                "/minecraft:test", "/bukkit:test");
+        List<String> expectedAliases = List.of(
+                "/test",
+                "/testplugin:test",
+                "/testplugin:tset", // Prefixed copies of
+                                    // conflicted aliases
+                                    // must be registered.
+                "/minecraft:test",
+                "/bukkit:test");
         for (String alias : expectedAliases)
         {
             assertTrue(monitor.isMonitoredCommand(new MonitorableCommand(alias)));
@@ -284,8 +291,10 @@ class MonitoredCommandsTest
      * Helper used to set command map used by MonitoredCommands rather than create a
      * server implementation.
      *
-     * @param commandMap the command map instance
-     * @exception ReflectiveOperationException if setting fails
+     * @param commandMap
+     *            the command map instance
+     * @exception ReflectiveOperationException
+     *                if setting fails
      */
     private static void setCommandMap(@Nullable CommandMap commandMap) throws ReflectiveOperationException
     {
@@ -317,6 +326,7 @@ class MonitoredCommandsTest
 
     private static abstract class MinecraftCommand extends BukkitCommand
     {
+
         // Mockito's mocks are constructed with a package matching that of the mocked
         // object.
         // This means that direct BukkitCommand mocking will always result in the bukkit

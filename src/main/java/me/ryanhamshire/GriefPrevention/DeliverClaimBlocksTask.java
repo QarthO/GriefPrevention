@@ -29,7 +29,9 @@ import me.ryanhamshire.GriefPrevention.events.AccrueClaimBlocksEvent;
 //runs every 5 minutes in the main thread, grants blocks per hour / 12 to each online player who appears to be actively playing
 class DeliverClaimBlocksTask implements Runnable
 {
+
     private final Player player;
+
     private final GriefPrevention instance;
 
     public DeliverClaimBlocksTask(Player player, GriefPrevention instance)
@@ -89,11 +91,13 @@ class DeliverClaimBlocksTask implements Runnable
                 if (event.isIdle())
                     GriefPrevention.AddLogEntry(
                             player.getName() + " wasn't active enough to accrue claim blocks this round.",
-                            CustomLogEntryTypes.Debug, true);
+                            CustomLogEntryTypes.Debug,
+                            true);
                 else
                     GriefPrevention.AddLogEntry(
                             player.getName() + " claim block delivery was canceled by another plugin.",
-                            CustomLogEntryTypes.Debug, true);
+                            CustomLogEntryTypes.Debug,
+                            true);
                 return; // event was cancelled
             }
 
@@ -101,8 +105,10 @@ class DeliverClaimBlocksTask implements Runnable
             accrualRate = event.getBlocksToAccrue();
             if (accrualRate < 0) accrualRate = 0;
             playerData.accrueBlocks(accrualRate);
-            GriefPrevention.AddLogEntry("Delivering " + event.getBlocksToAccrue() + " blocks to " + player.getName(),
-                    CustomLogEntryTypes.Debug, true);
+            GriefPrevention.AddLogEntry(
+                    "Delivering " + event.getBlocksToAccrue() + " blocks to " + player.getName(),
+                    CustomLogEntryTypes.Debug,
+                    true);
 
             // intentionally NOT saving data here to reduce overall secondary storage access
             // frequency

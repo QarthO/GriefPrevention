@@ -82,8 +82,10 @@ import me.ryanhamshire.GriefPrevention.events.ProtectDeathDropsEvent;
 //handles events related to entities
 public class EntityEventHandler implements Listener
 {
+
     // convenience reference for the singleton datastore
     private final DataStore dataStore;
+
     private final GriefPrevention instance;
 
     public EntityEventHandler(DataStore dataStore, GriefPrevention plugin)
@@ -96,8 +98,8 @@ public class EntityEventHandler implements Listener
     public void onEntityFormBlock(EntityBlockFormEvent event)
     {
         Entity entity = event.getEntity();
-        if (entity instanceof Player player && ProtectionHelper.checkPermission(player, event.getBlock().getLocation(),
-                ClaimPermission.Build, event) != null)
+        if (entity instanceof Player player && ProtectionHelper
+                .checkPermission(player, event.getBlock().getLocation(), ClaimPermission.Build, event) != null)
         {
             event.setCancelled(true);
         }
@@ -198,8 +200,8 @@ public class EntityEventHandler implements Listener
         // original location
         if (event.getTo() == Material.AIR)
         {
-            fallingBlock.setMetadata("GP_FALLINGBLOCK",
-                    new FixedMetadataValue(GriefPrevention.instance, blockLocation));
+            fallingBlock
+                    .setMetadata("GP_FALLINGBLOCK", new FixedMetadataValue(GriefPrevention.instance, blockLocation));
             return;
         }
 
@@ -391,7 +393,10 @@ public class EntityEventHandler implements Listener
         // Explosion causes interactable blocks (levers, buttons, etc.) to change state.
         if (explodeEvent.getExplosionResult() == ExplosionResult.TRIGGER_BLOCK)
         {
-            handleExplodeInteract(explodeEvent.getLocation(), explodeEvent.getEntity(), explodeEvent.blockList(),
+            handleExplodeInteract(
+                    explodeEvent.getLocation(),
+                    explodeEvent.getEntity(),
+                    explodeEvent.blockList(),
                     explodeEvent);
         }
         // Explosion damages world.
@@ -421,7 +426,10 @@ public class EntityEventHandler implements Listener
         }
     }
 
-    void handleExplodeInteract(@NotNull Location location, @Nullable Entity entity, @NotNull List<Block> blocks,
+    void handleExplodeInteract(
+            @NotNull Location location,
+            @Nullable Entity entity,
+            @NotNull List<Block> blocks,
             @NotNull Event event)
     {
         World world = location.getWorld();
@@ -578,7 +586,8 @@ public class EntityEventHandler implements Listener
             }
 
             // otherwise, mark item with protection information
-            newItem.setMetadata("GP_ITEMOWNER",
+            newItem.setMetadata(
+                    "GP_ITEMOWNER",
                     new FixedMetadataValue(GriefPrevention.instance, pendingProtection.owner));
 
             // and remove pending protection data
@@ -742,8 +751,8 @@ public class EntityEventHandler implements Listener
         }
 
         // if the player doesn't have build permission, don't allow the breakage
-        Supplier<String> noBuildReason = ProtectionHelper.checkPermission(playerRemover,
-                event.getEntity().getLocation(), ClaimPermission.Build, event);
+        Supplier<String> noBuildReason = ProtectionHelper
+                .checkPermission(playerRemover, event.getEntity().getLocation(), ClaimPermission.Build, event);
         if (noBuildReason != null)
         {
             event.setCancelled(true);
@@ -763,8 +772,8 @@ public class EntityEventHandler implements Listener
         // the claim
 
         // if the player doesn't have permission, don't allow the placement
-        Supplier<String> noBuildReason = ProtectionHelper.checkPermission(event.getPlayer(),
-                event.getEntity().getLocation(), ClaimPermission.Build, event);
+        Supplier<String> noBuildReason = ProtectionHelper
+                .checkPermission(event.getPlayer(), event.getEntity().getLocation(), ClaimPermission.Build, event);
         if (noBuildReason != null)
         {
             event.setCancelled(true);
@@ -805,8 +814,8 @@ public class EntityEventHandler implements Listener
         if (!(entity instanceof Player player)) return;
 
         // if the player doesn't have build permission, don't allow the interaction
-        Supplier<String> noBuildReason = ProtectionHelper.checkPermission(player, player.getLocation(),
-                ClaimPermission.Build, event);
+        Supplier<String> noBuildReason = ProtectionHelper
+                .checkPermission(player, player.getLocation(), ClaimPermission.Build, event);
         if (noBuildReason != null)
         {
             event.setCancelled(true);
@@ -844,7 +853,10 @@ public class EntityEventHandler implements Listener
         if (!playerData.receivedDropUnlockAdvertisement)
         {
             GriefPrevention.sendMessage(owner.getPlayer(), TextMode.Instr, Messages.DropUnlockAdvertisement);
-            GriefPrevention.sendMessage(player, TextMode.Err, Messages.PickupBlockedExplanation,
+            GriefPrevention.sendMessage(
+                    player,
+                    TextMode.Err,
+                    Messages.PickupBlockedExplanation,
                     GriefPrevention.lookupPlayerName(ownerID));
             playerData.receivedDropUnlockAdvertisement = true;
         }

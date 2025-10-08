@@ -11,6 +11,7 @@ import me.ryanhamshire.GriefPrevention.GriefPrevention;
  */
 public class MetricsHandler
 {
+
     private final Metrics metrics;
 
     public MetricsHandler(GriefPrevention plugin)
@@ -34,6 +35,7 @@ public class MetricsHandler
     private void addSimplePie(String id, String value)
     {
         metrics.addCustomChart(new Metrics.SimplePie(id, new Callable<String>() {
+
             @Override
             public String call() throws Exception
             {

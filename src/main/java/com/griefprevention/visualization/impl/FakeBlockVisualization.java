@@ -29,10 +29,13 @@ public class FakeBlockVisualization extends BlockBoundaryVisualization
     /**
      * Construct a new {@code FakeBlockVisualization}.
      *
-     * @param world the {@link World} being visualized in
-     * @param visualizeFrom the {@link IntVector} representing the world coordinate
-     *            being visualized from
-     * @param height the height of the visualization
+     * @param world
+     *            the {@link World} being visualized in
+     * @param visualizeFrom
+     *            the {@link IntVector} representing the world coordinate being
+     *            visualized from
+     * @param height
+     *            the height of the visualization
      */
     public FakeBlockVisualization(@NotNull World world, @NotNull IntVector visualizeFrom, int height)
     {
@@ -77,7 +80,8 @@ public class FakeBlockVisualization extends BlockBoundaryVisualization
      * Create a {@link Consumer} that adds an appropriate {@link FakeBlockElement}
      * for the given {@link IntVector}.
      *
-     * @param fakeData the fake {@link BlockData}
+     * @param fakeData
+     *            the fake {@link BlockData}
      * @return the function for determining a visible fake block location
      */
     private @NotNull Consumer<@NotNull IntVector> addBlockElement(@NotNull BlockData fakeData)
@@ -95,7 +99,8 @@ public class FakeBlockVisualization extends BlockBoundaryVisualization
      * Find a location that should be visible to players. This causes the
      * visualization to "cling" to the ground.
      *
-     * @param vector the {@link IntVector} of the display location
+     * @param vector
+     *            the {@link IntVector} of the display location
      * @return the located {@link Block}
      */
     private Block getVisibleLocation(@NotNull IntVector vector)
@@ -116,7 +121,8 @@ public class FakeBlockVisualization extends BlockBoundaryVisualization
      * Helper method for determining if a {@link Block} is transparent from the top
      * down.
      *
-     * @param block the {@code Block}
+     * @param block
+     *            the {@code Block}
      * @return true if transparent
      */
     protected boolean isTransparent(@NotNull Block block)

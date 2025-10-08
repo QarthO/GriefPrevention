@@ -29,8 +29,11 @@ import me.ryanhamshire.GriefPrevention.events.ClaimExpirationEvent;
 
 class CleanupUnusedClaimTask implements Runnable
 {
+
     Claim claim;
+
     PlayerData ownerData;
+
     OfflinePlayer ownerInfo;
 
     CleanupUnusedClaimTask(Claim claim, PlayerData ownerData, OfflinePlayer ownerInfo)
@@ -65,7 +68,8 @@ class CleanupUnusedClaimTask implements Runnable
                 if (expireEventCanceled()) return;
                 GriefPrevention.instance.dataStore.deleteClaim(claim, true, true);
 
-                GriefPrevention.AddLogEntry(" " + claim.getOwnerName() + "'s new player claim expired.",
+                GriefPrevention.AddLogEntry(
+                        " " + claim.getOwnerName() + "'s new player claim expired.",
                         CustomLogEntryTypes.AdminActivity);
             }
         }
@@ -85,13 +89,17 @@ class CleanupUnusedClaimTask implements Runnable
 
                 // delete them
                 GriefPrevention.instance.dataStore.deleteClaimsForPlayer(claim.ownerID, true);
-                GriefPrevention.AddLogEntry(" All of " + claim.getOwnerName() + "'s claims have expired.",
+                GriefPrevention.AddLogEntry(
+                        " All of " + claim.getOwnerName() + "'s claims have expired.",
                         CustomLogEntryTypes.AdminActivity);
                 GriefPrevention.AddLogEntry(
                         "earliestPermissibleLastLogin#getTime: " + earliestPermissibleLastLogin.getTime(),
-                        CustomLogEntryTypes.Debug, true);
-                GriefPrevention.AddLogEntry("ownerInfo#getLastPlayed: " + ownerInfo.getLastPlayed(),
-                        CustomLogEntryTypes.Debug, true);
+                        CustomLogEntryTypes.Debug,
+                        true);
+                GriefPrevention.AddLogEntry(
+                        "ownerInfo#getLastPlayed: " + ownerInfo.getLastPlayed(),
+                        CustomLogEntryTypes.Debug,
+                        true);
             }
         }
     }

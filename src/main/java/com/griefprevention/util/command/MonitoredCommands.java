@@ -54,6 +54,7 @@ public class MonitoredCommands
     }
 
     private final Set<String> monitoredCommands = new HashSet<>();
+
     private int maxSpaces = -1;
 
     public MonitoredCommands(@NotNull Collection<String> commands)
@@ -296,7 +297,8 @@ public class MonitoredCommands
             case String alias -> Set.of(commandEntry.getKey().toLowerCase(), alias.toLowerCase());
 
             // Zero or more aliases in List form.
-            case List<?> list -> Stream.concat(Stream.of(commandEntry.getKey().toLowerCase()),
+            case List<?> list -> Stream.concat(
+                    Stream.of(commandEntry.getKey().toLowerCase()),
                     list.stream().map(Object::toString).map(String::toLowerCase)).collect(Collectors.toSet());
 
             // Invalid alias declaration.

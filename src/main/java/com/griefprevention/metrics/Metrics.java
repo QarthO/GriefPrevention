@@ -49,8 +49,10 @@ public class Metrics
     /**
      * Creates a new Metrics instance.
      *
-     * @param plugin Your plugin instance.
-     * @param serviceId The id of the service. It can be found at
+     * @param plugin
+     *            Your plugin instance.
+     * @param serviceId
+     *            The id of the service. It can be found at
      *            <a href="https://bstats.org/what-is-my-plugin-id">What is my
      *            plugin id?</a>
      */
@@ -69,8 +71,8 @@ public class Metrics
             config.addDefault("logSentData", false);
             config.addDefault("logResponseStatusText", false);
             // Inform the server owners about bStats
-            config.options()
-                    .header("bStats (https://bStats.org) collects some basic information for plugin authors, like how\n"
+            config.options().header(
+                    "bStats (https://bStats.org) collects some basic information for plugin authors, like how\n"
                             + "many people use their plugin and their total player count. It's recommended to keep bStats\n"
                             + "enabled, but if you're not comfortable with this, you can turn this setting off. There is no\n"
                             + "performance penalty associated with having metrics enabled, and data sent to bStats is fully\n"
@@ -106,7 +108,8 @@ public class Metrics
     /**
      * Adds a custom chart.
      *
-     * @param chart The chart to add.
+     * @param chart
+     *            The chart to add.
      */
     public void addCustomChart(CustomChart chart)
     {
@@ -191,26 +194,36 @@ public class Metrics
         /**
          * Creates a new MetricsBase class instance.
          *
-         * @param platform The platform of the service.
-         * @param serviceId The id of the service.
-         * @param serverUuid The server uuid.
-         * @param enabled Whether or not data sending is enabled.
-         * @param appendPlatformDataConsumer A consumer that receives a
-         *            {@code JsonObjectBuilder} and appends all platform-specific data.
-         * @param appendServiceDataConsumer A consumer that receives a
-         *            {@code JsonObjectBuilder} and appends all service-specific data.
-         * @param submitTaskConsumer A consumer that takes a runnable with the submit
-         *            task. This can be used to delegate the data collection to a
-         *            another thread to prevent errors caused by concurrency. Can be
-         *            {@code null}.
-         * @param checkServiceEnabledSupplier A supplier to check if the service is
-         *            still enabled.
-         * @param errorLogger A consumer that accepts log message and an error.
-         * @param infoLogger A consumer that accepts info log messages.
-         * @param logErrors Whether or not errors should be logged.
-         * @param logSentData Whether or not the sent data should be logged.
-         * @param logResponseStatusText Whether or not the response status text should
-         *            be logged.
+         * @param platform
+         *            The platform of the service.
+         * @param serviceId
+         *            The id of the service.
+         * @param serverUuid
+         *            The server uuid.
+         * @param enabled
+         *            Whether or not data sending is enabled.
+         * @param appendPlatformDataConsumer
+         *            A consumer that receives a {@code JsonObjectBuilder} and appends
+         *            all platform-specific data.
+         * @param appendServiceDataConsumer
+         *            A consumer that receives a {@code JsonObjectBuilder} and appends
+         *            all service-specific data.
+         * @param submitTaskConsumer
+         *            A consumer that takes a runnable with the submit task. This can be
+         *            used to delegate the data collection to a another thread to
+         *            prevent errors caused by concurrency. Can be {@code null}.
+         * @param checkServiceEnabledSupplier
+         *            A supplier to check if the service is still enabled.
+         * @param errorLogger
+         *            A consumer that accepts log message and an error.
+         * @param infoLogger
+         *            A consumer that accepts info log messages.
+         * @param logErrors
+         *            Whether or not errors should be logged.
+         * @param logSentData
+         *            Whether or not the sent data should be logged.
+         * @param logResponseStatusText
+         *            Whether or not the response status text should be logged.
          */
         public MetricsBase(String platform, String serverUuid, int serviceId, boolean enabled,
                 Consumer<JsonObjectBuilder> appendPlatformDataConsumer,
@@ -287,8 +300,8 @@ public class Metrics
             long initialDelay = (long) (1000 * 60 * (3 + Math.random() * 3));
             long secondDelay = (long) (1000 * 60 * (Math.random() * 30));
             scheduler.schedule(submitTask, initialDelay, TimeUnit.MILLISECONDS);
-            scheduler.scheduleAtFixedRate(submitTask, initialDelay + secondDelay, 1000 * 60 * 30,
-                    TimeUnit.MILLISECONDS);
+            scheduler
+                    .scheduleAtFixedRate(submitTask, initialDelay + secondDelay, 1000 * 60 * 30, TimeUnit.MILLISECONDS);
         }
 
         private void submitData()
@@ -383,7 +396,8 @@ public class Metrics
         /**
          * Gzips the given string.
          *
-         * @param str The string to gzip.
+         * @param str
+         *            The string to gzip.
          * @return The gzipped string.
          */
         private static byte[] compress(final String str) throws IOException
@@ -407,8 +421,10 @@ public class Metrics
         /**
          * Class constructor.
          *
-         * @param chartId The id of the chart.
-         * @param callable The callable which is used to request the chart data.
+         * @param chartId
+         *            The id of the chart.
+         * @param callable
+         *            The callable which is used to request the chart data.
          */
         public SimplePie(String chartId, Callable<String> callable)
         {
@@ -437,8 +453,10 @@ public class Metrics
         /**
          * Class constructor.
          *
-         * @param chartId The id of the chart.
-         * @param callable The callable which is used to request the chart data.
+         * @param chartId
+         *            The id of the chart.
+         * @param callable
+         *            The callable which is used to request the chart data.
          */
         public MultiLineChart(String chartId, Callable<Map<String, Integer>> callable)
         {
@@ -484,8 +502,10 @@ public class Metrics
         /**
          * Class constructor.
          *
-         * @param chartId The id of the chart.
-         * @param callable The callable which is used to request the chart data.
+         * @param chartId
+         *            The id of the chart.
+         * @param callable
+         *            The callable which is used to request the chart data.
          */
         public AdvancedPie(String chartId, Callable<Map<String, Integer>> callable)
         {
@@ -531,8 +551,10 @@ public class Metrics
         /**
          * Class constructor.
          *
-         * @param chartId The id of the chart.
-         * @param callable The callable which is used to request the chart data.
+         * @param chartId
+         *            The id of the chart.
+         * @param callable
+         *            The callable which is used to request the chart data.
          */
         public SimpleBarChart(String chartId, Callable<Map<String, Integer>> callable)
         {
@@ -566,8 +588,10 @@ public class Metrics
         /**
          * Class constructor.
          *
-         * @param chartId The id of the chart.
-         * @param callable The callable which is used to request the chart data.
+         * @param chartId
+         *            The id of the chart.
+         * @param callable
+         *            The callable which is used to request the chart data.
          */
         public AdvancedBarChart(String chartId, Callable<Map<String, int[]>> callable)
         {
@@ -613,8 +637,10 @@ public class Metrics
         /**
          * Class constructor.
          *
-         * @param chartId The id of the chart.
-         * @param callable The callable which is used to request the chart data.
+         * @param chartId
+         *            The id of the chart.
+         * @param callable
+         *            The callable which is used to request the chart data.
          */
         public DrilldownPie(String chartId, Callable<Map<String, Map<String, Integer>>> callable)
         {
@@ -669,7 +695,8 @@ public class Metrics
             this.chartId = chartId;
         }
 
-        public JsonObjectBuilder.JsonObject getRequestJsonObject(BiConsumer<String, Throwable> errorLogger,
+        public JsonObjectBuilder.JsonObject getRequestJsonObject(
+                BiConsumer<String, Throwable> errorLogger,
                 boolean logErrors)
         {
             JsonObjectBuilder builder = new JsonObjectBuilder();
@@ -706,8 +733,10 @@ public class Metrics
         /**
          * Class constructor.
          *
-         * @param chartId The id of the chart.
-         * @param callable The callable which is used to request the chart data.
+         * @param chartId
+         *            The id of the chart.
+         * @param callable
+         *            The callable which is used to request the chart data.
          */
         public SingleLineChart(String chartId, Callable<Integer> callable)
         {
@@ -750,7 +779,8 @@ public class Metrics
         /**
          * Appends a null field to the JSON.
          *
-         * @param key The key of the field.
+         * @param key
+         *            The key of the field.
          * @return A reference to this object.
          */
         public JsonObjectBuilder appendNull(String key)
@@ -762,8 +792,10 @@ public class Metrics
         /**
          * Appends a string field to the JSON.
          *
-         * @param key The key of the field.
-         * @param value The value of the field.
+         * @param key
+         *            The key of the field.
+         * @param value
+         *            The value of the field.
          * @return A reference to this object.
          */
         public JsonObjectBuilder appendField(String key, String value)
@@ -777,8 +809,10 @@ public class Metrics
         /**
          * Appends an integer field to the JSON.
          *
-         * @param key The key of the field.
-         * @param value The value of the field.
+         * @param key
+         *            The key of the field.
+         * @param value
+         *            The value of the field.
          * @return A reference to this object.
          */
         public JsonObjectBuilder appendField(String key, int value)
@@ -790,8 +824,10 @@ public class Metrics
         /**
          * Appends an object to the JSON.
          *
-         * @param key The key of the field.
-         * @param object The object.
+         * @param key
+         *            The key of the field.
+         * @param object
+         *            The object.
          * @return A reference to this object.
          */
         public JsonObjectBuilder appendField(String key, JsonObject object)
@@ -805,8 +841,10 @@ public class Metrics
         /**
          * Appends a string array to the JSON.
          *
-         * @param key The key of the field.
-         * @param values The string array.
+         * @param key
+         *            The key of the field.
+         * @param values
+         *            The string array.
          * @return A reference to this object.
          */
         public JsonObjectBuilder appendField(String key, String[] values)
@@ -822,8 +860,10 @@ public class Metrics
         /**
          * Appends an integer array to the JSON.
          *
-         * @param key The key of the field.
-         * @param values The integer array.
+         * @param key
+         *            The key of the field.
+         * @param values
+         *            The integer array.
          * @return A reference to this object.
          */
         public JsonObjectBuilder appendField(String key, int[] values)
@@ -838,8 +878,10 @@ public class Metrics
         /**
          * Appends an object array to the JSON.
          *
-         * @param key The key of the field.
-         * @param values The integer array.
+         * @param key
+         *            The key of the field.
+         * @param values
+         *            The integer array.
          * @return A reference to this object.
          */
         public JsonObjectBuilder appendField(String key, JsonObject[] values)
@@ -854,8 +896,10 @@ public class Metrics
         /**
          * Appends a field to the object.
          *
-         * @param key The key of the field.
-         * @param escapedValue The escaped value of the field.
+         * @param key
+         *            The key of the field.
+         * @param escapedValue
+         *            The escaped value of the field.
          */
         private void appendFieldUnescaped(String key, String escapedValue)
         {
@@ -893,7 +937,8 @@ public class Metrics
          * '\u001F'. Compact escapes are not used (e.g., '\n' is escaped as "\u000a" and
          * not as "\n").
          *
-         * @param value The value to escape.
+         * @param value
+         *            The value to escape.
          * @return The escaped value.
          */
         private static String escape(String value)

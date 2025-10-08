@@ -48,8 +48,11 @@ import com.google.common.io.Files;
 //manages data stored in the file system
 public class FlatFileDataStore extends DataStore
 {
+
     private final static String claimDataFolderPath = dataLayerFolderPath + File.separator + "ClaimData";
+
     private final static String nextClaimIdFilePath = claimDataFolderPath + File.separator + "_nextClaimID";
+
     private final static String schemaVersionFilePath = dataLayerFolderPath + File.separator + "_schemaVersion";
 
     static boolean hasData()
@@ -309,8 +312,9 @@ public class FlatFileDataStore extends DataStore
                             catch (Exception ex)
                             {
                                 GriefPrevention.AddLogEntry("Couldn't resolve this name to a UUID: " + ownerName + ".");
-                                GriefPrevention.AddLogEntry("  Converted land claim to administrative @ "
-                                        + lesserBoundaryCorner.toString());
+                                GriefPrevention.AddLogEntry(
+                                        "  Converted land claim to administrative @ "
+                                                + lesserBoundaryCorner.toString());
                             }
                         }
                         else
@@ -322,8 +326,9 @@ public class FlatFileDataStore extends DataStore
                             catch (Exception ex)
                             {
                                 GriefPrevention.AddLogEntry("Error - this is not a valid UUID: " + ownerName + ".");
-                                GriefPrevention.AddLogEntry("  Converted land claim to administrative @ "
-                                        + lesserBoundaryCorner.toString());
+                                GriefPrevention.AddLogEntry(
+                                        "  Converted land claim to administrative @ "
+                                                + lesserBoundaryCorner.toString());
                             }
                         }
 
@@ -392,9 +397,10 @@ public class FlatFileDataStore extends DataStore
                 {
                     if (e.getMessage() != null && e.getMessage().contains("World not found"))
                     {
-                        GriefPrevention.AddLogEntry("Failed to load a claim " + files[i].getName()
-                                + " because its world isn't loaded (yet?).  Please delete the claim file or contact the GriefPrevention developer with information about which plugin(s) you're using to load or create worlds.  "
-                                + lesserCornerString);
+                        GriefPrevention.AddLogEntry(
+                                "Failed to load a claim " + files[i].getName()
+                                        + " because its world isn't loaded (yet?).  Please delete the claim file or contact the GriefPrevention developer with information about which plugin(s) you're using to load or create worlds.  "
+                                        + lesserCornerString);
                         inStream.close();
 
                     }
@@ -402,9 +408,12 @@ public class FlatFileDataStore extends DataStore
                     {
                         StringWriter errors = new StringWriter();
                         e.printStackTrace(new PrintWriter(errors));
-                        GriefPrevention.AddLogEntry("Failed to load claim " + files[i].getName()
-                                + ". This usually occurs when your server runs out of storage space, causing any file saves to corrupt. Fix or delete the file found in GriefPreventionData/ClaimData/"
-                                + files[i].getName(), CustomLogEntryTypes.Debug, false);
+                        GriefPrevention.AddLogEntry(
+                                "Failed to load claim " + files[i].getName()
+                                        + ". This usually occurs when your server runs out of storage space, causing any file saves to corrupt. Fix or delete the file found in GriefPreventionData/ClaimData/"
+                                        + files[i].getName(),
+                                CustomLogEntryTypes.Debug,
+                                false);
                         GriefPrevention.AddLogEntry(files[i].getName() + " " + errors, CustomLogEntryTypes.Exception);
                     }
                 }
@@ -478,8 +487,9 @@ public class FlatFileDataStore extends DataStore
                 {
                     if (e.getMessage() != null && e.getMessage().contains("World not found"))
                     {
-                        GriefPrevention.AddLogEntry("Failed to load a claim (ID:" + claimID
-                                + ") because its world isn't loaded (yet?).  If this is not expected, delete this claim.");
+                        GriefPrevention.AddLogEntry(
+                                "Failed to load a claim (ID:" + claimID
+                                        + ") because its world isn't loaded (yet?).  If this is not expected, delete this claim.");
                     }
                     else
                     {
@@ -513,11 +523,19 @@ public class FlatFileDataStore extends DataStore
             builder.append(line).append('\n');
         }
 
-        return this.loadClaim(builder.toString(), out_parentID, file.lastModified(), claimID,
+        return this.loadClaim(
+                builder.toString(),
+                out_parentID,
+                file.lastModified(),
+                claimID,
                 Bukkit.getServer().getWorlds());
     }
 
-    Claim loadClaim(String input, ArrayList<Long> out_parentID, long lastModifiedDate, long claimID,
+    Claim loadClaim(
+            String input,
+            ArrayList<Long> out_parentID,
+            long lastModifiedDate,
+            long claimID,
             List<World> validWorlds) throws InvalidConfigurationException, Exception
     {
         Claim claim = null;
@@ -526,8 +544,8 @@ public class FlatFileDataStore extends DataStore
 
         // boundaries
         Location lesserBoundaryCorner = this.locationFromString(yaml.getString("Lesser Boundary Corner"), validWorlds);
-        Location greaterBoundaryCorner = this.locationFromString(yaml.getString("Greater Boundary Corner"),
-                validWorlds);
+        Location greaterBoundaryCorner = this
+                .locationFromString(yaml.getString("Greater Boundary Corner"), validWorlds);
 
         // owner
         String ownerIdentifier = yaml.getString("Owner");
@@ -724,9 +742,12 @@ public class FlatFileDataStore extends DataStore
             {
                 StringWriter errors = new StringWriter();
                 latestException.printStackTrace(new PrintWriter(errors));
-                GriefPrevention.AddLogEntry("Failed to load PlayerData for " + playerID
-                        + ". This usually occurs when your server runs out of storage space, causing any file saves to corrupt. Fix or delete the file in GriefPrevetionData/PlayerData/"
-                        + playerID, CustomLogEntryTypes.Debug, false);
+                GriefPrevention.AddLogEntry(
+                        "Failed to load PlayerData for " + playerID
+                                + ". This usually occurs when your server runs out of storage space, causing any file saves to corrupt. Fix or delete the file in GriefPrevetionData/PlayerData/"
+                                + playerID,
+                        CustomLogEntryTypes.Debug,
+                        false);
                 GriefPrevention.AddLogEntry(playerID + " " + errors, CustomLogEntryTypes.Exception);
             }
         }
@@ -771,8 +792,9 @@ public class FlatFileDataStore extends DataStore
         // if any problem, log it
         catch (Exception e)
         {
-            GriefPrevention.AddLogEntry("GriefPrevention: Unexpected exception saving data for player \"" + playerID
-                    + "\": " + e.getMessage());
+            GriefPrevention.AddLogEntry(
+                    "GriefPrevention: Unexpected exception saving data for player \"" + playerID + "\": "
+                            + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -918,8 +940,9 @@ public class FlatFileDataStore extends DataStore
         claimsFolder.renameTo(claimsBackupFolder);
         playersFolder.renameTo(playersBackupFolder);
 
-        GriefPrevention.AddLogEntry("Backed your file system data up to " + claimsBackupFolder.getName() + " and "
-                + playersBackupFolder.getName() + ".");
+        GriefPrevention.AddLogEntry(
+                "Backed your file system data up to " + claimsBackupFolder.getName() + " and "
+                        + playersBackupFolder.getName() + ".");
         GriefPrevention.AddLogEntry(
                 "If your migration encountered any problems, you can restore those data with a quick copy/paste.");
         GriefPrevention.AddLogEntry(

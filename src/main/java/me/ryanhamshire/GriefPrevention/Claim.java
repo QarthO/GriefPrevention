@@ -53,10 +53,12 @@ import me.ryanhamshire.GriefPrevention.util.BoundingBox;
 //only claims which have been added to the datastore have any effect
 public class Claim
 {
+
     // two locations, which together define the boundaries of the claim
     // note that the upper Y value is always ignored, because claims ALWAYS extend
     // up to the sky
     Location lesserBoundaryCorner;
+
     Location greaterBoundaryCorner;
 
     // modification date. this comes from the file timestamp during load, and is
@@ -219,9 +221,11 @@ public class Claim
         try
         {
             int dX = Math.addExact(
-                    Math.subtractExact(greaterBoundaryCorner.getBlockX(), lesserBoundaryCorner.getBlockX()), 1);
+                    Math.subtractExact(greaterBoundaryCorner.getBlockX(), lesserBoundaryCorner.getBlockX()),
+                    1);
             int dZ = Math.addExact(
-                    Math.subtractExact(greaterBoundaryCorner.getBlockZ(), lesserBoundaryCorner.getBlockZ()), 1);
+                    Math.subtractExact(greaterBoundaryCorner.getBlockZ(), lesserBoundaryCorner.getBlockZ()),
+                    1);
             return Math.multiplyExact(dX, dZ);
         }
         catch (ArithmeticException e)
@@ -268,7 +272,8 @@ public class Claim
     /**
      * @deprecated Check {@link ClaimPermission#Edit} with
      *             {@link #checkPermission(Player, ClaimPermission, Event)}.
-     * @param player the Player
+     * @param player
+     *            the Player
      * @return the denial message, or null if the action is allowed
      */
     @Deprecated
@@ -278,9 +283,18 @@ public class Claim
         return supplier != null ? supplier.get() : null;
     }
 
-    private static final Set<Material> PLACEABLE_FARMING_BLOCKS = Set.of(Material.PUMPKIN_STEM, Material.WHEAT,
-            Material.MELON_STEM, Material.CARROTS, Material.POTATOES, Material.NETHER_WART, Material.BEETROOTS,
-            Material.COCOA, Material.GLOW_BERRIES, Material.CAVE_VINES, Material.CAVE_VINES_PLANT);
+    private static final Set<Material> PLACEABLE_FARMING_BLOCKS = Set.of(
+            Material.PUMPKIN_STEM,
+            Material.WHEAT,
+            Material.MELON_STEM,
+            Material.CARROTS,
+            Material.POTATOES,
+            Material.NETHER_WART,
+            Material.BEETROOTS,
+            Material.COCOA,
+            Material.GLOW_BERRIES,
+            Material.CAVE_VINES,
+            Material.CAVE_VINES_PLANT);
 
     private static boolean placeableForFarming(Material material)
     {
@@ -290,21 +304,26 @@ public class Claim
     /**
      * @deprecated Check {@link ClaimPermission#Build} with
      *             {@link #checkPermission(Player, ClaimPermission, Event)}.
-     * @param player the Player
+     * @param player
+     *            the Player
      * @return the denial message, or null if the action is allowed
      */
     @Deprecated
     // build permission check
     public @Nullable String allowBuild(@NotNull Player player, @NotNull Material material)
     {
-        Supplier<String> supplier = checkPermission(player, ClaimPermission.Build,
+        Supplier<String> supplier = checkPermission(
+                player,
+                ClaimPermission.Build,
                 new CompatBuildBreakEvent(material, false));
         return supplier != null ? supplier.get() : null;
     }
 
     public static class CompatBuildBreakEvent extends Event
     {
+
         private final Material material;
+
         private final boolean isBreak;
 
         private CompatBuildBreakEvent(Material material, boolean isBreak)
@@ -377,12 +396,17 @@ public class Claim
     /**
      * Check whether a Player has a certain level of trust.
      *
-     * @param player the Player being checked for permissions
-     * @param permission the ClaimPermission level required
-     * @param event the Event triggering the permission check
+     * @param player
+     *            the Player being checked for permissions
+     * @param permission
+     *            the ClaimPermission level required
+     * @param event
+     *            the Event triggering the permission check
      * @return the denial message or null if permission is granted
      */
-    public @Nullable Supplier<String> checkPermission(@NotNull Player player, @NotNull ClaimPermission permission,
+    public @Nullable Supplier<String> checkPermission(
+            @NotNull Player player,
+            @NotNull ClaimPermission permission,
             @Nullable Event event)
     {
         return checkPermission(player, permission, event, null);
@@ -392,14 +416,21 @@ public class Claim
      * Check whether a Player has a certain level of trust. For internal use; allows
      * changing default message.
      *
-     * @param player the Player being checked for permissions
-     * @param permission the ClaimPermission level required
-     * @param event the Event triggering the permission check
-     * @param denialOverride a message overriding the default denial for clarity
+     * @param player
+     *            the Player being checked for permissions
+     * @param permission
+     *            the ClaimPermission level required
+     * @param event
+     *            the Event triggering the permission check
+     * @param denialOverride
+     *            a message overriding the default denial for clarity
      * @return the denial message or null if permission is granted
      */
     @Nullable
-    Supplier<String> checkPermission(@NotNull Player player, @NotNull ClaimPermission permission, @Nullable Event event,
+    Supplier<String> checkPermission(
+            @NotNull Player player,
+            @NotNull ClaimPermission permission,
+            @Nullable Event event,
             @Nullable Supplier<String> denialOverride)
     {
         return callPermissionCheck(new ClaimPermissionCheckEvent(player, this, permission, event), denialOverride);
@@ -408,12 +439,17 @@ public class Claim
     /**
      * Check whether a UUID has a certain level of trust.
      *
-     * @param uuid the UUID being checked for permissions
-     * @param permission the ClaimPermission level required
-     * @param event the Event triggering the permission check
+     * @param uuid
+     *            the UUID being checked for permissions
+     * @param permission
+     *            the ClaimPermission level required
+     * @param event
+     *            the Event triggering the permission check
      * @return the denial reason or null if permission is granted
      */
-    public @Nullable Supplier<String> checkPermission(@NotNull UUID uuid, @NotNull ClaimPermission permission,
+    public @Nullable Supplier<String> checkPermission(
+            @NotNull UUID uuid,
+            @NotNull ClaimPermission permission,
             @Nullable Event event)
     {
         return callPermissionCheck(new ClaimPermissionCheckEvent(uuid, this, permission, event), null);
@@ -422,16 +458,22 @@ public class Claim
     /**
      * Helper method for calling a ClaimPermissionCheckEvent.
      *
-     * @param event the ClaimPermissionCheckEvent to call
-     * @param denialOverride a message overriding the default denial for clarity
+     * @param event
+     *            the ClaimPermissionCheckEvent to call
+     * @param denialOverride
+     *            a message overriding the default denial for clarity
      * @return the denial reason or null if permission is granted
      */
-    private @Nullable Supplier<String> callPermissionCheck(@NotNull ClaimPermissionCheckEvent event,
+    private @Nullable Supplier<String> callPermissionCheck(
+            @NotNull ClaimPermissionCheckEvent event,
             @Nullable Supplier<String> denialOverride)
     {
         // Set denial message (if any) using default behavior.
-        Supplier<String> defaultDenial = getDefaultDenial(event.getCheckedPlayer(), event.getCheckedUUID(),
-                event.getRequiredPermission(), event.getTriggeringEvent());
+        Supplier<String> defaultDenial = getDefaultDenial(
+                event.getCheckedPlayer(),
+                event.getCheckedUUID(),
+                event.getRequiredPermission(),
+                event.getTriggeringEvent());
         // If permission is denied and a clarifying override is provided, use override.
         if (defaultDenial != null && denialOverride != null)
         {
@@ -448,14 +490,21 @@ public class Claim
     /**
      * Get the default reason for denial of a ClaimPermission.
      *
-     * @param player the Player being checked for permissions
-     * @param uuid the UUID being checked for permissions
-     * @param permission the ClaimPermission required
-     * @param event the Event triggering the permission check
+     * @param player
+     *            the Player being checked for permissions
+     * @param uuid
+     *            the UUID being checked for permissions
+     * @param permission
+     *            the ClaimPermission required
+     * @param event
+     *            the Event triggering the permission check
      * @return the denial reason or null if permission is granted
      */
-    private @Nullable Supplier<String> getDefaultDenial(@Nullable Player player, @NotNull UUID uuid,
-            @NotNull ClaimPermission permission, @Nullable Event event)
+    private @Nullable Supplier<String> getDefaultDenial(
+            @Nullable Player player,
+            @NotNull UUID uuid,
+            @NotNull ClaimPermission permission,
+            @Nullable Event event)
     {
         if (player != null)
         {
@@ -514,8 +563,8 @@ public class Claim
 
         // Catch-all error message for all other cases.
         return () -> {
-            String reason = GriefPrevention.instance.dataStore.getMessage(permission.getDenialMessage(),
-                    this.getOwnerName());
+            String reason = GriefPrevention.instance.dataStore
+                    .getMessage(permission.getDenialMessage(), this.getOwnerName());
             if (hasBypassPermission(player, permission))
                 reason += "  " + GriefPrevention.instance.dataStore.getMessage(Messages.IgnoreClaimsAdvertisement);
             return reason;
@@ -528,9 +577,11 @@ public class Claim
      * {@code griefprevention.deleteclaims}. All other actions require
      * {@code griefprevention.ignoreclaims}.
      *
-     * @param player the {@code Player}
-     * @param permission the {@code ClaimPermission} whose bypass permission is
-     *            being checked
+     * @param player
+     *            the {@code Player}
+     * @param permission
+     *            the {@code ClaimPermission} whose bypass permission is being
+     *            checked
      * @return whether the player has the bypass node
      */
     @Contract("null, _ -> false")
@@ -546,13 +597,16 @@ public class Claim
     /**
      * @deprecated Check {@link ClaimPermission#Build} with
      *             {@link #checkPermission(Player, ClaimPermission, Event)}.
-     * @param player the Player
+     * @param player
+     *            the Player
      * @return the denial message, or null if the action is allowed
      */
     @Deprecated
     public @Nullable String allowBreak(@NotNull Player player, @NotNull Material material)
     {
-        Supplier<String> supplier = checkPermission(player, ClaimPermission.Build,
+        Supplier<String> supplier = checkPermission(
+                player,
+                ClaimPermission.Build,
                 new CompatBuildBreakEvent(material, true));
         return supplier != null ? supplier.get() : null;
     }
@@ -560,7 +614,8 @@ public class Claim
     /**
      * @deprecated Check {@link ClaimPermission#Access} with
      *             {@link #checkPermission(Player, ClaimPermission, Event)}.
-     * @param player the Player
+     * @param player
+     *            the Player
      * @return the denial message, or null if the action is allowed
      */
     @Deprecated
@@ -573,7 +628,8 @@ public class Claim
     /**
      * @deprecated Check {@link ClaimPermission#Inventory} with
      *             {@link #checkPermission(Player, ClaimPermission, Event)}.
-     * @param player the Player
+     * @param player
+     *            the Player
      * @return the denial message, or null if the action is allowed
      */
     @Deprecated
@@ -586,7 +642,8 @@ public class Claim
     /**
      * @deprecated Check {@link ClaimPermission#Manage} with
      *             {@link #checkPermission(Player, ClaimPermission, Event)}.
-     * @param player the Player
+     * @param player
+     *            the Player
      * @return the denial message, or null if the action is allowed
      */
     @Deprecated
@@ -645,7 +702,10 @@ public class Claim
     // gets ALL permissions
     // useful for making copies of permissions during a claim resize and listing all
     // permissions in a claim
-    public void getPermissions(ArrayList<String> builders, ArrayList<String> containers, ArrayList<String> accessors,
+    public void getPermissions(
+            ArrayList<String> builders,
+            ArrayList<String> containers,
+            ArrayList<String> accessors,
             ArrayList<String> managers)
     {
         // loop through all the entries in the hash map

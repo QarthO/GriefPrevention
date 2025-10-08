@@ -17,7 +17,8 @@ public abstract class ClaimEvent extends Event
     /**
      * Construct a new {@code ClaimEvent}.
      *
-     * @param claim the {@link Claim} involved
+     * @param claim
+     *            the {@link Claim} involved
      */
     protected ClaimEvent(@NotNull Claim claim)
     {

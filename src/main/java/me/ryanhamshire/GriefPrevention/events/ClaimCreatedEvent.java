@@ -27,8 +27,10 @@ public class ClaimCreatedEvent extends ClaimEvent implements Cancellable
     /**
      * Construct a new {@code ClaimCreatedEvent}.
      *
-     * @param claim the {@link Claim} being created
-     * @param creator the {@link CommandSender} causing creation
+     * @param claim
+     *            the {@link Claim} being created
+     * @param creator
+     *            the {@link CommandSender} causing creation
      */
     public ClaimCreatedEvent(@NotNull Claim claim, @Nullable CommandSender creator)
     {

@@ -32,9 +32,12 @@ public class ClaimModifiedEvent extends ClaimResizeEvent
      * Note that the actor causing modification may not be present if done by
      * plugins.
      *
-     * @param from the unmodified {@link Claim}
-     * @param to the resulting {@code Claim}
-     * @param modifier the {@link CommandSender} causing modification
+     * @param from
+     *            the unmodified {@link Claim}
+     * @param to
+     *            the resulting {@code Claim}
+     * @param modifier
+     *            the {@link CommandSender} causing modification
      */
     public ClaimModifiedEvent(@NotNull Claim from, @NotNull Claim to, @Nullable CommandSender modifier)
     {

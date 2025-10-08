@@ -31,7 +31,8 @@ public class AutoExtendClaimTask implements Runnable
      * Assemble information and schedule a task to update claim depth to include
      * existing structures.
      *
-     * @param claim the claim to extend the depth of
+     * @param claim
+     *            the claim to extend the depth of
      */
     public static void scheduleAsync(@NotNull Claim claim)
     {
@@ -58,18 +59,22 @@ public class AutoExtendClaimTask implements Runnable
                         // Find the lowest non-natural storage block in the chunk.
                         // This way chests, barrels, etc. are always protected even if player block
                         // definitions are lacking.
-                        lowestLootableTile = Math.min(lowestLootableTile, Arrays.stream(chunk.getTileEntities())
-                                // Accept only Lootable tiles that do not have loot tables.
-                                // Naturally generated Lootables only have a loot table reference until the
-                                // container is
-                                // accessed. On access the loot table is used to calculate the contents and
-                                // removed.
-                                // This prevents claims from always extending over unexplored structures,
-                                // spawners, etc.
-                                .filter(tile -> tile instanceof Lootable lootable && lootable.getLootTable() == null)
-                                // Return smallest value or default to existing min Y if no eligible tiles are
-                                // present.
-                                .mapToInt(BlockState::getY).min().orElse(lowestLootableTile));
+                        lowestLootableTile = Math.min(
+                                lowestLootableTile,
+                                Arrays.stream(chunk.getTileEntities())
+                                        // Accept only Lootable tiles that do not have loot tables.
+                                        // Naturally generated Lootables only have a loot table reference until the
+                                        // container is
+                                        // accessed. On access the loot table is used to calculate the contents and
+                                        // removed.
+                                        // This prevents claims from always extending over unexplored structures,
+                                        // spawners, etc.
+                                        .filter(
+                                                tile -> tile instanceof Lootable lootable
+                                                        && lootable.getLootTable() == null)
+                                        // Return smallest value or default to existing min Y if no eligible tiles are
+                                        // present.
+                                        .mapToInt(BlockState::getY).min().orElse(lowestLootableTile));
                     }
 
                     // Save a snapshot of the chunk for more detailed async block searching.
@@ -78,19 +83,28 @@ public class AutoExtendClaimTask implements Runnable
             }
         }
 
-        Bukkit.getScheduler().runTaskAsynchronously(GriefPrevention.instance,
+        Bukkit.getScheduler().runTaskAsynchronously(
+                GriefPrevention.instance,
                 new AutoExtendClaimTask(claim, snapshots, world.getEnvironment(), lowestLootableTile));
     }
 
     private final Claim claim;
+
     private final ArrayList<ChunkSnapshot> chunks;
+
     private final Environment worldType;
+
     private final Map<Biome, Set<Material>> biomePlayerMaterials = new HashMap<>();
+
     private final int minY;
+
     private final int lowestExistingY;
+
     // Definitions of biomes where sand covers surfaces instead of grass.
-    static final Set<NamespacedKey> SAND_SOIL_BIOMES = Set.of(NamespacedKey.minecraft("snowy_beach"),
-            NamespacedKey.minecraft("beach"), NamespacedKey.minecraft("desert"));
+    static final Set<NamespacedKey> SAND_SOIL_BIOMES = Set.of(
+            NamespacedKey.minecraft("snowy_beach"),
+            NamespacedKey.minecraft("beach"),
+            NamespacedKey.minecraft("desert"));
 
     private AutoExtendClaimTask(@NotNull Claim claim, @NotNull ArrayList<@NotNull ChunkSnapshot> chunks,
             @NotNull Environment worldType, int lowestExistingY)
@@ -99,7 +113,8 @@ public class AutoExtendClaimTask implements Runnable
         this.chunks = chunks;
         this.worldType = worldType;
         this.lowestExistingY = Math.min(lowestExistingY, claim.getLesserBoundaryCorner().getBlockY());
-        this.minY = Math.max(Objects.requireNonNull(claim.getLesserBoundaryCorner().getWorld()).getMinHeight(),
+        this.minY = Math.max(
+                Objects.requireNonNull(claim.getLesserBoundaryCorner().getWorld()).getMinHeight(),
                 GriefPrevention.instance.config_claims_maxDepth);
     }
 
@@ -415,6 +430,7 @@ public class AutoExtendClaimTask implements Runnable
     // runs in the main execution thread, where it can safely change claims and save
     // those changes
     private record ExecuteExtendClaimTask(Claim claim, int newY) implements Runnable {
+
         @Override
         public void run()
         {

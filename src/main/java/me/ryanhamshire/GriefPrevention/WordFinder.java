@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 class WordFinder
 {
+
     private Pattern pattern;
 
     WordFinder(List<String> wordsToFind)

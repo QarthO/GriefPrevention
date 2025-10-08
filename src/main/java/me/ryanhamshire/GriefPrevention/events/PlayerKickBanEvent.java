@@ -17,16 +17,22 @@ public class PlayerKickBanEvent extends PlayerEvent implements Cancellable
 {
 
     private final @NotNull String reason;
+
     private final @NotNull String source;
+
     private final boolean ban;
 
     /**
      * Construct a new {@code PlayerKickBanEvent}.
      *
-     * @param player the affected {@link Player}
-     * @param reason the reason for the kick/ban
-     * @param source the source of the kick/ban
-     * @param ban whether the {@code Player} will be banned
+     * @param player
+     *            the affected {@link Player}
+     * @param reason
+     *            the reason for the kick/ban
+     * @param source
+     *            the source of the kick/ban
+     * @param ban
+     *            whether the {@code Player} will be banned
      */
     public PlayerKickBanEvent(Player player, @NotNull String reason, @NotNull String source, boolean ban)
     {

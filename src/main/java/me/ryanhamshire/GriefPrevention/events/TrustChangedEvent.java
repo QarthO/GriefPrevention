@@ -23,19 +23,27 @@ public class TrustChangedEvent extends MultiClaimEvent implements Cancellable
 {
 
     private final @NotNull Player changer;
+
     private final @Nullable ClaimPermission claimPermission;
+
     private final boolean given;
+
     private final @NotNull String identifier;
 
     /**
      * Construct a new {@code TrustChangedEvent} for several {@link Claim claims}.
      *
-     * @param changer the {@link Player} causing the trust changes
-     * @param claims the affected {@code Claims}
-     * @param claimPermission the new {@link ClaimPermission} to assign or
-     *            {@code null} if trust is removed
-     * @param given whether trust is being given or taken
-     * @param identifier the identifier whose trust is being affected
+     * @param changer
+     *            the {@link Player} causing the trust changes
+     * @param claims
+     *            the affected {@code Claims}
+     * @param claimPermission
+     *            the new {@link ClaimPermission} to assign or {@code null} if trust
+     *            is removed
+     * @param given
+     *            whether trust is being given or taken
+     * @param identifier
+     *            the identifier whose trust is being affected
      */
     public TrustChangedEvent(@NotNull Player changer, @Nullable List<Claim> claims,
             @Nullable ClaimPermission claimPermission, boolean given, @NotNull String identifier)
@@ -50,12 +58,17 @@ public class TrustChangedEvent extends MultiClaimEvent implements Cancellable
     /**
      * Construct a new {@code TrustChangedEvent} for a single {@link Claim}.
      *
-     * @param changer the {@link Player} causing the trust changes
-     * @param claim the affected {@code Claim}
-     * @param claimPermission the new {@link ClaimPermission} to assign or
-     *            {@code null} if trust is removed
-     * @param given whether trust is being given or taken
-     * @param identifier the identifier whose trust is being affected
+     * @param changer
+     *            the {@link Player} causing the trust changes
+     * @param claim
+     *            the affected {@code Claim}
+     * @param claimPermission
+     *            the new {@link ClaimPermission} to assign or {@code null} if trust
+     *            is removed
+     * @param given
+     *            whether trust is being given or taken
+     * @param identifier
+     *            the identifier whose trust is being affected
      */
     public TrustChangedEvent(@NotNull Player changer, @NotNull Claim claim, @Nullable ClaimPermission claimPermission,
             boolean given, @NotNull String identifier)

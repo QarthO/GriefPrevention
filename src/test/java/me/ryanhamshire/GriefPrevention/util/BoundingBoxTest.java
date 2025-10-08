@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 public class BoundingBoxTest
 {
+
     @Test
     public void testVerify()
     {
@@ -76,6 +77,7 @@ public class BoundingBoxTest
 
     private interface TriConsumer<T, U, V>
     {
+
         void apply(T t, U u, V v);
     }
 

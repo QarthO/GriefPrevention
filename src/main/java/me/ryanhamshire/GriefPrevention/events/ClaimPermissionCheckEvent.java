@@ -24,17 +24,24 @@ public class ClaimPermissionCheckEvent extends ClaimEvent implements Cancellable
 {
 
     private final @Nullable Player checkedPlayer;
+
     private final @NotNull UUID checkedUUID;
+
     private final @NotNull ClaimPermission requiredPermission;
+
     private final @Nullable Event triggeringEvent;
 
     /**
      * Construct a new {@code ClaimPermissionCheckEvent}.
      *
-     * @param checked the {@link Player} being checked for permissions
-     * @param claim the {@link Claim} in which permissions are being checked
-     * @param required the {@link ClaimPermission} level required
-     * @param triggeringEvent the {@link Event} triggering the permission check
+     * @param checked
+     *            the {@link Player} being checked for permissions
+     * @param claim
+     *            the {@link Claim} in which permissions are being checked
+     * @param required
+     *            the {@link ClaimPermission} level required
+     * @param triggeringEvent
+     *            the {@link Event} triggering the permission check
      */
     public ClaimPermissionCheckEvent(@NotNull Player checked, @NotNull Claim claim, @NotNull ClaimPermission required,
             @Nullable Event triggeringEvent)
@@ -45,10 +52,14 @@ public class ClaimPermissionCheckEvent extends ClaimEvent implements Cancellable
     /**
      * Construct a new {@code ClaimPermissionCheckEvent}.
      *
-     * @param checked the {@link UUID} being checked for permissions
-     * @param claim the {@link Claim} in which permissions are being checked
-     * @param required the {@link ClaimPermission} level required
-     * @param triggeringEvent the {@link Event} triggering the permission check
+     * @param checked
+     *            the {@link UUID} being checked for permissions
+     * @param claim
+     *            the {@link Claim} in which permissions are being checked
+     * @param required
+     *            the {@link ClaimPermission} level required
+     * @param triggeringEvent
+     *            the {@link Event} triggering the permission check
      */
     public ClaimPermissionCheckEvent(@NotNull UUID checked, @NotNull Claim claim, @NotNull ClaimPermission required,
             @Nullable Event triggeringEvent)
@@ -118,7 +129,8 @@ public class ClaimPermissionCheckEvent extends ClaimEvent implements Cancellable
     /**
      * @deprecated If cancelling, {@link #setDenialReason(Supplier)} is preferred.
      *
-     * @param cancelled whether the event is cancelled
+     * @param cancelled
+     *            whether the event is cancelled
      */
     @Override
     @Deprecated
@@ -148,7 +160,8 @@ public class ClaimPermissionCheckEvent extends ClaimEvent implements Cancellable
     /**
      * Set the reason for denial.
      *
-     * @param denial the denial reason
+     * @param denial
+     *            the denial reason
      */
     public void setDenialReason(@Nullable Supplier<String> denial)
     {

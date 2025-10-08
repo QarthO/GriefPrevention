@@ -19,14 +19,18 @@ public class PreventPvPEvent extends ClaimEvent implements Cancellable
 {
 
     private final @Nullable Player attacker;
+
     private final @NotNull Entity defender;
 
     /**
      * Construct a new {@code PreventPvPEvent}.
      *
-     * @param claim the {@link Claim} in which the attack is occurring
-     * @param attacker the attacking {@link Player}
-     * @param defender the {@link Entity} being attacked
+     * @param claim
+     *            the {@link Claim} in which the attack is occurring
+     * @param attacker
+     *            the attacking {@link Player}
+     * @param defender
+     *            the {@link Entity} being attacked
      */
     public PreventPvPEvent(@NotNull Claim claim, @Nullable Player attacker, @NotNull Entity defender)
     {

@@ -25,6 +25,7 @@ import org.bukkit.block.data.BlockData;
  */
 @Deprecated(forRemoval = true, since = "16.18")
 public enum VisualizationType {
+
     Claim, Subdivision, ErrorClaim, AdminClaim;
 
     @Deprecated(forRemoval = true, since = "16.18")

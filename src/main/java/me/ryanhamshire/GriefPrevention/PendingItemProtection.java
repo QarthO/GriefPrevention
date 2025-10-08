@@ -7,9 +7,13 @@ import org.bukkit.inventory.ItemStack;
 
 class PendingItemProtection
 {
+
     public Location location;
+
     public UUID owner;
+
     long expirationTimestamp;
+
     ItemStack itemStack;
 
     public PendingItemProtection(Location location, UUID owner, long expirationTimestamp, ItemStack itemStack)

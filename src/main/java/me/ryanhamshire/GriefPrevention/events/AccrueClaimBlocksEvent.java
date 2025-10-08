@@ -18,6 +18,7 @@ public class AccrueClaimBlocksEvent extends PlayerEvent implements Cancellable
 {
 
     private int blocksToAccrue;
+
     private boolean isIdle;
 
     /**
@@ -30,9 +31,10 @@ public class AccrueClaimBlocksEvent extends PlayerEvent implements Cancellable
      * To achieve a specific number of blocks to accrue, either multiply in advance
      * or set using {@link #setBlocksToAccrue(int)} after construction.
      *
-     * @param player the {@link Player} receiving accruals
-     * @param blocksToAccruePerHour the number of claim blocks to accrue multiplied
-     *            by 6
+     * @param player
+     *            the {@link Player} receiving accruals
+     * @param blocksToAccruePerHour
+     *            the number of claim blocks to accrue multiplied by 6
      * @see #setBlocksToAccruePerHour(int)
      * @deprecated Use {@link #AccrueClaimBlocksEvent(Player, int, boolean)} instead
      */
@@ -53,10 +55,12 @@ public class AccrueClaimBlocksEvent extends PlayerEvent implements Cancellable
      * or set using {@link #setBlocksToAccrue(int)} after construction. <br>
      * This event is initialized as canceled if @param isIdle is set to true.
      *
-     * @param player the {@link Player} receiving accruals
-     * @param blocksToAccruePerHour the number of claim blocks to accrue multiplied
-     *            by 6
-     * @param isIdle whether player is detected as idle
+     * @param player
+     *            the {@link Player} receiving accruals
+     * @param blocksToAccruePerHour
+     *            the number of claim blocks to accrue multiplied by 6
+     * @param isIdle
+     *            whether player is detected as idle
      * @see #setBlocksToAccruePerHour(int)
      */
     public AccrueClaimBlocksEvent(@NotNull Player player, int blocksToAccruePerHour, boolean isIdle)
@@ -80,7 +84,8 @@ public class AccrueClaimBlocksEvent extends PlayerEvent implements Cancellable
     /**
      * Set the number of claim blocks to be delivered to the {@link Player}.
      *
-     * @param blocksToAccrue blocks to deliver
+     * @param blocksToAccrue
+     *            blocks to deliver
      */
     public void setBlocksToAccrue(int blocksToAccrue)
     {
@@ -91,7 +96,8 @@ public class AccrueClaimBlocksEvent extends PlayerEvent implements Cancellable
      * Set the number of blocks to accrue per hour. This assumes GriefPrevention is
      * handling block delivery at its standard rate of 6 times per hour.
      *
-     * @param blocksToAccruePerHour the per-hour rate of blocks to deliver
+     * @param blocksToAccruePerHour
+     *            the per-hour rate of blocks to deliver
      * @see #setBlocksToAccrue(int)
      */
     public void setBlocksToAccruePerHour(int blocksToAccruePerHour)
@@ -113,7 +119,8 @@ public class AccrueClaimBlocksEvent extends PlayerEvent implements Cancellable
     /**
      * Set whether the {@link Player} is idle.
      *
-     * @param idle whether the {@code Player} is idle
+     * @param idle
+     *            whether the {@code Player} is idle
      */
     public void setIdle(boolean idle)
     {

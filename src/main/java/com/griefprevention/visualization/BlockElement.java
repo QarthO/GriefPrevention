@@ -21,7 +21,8 @@ public abstract class BlockElement
     /**
      * Construct a new {@code BlockElement} with the given coordinate.
      *
-     * @param coordinate the in-world coordinate of the element
+     * @param coordinate
+     *            the in-world coordinate of the element
      */
     public BlockElement(@NotNull IntVector coordinate)
     {
@@ -41,8 +42,10 @@ public abstract class BlockElement
     /**
      * Display the element for a {@link Player} in a particular {@link World}.
      *
-     * @param player the {@code Player} visualizing the element
-     * @param world the {@code World} the element is displayed in
+     * @param player
+     *            the {@code Player} visualizing the element
+     * @param world
+     *            the {@code World} the element is displayed in
      */
     protected abstract void draw(@NotNull Player player, @NotNull World world);
 
@@ -50,8 +53,10 @@ public abstract class BlockElement
      * Stop the display of the element for a {@link Player} in a particular
      * {@link World}.
      *
-     * @param player the {@code Player} visualizing the element
-     * @param world the {@code World} the element is displayed in
+     * @param player
+     *            the {@code Player} visualizing the element
+     * @param world
+     *            the {@code World} the element is displayed in
      */
     protected abstract void erase(@NotNull Player player, @NotNull World world);
 

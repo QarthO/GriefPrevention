@@ -22,6 +22,7 @@ package me.ryanhamshire.GriefPrevention;
  * Enum representing the permissions available in a {@link Claim}.
  */
 public enum ClaimPermission {
+
     /**
      * ClaimPermission used for owner-based checks. Cannot be granted and grants all
      * other permissions.
@@ -67,7 +68,8 @@ public enum ClaimPermission {
     /**
      * Check if a ClaimPermission is granted by another ClaimPermission.
      *
-     * @param other the ClaimPermission to compare against
+     * @param other
+     *            the ClaimPermission to compare against
      * @return true if this ClaimPermission is equal or lesser than the provided
      *         ClaimPermission
      */

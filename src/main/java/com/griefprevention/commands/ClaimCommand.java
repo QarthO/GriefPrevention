@@ -27,13 +27,17 @@ import me.ryanhamshire.GriefPrevention.TextMode;
 
 public class ClaimCommand extends CommandHandler
 {
+
     public ClaimCommand(@NotNull GriefPrevention plugin)
     {
         super(plugin, "claim");
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label,
+    public boolean onCommand(
+            @NotNull CommandSender sender,
+            @NotNull Command command,
+            @NotNull String label,
             @NotNull String[] args)
     {
         if (!(sender instanceof Player player)) return false;
@@ -122,7 +126,10 @@ public class ClaimCommand extends CommandHandler
         }
         catch (ArithmeticException e)
         {
-            GriefPrevention.sendMessage(player, TextMode.Err, Messages.CreateClaimInsufficientBlocks,
+            GriefPrevention.sendMessage(
+                    player,
+                    TextMode.Err,
+                    Messages.CreateClaimInsufficientBlocks,
                     String.valueOf(Integer.MAX_VALUE));
             return true;
         }
@@ -147,14 +154,20 @@ public class ClaimCommand extends CommandHandler
             }
             catch (ArithmeticException e)
             {
-                GriefPrevention.sendMessage(player, TextMode.Err, Messages.CreateClaimInsufficientBlocks,
+                GriefPrevention.sendMessage(
+                        player,
+                        TextMode.Err,
+                        Messages.CreateClaimInsufficientBlocks,
                         String.valueOf(Integer.MAX_VALUE));
                 return true;
             }
             int remaining = playerData.getRemainingClaimBlocks();
             if (remaining < area)
             {
-                GriefPrevention.sendMessage(player, TextMode.Err, Messages.CreateClaimInsufficientBlocks,
+                GriefPrevention.sendMessage(
+                        player,
+                        TextMode.Err,
+                        Messages.CreateClaimInsufficientBlocks,
                         String.valueOf(area - remaining));
                 plugin.dataStore.tryAdvertiseAdminAlternatives(player);
                 return true;
@@ -166,14 +179,26 @@ public class ClaimCommand extends CommandHandler
         return true;
     }
 
-    private void createClaim(@NotNull Player player, @NotNull PlayerData playerData, @NotNull Location lesser,
-            @NotNull Location greater, @Nullable UUID ownerId)
+    private void createClaim(
+            @NotNull Player player,
+            @NotNull PlayerData playerData,
+            @NotNull Location lesser,
+            @NotNull Location greater,
+            @Nullable UUID ownerId)
     {
         World world = player.getWorld();
-        CreateClaimResult result = plugin.dataStore.createClaim(world, lesser.getBlockX(), greater.getBlockX(),
+        CreateClaimResult result = plugin.dataStore.createClaim(
+                world,
+                lesser.getBlockX(),
+                greater.getBlockX(),
                 lesser.getBlockY() - plugin.config_claims_claimsExtendIntoGroundDistance - 1,
                 world.getHighestBlockYAt(greater) - plugin.config_claims_claimsExtendIntoGroundDistance - 1,
-                lesser.getBlockZ(), greater.getBlockZ(), ownerId, null, null, player);
+                lesser.getBlockZ(),
+                greater.getBlockZ(),
+                ownerId,
+                null,
+                null,
+                player);
         if (!result.succeeded || result.claim == null)
         {
             if (result.claim != null)
@@ -194,12 +219,18 @@ public class ClaimCommand extends CommandHandler
             // link to a video demo of land claiming, based on world type
             if (plugin.creativeRulesApply(player.getLocation()))
             {
-                GriefPrevention.sendMessage(player, TextMode.Instr, Messages.CreativeBasicsVideo2,
+                GriefPrevention.sendMessage(
+                        player,
+                        TextMode.Instr,
+                        Messages.CreativeBasicsVideo2,
                         DataStore.CREATIVE_VIDEO_URL);
             }
             else if (plugin.claimsEnabledForWorld(world))
             {
-                GriefPrevention.sendMessage(player, TextMode.Instr, Messages.SurvivalBasicsVideo2,
+                GriefPrevention.sendMessage(
+                        player,
+                        TextMode.Instr,
+                        Messages.SurvivalBasicsVideo2,
                         DataStore.SURVIVAL_VIDEO_URL);
             }
             BoundaryVisualization.visualizeClaim(player, result.claim, VisualizationType.CLAIM);
@@ -223,8 +254,11 @@ public class ClaimCommand extends CommandHandler
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command,
-            @NotNull String alias, @NotNull String[] args)
+    public @Nullable List<String> onTabComplete(
+            @NotNull CommandSender sender,
+            @NotNull Command command,
+            @NotNull String alias,
+            @NotNull String[] args)
     {
         if (args.length != 1) return List.of();
         return TabCompletions.integer(args, 3, false);

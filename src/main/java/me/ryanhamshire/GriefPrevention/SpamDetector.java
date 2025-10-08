@@ -6,8 +6,10 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 class SpamDetector
 {
+
     // last chat message shown and its timestamp, regardless of who sent it
     private String lastChatMessage = "";
+
     private long lastChatMessageTimestamp = 0;
 
     // number of identical chat messages in a row
@@ -226,21 +228,30 @@ class SpamDetector
 
 class SpamAnalysisResult
 {
+
     String finalMessage;
+
     boolean shouldWarnChatter = false;
+
     boolean shouldBanChatter = false;
+
     String muteReason;
 }
 
 class ChatterData
 {
+
     public String lastMessage = ""; // the player's last chat message, or slash command complete with parameters
+
     public long lastMessageTimestamp; // last time the player sent a chat message or used a monitored slash command
+
     public int spamLevel = 0; // number of consecutive "spams"
+
     public boolean spamWarned = false; // whether the player has received a warning recently
 
     // all recent message lengths and their total
     private final ConcurrentLinkedQueue<LengthTimestampPair> recentMessageLengths = new ConcurrentLinkedQueue<>();
+
     private int recentTotalLength = 0;
 
     public void AddMessage(String message, long timestamp)
@@ -269,7 +280,9 @@ class ChatterData
 
 class LengthTimestampPair
 {
+
     public long timestamp;
+
     public int length;
 
     public LengthTimestampPair(int length, long timestamp)

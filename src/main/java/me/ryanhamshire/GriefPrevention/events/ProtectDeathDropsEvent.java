@@ -21,7 +21,8 @@ public class ProtectDeathDropsEvent extends Event implements Cancellable
     /**
      * Construct a new {@code ProtectDeathDropsEvent}.
      *
-     * @param claim the claim in which the death occurred
+     * @param claim
+     *            the claim in which the death occurred
      */
     public ProtectDeathDropsEvent(@Nullable Claim claim)
     {

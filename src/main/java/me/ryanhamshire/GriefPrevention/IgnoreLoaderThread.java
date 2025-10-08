@@ -11,7 +11,9 @@ import com.google.common.io.Files;
 //loads ignore data from file into a hash map
 class IgnoreLoaderThread extends Thread
 {
+
     private final UUID playerToLoad;
+
     private final ConcurrentHashMap<UUID, Boolean> destinationMap;
 
     IgnoreLoaderThread(UUID playerToLoad, ConcurrentHashMap<UUID, Boolean> destinationMap)
@@ -83,8 +85,9 @@ class IgnoreLoaderThread extends Thread
         // if last attempt failed, log information about the problem
         if (needRetry)
         {
-            GriefPrevention.AddLogEntry("Retry attempts exhausted.  Unable to load ignore data for player \""
-                    + playerToLoad.toString() + "\": " + latestException);
+            GriefPrevention.AddLogEntry(
+                    "Retry attempts exhausted.  Unable to load ignore data for player \"" + playerToLoad.toString()
+                            + "\": " + latestException);
             latestException.printStackTrace();
         }
     }

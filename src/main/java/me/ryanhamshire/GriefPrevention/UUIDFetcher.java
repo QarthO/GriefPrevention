@@ -23,10 +23,15 @@ import com.google.gson.JsonObject;
 
 class UUIDFetcher
 {
+
     private static int PROFILES_PER_REQUEST = 100;
+
     private static final String PROFILE_URL = "https://api.mojang.com/profiles/minecraft";
+
     private final Gson gson = new Gson();
+
     private final List<String> names;
+
     private final boolean rateLimiting;
 
     // cache for username -> uuid lookups
@@ -123,8 +128,10 @@ class UUIDFetcher
                 do
                 {
                     HttpURLConnection connection = createConnection();
-                    String body = gson.toJson(names.subList(i * PROFILES_PER_REQUEST,
-                            Math.min((i + 1) * PROFILES_PER_REQUEST, names.size())));
+                    String body = gson.toJson(
+                            names.subList(
+                                    i * PROFILES_PER_REQUEST,
+                                    Math.min((i + 1) * PROFILES_PER_REQUEST, names.size())));
                     writeBody(connection, body);
                     retry = false;
                     array = null;
@@ -144,8 +151,9 @@ class UUIDFetcher
                             // try reducing it
                             if (i == 0 && PROFILES_PER_REQUEST > 1)
                             {
-                                GriefPrevention.AddLogEntry("Batch size " + PROFILES_PER_REQUEST
-                                        + " seems too large.  Looking for a workable batch size...");
+                                GriefPrevention.AddLogEntry(
+                                        "Batch size " + PROFILES_PER_REQUEST
+                                                + " seems too large.  Looking for a workable batch size...");
                                 PROFILES_PER_REQUEST = Math.max(PROFILES_PER_REQUEST - 5, 1);
                             }
 
@@ -219,8 +227,9 @@ class UUIDFetcher
 
     private static UUID getUUID(String id)
     {
-        return UUID.fromString(id.substring(0, 8) + "-" + id.substring(8, 12) + "-" + id.substring(12, 16) + "-"
-                + id.substring(16, 20) + "-" + id.substring(20, 32));
+        return UUID.fromString(
+                id.substring(0, 8) + "-" + id.substring(8, 12) + "-" + id.substring(12, 16) + "-" + id.substring(16, 20)
+                        + "-" + id.substring(20, 32));
     }
 
     public static byte[] toBytes(UUID uuid)

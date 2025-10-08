@@ -22,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public enum Messages {
+
     RespectingClaims("Now respecting claims."), IgnoringClaims("Now ignoring claims."), NoCreativeUnClaim(
             "You can't unclaim this land.  You can only make this claim larger or create additional claims."), SuccessfulAbandon(
                     "Claims abandoned.  You now have {0} available claim blocks.",
@@ -259,6 +260,7 @@ public enum Messages {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     "Sent to player on join, if they left while inside a nether portal.");
 
     final @NotNull String defaultValue;
+
     final @Nullable String notes;
 
     Messages(@NotNull String defaultValue, @NotNull String notes)

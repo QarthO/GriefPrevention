@@ -10,6 +10,7 @@ public class MonitorableCommand
 {
 
     private final String command;
+
     private final List<Integer> spaces = new ArrayList<>();
 
     public MonitorableCommand(@NotNull String command)

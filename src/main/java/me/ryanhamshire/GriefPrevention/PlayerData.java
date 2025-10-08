@@ -35,6 +35,7 @@ import com.griefprevention.visualization.BoundaryVisualization;
 //holds all of GriefPrevention's player-tied data
 public class PlayerData
 {
+
     // the player's ID
     public UUID playerID;
 
@@ -90,6 +91,7 @@ public class PlayerData
 
     // anti-camping pvp protection
     public boolean pvpImmune = false;
+
     public long lastSpawn = 0;
 
     // ignore claims mode
@@ -100,6 +102,7 @@ public class PlayerData
 
     // pvp
     public long lastPvpTimestamp = 0;
+
     public String lastPvpPlayer = "";
 
     // safety confirmation for deleting multi-subdivision claims
@@ -136,6 +139,7 @@ public class PlayerData
     // ignore list
     // true means invisible (admin-forced ignore), false means player-created ignore
     public ConcurrentHashMap<UUID, Boolean> ignoredPlayers = new ConcurrentHashMap<>();
+
     public boolean ignoreListChanged = false;
 
     // profanity warning, once per play session
@@ -165,7 +169,8 @@ public class PlayerData
         int remainingBlocks;
         try
         {
-            remainingBlocks = Math.addExact(Math.addExact(this.getAccruedClaimBlocks(), this.getBonusClaimBlocks()),
+            remainingBlocks = Math.addExact(
+                    Math.addExact(this.getAccruedClaimBlocks(), this.getBonusClaimBlocks()),
                     GriefPrevention.instance.dataStore.getGroupBonusBlocks(this.playerID));
         }
         catch (ArithmeticException e)
@@ -322,11 +327,17 @@ public class PlayerData
                 OfflinePlayer player = GriefPrevention.instance.getServer().getOfflinePlayer(this.playerID);
                 GriefPrevention.AddLogEntry(
                         player.getName() + " has more claimed land than blocks available.  Adding blocks to fix.",
-                        CustomLogEntryTypes.Debug, true);
-                GriefPrevention.AddLogEntry(player.getName() + " Accrued blocks: " + this.getAccruedClaimBlocks()
-                        + " Bonus blocks: " + this.getBonusClaimBlocks(), CustomLogEntryTypes.Debug, true);
-                GriefPrevention.AddLogEntry("Total blocks: " + totalBlocks + " Total claimed area: " + totalClaimsArea,
-                        CustomLogEntryTypes.Debug, true);
+                        CustomLogEntryTypes.Debug,
+                        true);
+                GriefPrevention.AddLogEntry(
+                        player.getName() + " Accrued blocks: " + this.getAccruedClaimBlocks() + " Bonus blocks: "
+                                + this.getBonusClaimBlocks(),
+                        CustomLogEntryTypes.Debug,
+                        true);
+                GriefPrevention.AddLogEntry(
+                        "Total blocks: " + totalBlocks + " Total claimed area: " + totalClaimsArea,
+                        CustomLogEntryTypes.Debug,
+                        true);
                 for (Claim claim : this.claims)
                 {
                     if (!claim.inDataStore) continue;
@@ -336,7 +347,8 @@ public class PlayerData
                                             + GriefPrevention.getfriendlyLocationString(
                                                     claim.getGreaterBoundaryCorner())
                                             + " = " + claim.getArea(),
-                                    CustomLogEntryTypes.Debug, true);
+                                    CustomLogEntryTypes.Debug,
+                                    true);
                 }
 
                 // try to fix it by adding to accrued blocks
@@ -345,8 +357,8 @@ public class PlayerData
                 this.accruedClaimBlocks = Math.min(accruedLimit, this.accruedClaimBlocks); // set accrued blocks to
                                                                                            // maximum limit, if it's
                                                                                            // smaller
-                GriefPrevention.AddLogEntry("New accrued blocks: " + this.accruedClaimBlocks, CustomLogEntryTypes.Debug,
-                        true);
+                GriefPrevention
+                        .AddLogEntry("New accrued blocks: " + this.accruedClaimBlocks, CustomLogEntryTypes.Debug, true);
 
                 // Recalculate total blocks (accrued + bonus + permission group bonus)
                 totalBlocks = this.accruedClaimBlocks + this.getBonusClaimBlocks()
@@ -360,21 +372,26 @@ public class PlayerData
                     this.bonusClaimBlocks += bonusBlocksToAdd;
                     GriefPrevention.AddLogEntry(
                             "Accrued blocks weren't enough. Adding " + bonusBlocksToAdd + " bonus blocks.",
-                            CustomLogEntryTypes.Debug, true);
+                            CustomLogEntryTypes.Debug,
+                            true);
                 }
                 GriefPrevention.AddLogEntry(
                         player.getName() + " Accrued blocks: " + this.getAccruedClaimBlocks() + " Bonus blocks: "
                                 + this.getBonusClaimBlocks() + " Group Bonus Blocks: "
                                 + GriefPrevention.instance.dataStore.getGroupBonusBlocks(this.playerID),
-                        CustomLogEntryTypes.Debug, true);
+                        CustomLogEntryTypes.Debug,
+                        true);
                 // Recalculate total blocks (accrued + bonus + permission group bonus)
                 totalBlocks = this.accruedClaimBlocks + this.getBonusClaimBlocks()
                         + GriefPrevention.instance.dataStore.getGroupBonusBlocks(this.playerID);
-                GriefPrevention.AddLogEntry("Total blocks: " + totalBlocks + " Total claimed area: " + totalClaimsArea,
-                        CustomLogEntryTypes.Debug, true);
+                GriefPrevention.AddLogEntry(
+                        "Total blocks: " + totalBlocks + " Total claimed area: " + totalClaimsArea,
+                        CustomLogEntryTypes.Debug,
+                        true);
                 GriefPrevention.AddLogEntry(
                         "Remaining claim blocks to use: " + this.getRemainingClaimBlocks() + " (should be 0)",
-                        CustomLogEntryTypes.Debug, true);
+                        CustomLogEntryTypes.Debug,
+                        true);
             }
         }
 

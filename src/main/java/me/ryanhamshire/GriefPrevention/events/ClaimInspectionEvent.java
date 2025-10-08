@@ -24,16 +24,21 @@ public class ClaimInspectionEvent extends PlayerEvent implements Cancellable
 {
 
     private final @NotNull Collection<Claim> claims;
+
     private final @Nullable Block inspectedBlock;
+
     private final boolean inspectingNearbyClaims;
 
     /**
      * Construct a new {@code ClaimInspectionEvent} for a {@link Player} inspecting
      * a {@link Block}.
      *
-     * @param player the inspecting {@code Player}
-     * @param inspectedBlock the inspected {@code Block}
-     * @param claim the {@link Claim} present or {@code null} if not claimed
+     * @param player
+     *            the inspecting {@code Player}
+     * @param inspectedBlock
+     *            the inspected {@code Block}
+     * @param claim
+     *            the {@link Claim} present or {@code null} if not claimed
      */
     public ClaimInspectionEvent(@NotNull Player player, @NotNull Block inspectedBlock, @Nullable Claim claim)
     {
@@ -54,12 +59,15 @@ public class ClaimInspectionEvent extends PlayerEvent implements Cancellable
     /**
      * Construct a new {@code ClaimInspectionEvent}.
      *
-     * @param player the inspecting {@link Player}
-     * @param inspectedBlock the inspected {@link Block} or {@code null} if no block
-     *            was clicked
-     * @param claims a {@link Collection} of all claims inspected
-     * @param inspectingNearbyClaims whether the user is inspecting nearby claims
-     *            ("shift-clicking")
+     * @param player
+     *            the inspecting {@link Player}
+     * @param inspectedBlock
+     *            the inspected {@link Block} or {@code null} if no block was
+     *            clicked
+     * @param claims
+     *            a {@link Collection} of all claims inspected
+     * @param inspectingNearbyClaims
+     *            whether the user is inspecting nearby claims ("shift-clicking")
      */
     public ClaimInspectionEvent(@NotNull Player player, @Nullable Block inspectedBlock,
             @NotNull Collection<Claim> claims, boolean inspectingNearbyClaims)

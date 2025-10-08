@@ -25,8 +25,10 @@ public class ClaimTransferEvent extends ClaimEvent implements Cancellable
     /**
      * Construct a new {@code ClaimTransferEvent}.
      *
-     * @param claim the {@link Claim} being transferred
-     * @param newOwner the {@link UUID} of the new owner
+     * @param claim
+     *            the {@link Claim} being transferred
+     * @param newOwner
+     *            the {@link UUID} of the new owner
      */
     public ClaimTransferEvent(@NotNull Claim claim, @Nullable UUID newOwner)
     {
@@ -49,7 +51,8 @@ public class ClaimTransferEvent extends ClaimEvent implements Cancellable
      * Set the {@link UUID} of the new owner of the claim. This may be {@code null}
      * to indicate an administrative claim.
      *
-     * @param newOwner the {@code UUID} of the new owner
+     * @param newOwner
+     *            the {@code UUID} of the new owner
      */
     public void setNewOwner(@Nullable UUID newOwner)
     {

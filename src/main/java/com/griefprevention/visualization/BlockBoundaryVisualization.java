@@ -19,17 +19,22 @@ public abstract class BlockBoundaryVisualization extends BoundaryVisualization
 {
 
     private final int step;
+
     private final BoundingBox displayZoneArea;
+
     protected final Collection<BlockElement> elements = new HashSet<>();
 
     /**
      * Construct a new {@code BlockBoundaryVisualization} with a step size of
      * {@code 10} and a display radius of {@code 75}.
      *
-     * @param world the {@link World} being visualized in
-     * @param visualizeFrom the {@link IntVector} representing the world coordinate
-     *            being visualized from
-     * @param height the height of the visualization
+     * @param world
+     *            the {@link World} being visualized in
+     * @param visualizeFrom
+     *            the {@link IntVector} representing the world coordinate being
+     *            visualized from
+     * @param height
+     *            the height of the visualization
      */
     protected BlockBoundaryVisualization(@NotNull World world, @NotNull IntVector visualizeFrom, int height)
     {
@@ -39,13 +44,18 @@ public abstract class BlockBoundaryVisualization extends BoundaryVisualization
     /**
      * Construct a new {@code BlockBoundaryVisualization}.
      *
-     * @param world the {@link World} being visualized in
-     * @param visualizeFrom the {@link IntVector} representing the world coordinate
-     *            being visualized from
-     * @param height the height of the visualization
-     * @param step the distance between individual side elements
-     * @param displayZoneRadius the radius in which elements are visible from the
-     *            visualization location
+     * @param world
+     *            the {@link World} being visualized in
+     * @param visualizeFrom
+     *            the {@link IntVector} representing the world coordinate being
+     *            visualized from
+     * @param height
+     *            the height of the visualization
+     * @param step
+     *            the distance between individual side elements
+     * @param displayZoneRadius
+     *            the radius in which elements are visible from the visualization
+     *            location
      */
     protected BlockBoundaryVisualization(@NotNull World world, @NotNull IntVector visualizeFrom, int height, int step,
             int displayZoneRadius)
@@ -120,7 +130,8 @@ public abstract class BlockBoundaryVisualization extends BoundaryVisualization
      * Create a {@link Consumer} that adds a corner element for the given
      * {@link IntVector}.
      *
-     * @param boundary the {@code Boundary}
+     * @param boundary
+     *            the {@code Boundary}
      * @return the corner element consumer
      */
     protected abstract @NotNull Consumer<@NotNull IntVector> addCornerElements(@NotNull Boundary boundary);
@@ -129,7 +140,8 @@ public abstract class BlockBoundaryVisualization extends BoundaryVisualization
      * Create a {@link Consumer} that adds a side element for the given
      * {@link IntVector}.
      *
-     * @param boundary the {@code Boundary}
+     * @param boundary
+     *            the {@code Boundary}
      * @return the side element consumer
      */
     protected abstract @NotNull Consumer<@NotNull IntVector> addSideElements(@NotNull Boundary boundary);
@@ -142,11 +154,16 @@ public abstract class BlockBoundaryVisualization extends BoundaryVisualization
     /**
      * Add a display element if accessible.
      *
-     * @param displayZone the zone in which elements may be displayed
-     * @param coordinate the coordinate being displayed
-     * @param addElement the function for obtaining the element displayed
+     * @param displayZone
+     *            the zone in which elements may be displayed
+     * @param coordinate
+     *            the coordinate being displayed
+     * @param addElement
+     *            the function for obtaining the element displayed
      */
-    protected void addDisplayed(@NotNull BoundingBox displayZone, @NotNull IntVector coordinate,
+    protected void addDisplayed(
+            @NotNull BoundingBox displayZone,
+            @NotNull IntVector coordinate,
             @NotNull Consumer<@NotNull IntVector> addElement)
     {
         if (isAccessible(displayZone, coordinate))

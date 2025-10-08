@@ -43,8 +43,11 @@ public abstract class CommandHandler implements TabExecutor
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command,
-            @NotNull String alias, @NotNull String[] args)
+    public @Nullable List<String> onTabComplete(
+            @NotNull CommandSender sender,
+            @NotNull Command command,
+            @NotNull String alias,
+            @NotNull String[] args)
     {
         // Tab complete visible online players by default.
         return TabCompletions.visiblePlayers(sender, args);

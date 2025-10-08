@@ -41,15 +41,22 @@ public final class ProtectionHelper
      * This respects ignoring claims, wilderness rules, etc.
      * </p>
      *
-     * @param player the person performing the action
-     * @param location the affected {@link Location}
-     * @param permission the required permission
-     * @param trigger the triggering {@link Event}, if any
+     * @param player
+     *            the person performing the action
+     * @param location
+     *            the affected {@link Location}
+     * @param permission
+     *            the required permission
+     * @param trigger
+     *            the triggering {@link Event}, if any
      * @return the denial message supplier, or {@code null} if the action is not
      *         denied
      */
-    public static @Nullable Supplier<String> checkPermission(@NotNull Player player, @NotNull Location location,
-            @NotNull ClaimPermission permission, @Nullable Event trigger)
+    public static @Nullable Supplier<String> checkPermission(
+            @NotNull Player player,
+            @NotNull Location location,
+            @NotNull ClaimPermission permission,
+            @Nullable Event trigger)
     {
         World world = location.getWorld();
         if (world == null || !GriefPrevention.instance.claimsEnabledForWorld(world)) return null;
@@ -79,8 +86,8 @@ public final class ProtectionHelper
                     if (player.hasPermission("griefprevention.ignoreclaims"))
                         reason += "  "
                                 + GriefPrevention.instance.dataStore.getMessage(Messages.IgnoreClaimsAdvertisement);
-                    reason += "  " + GriefPrevention.instance.dataStore.getMessage(Messages.CreativeBasicsVideo2,
-                            DataStore.CREATIVE_VIDEO_URL);
+                    reason += "  " + GriefPrevention.instance.dataStore
+                            .getMessage(Messages.CreativeBasicsVideo2, DataStore.CREATIVE_VIDEO_URL);
                     return reason;
                 };
             }

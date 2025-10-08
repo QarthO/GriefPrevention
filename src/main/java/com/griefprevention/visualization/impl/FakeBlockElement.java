@@ -16,6 +16,7 @@ final class FakeBlockElement extends BlockElement
 {
 
     private final @NotNull BlockData realBlock;
+
     private final @NotNull BlockData visualizedBlock;
 
     FakeBlockElement(@NotNull IntVector intVector, @NotNull BlockData realBlock, @NotNull BlockData visualizedBlock)

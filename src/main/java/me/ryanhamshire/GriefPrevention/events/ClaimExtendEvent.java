@@ -24,12 +24,15 @@ public class ClaimExtendEvent extends ClaimChangeEvent
     /**
      * Construct a new {@code ClaimExtendEvent}.
      *
-     * @param claim the {@link Claim} extending downwards
-     * @param newDepth the new depth of the {@code Claim}
+     * @param claim
+     *            the {@link Claim} extending downwards
+     * @param newDepth
+     *            the new depth of the {@code Claim}
      */
     public ClaimExtendEvent(@NotNull Claim claim, int newDepth)
     {
         super(claim, new Claim(claim) {
+
             @Override
             public Location getLesserBoundaryCorner()
             {
@@ -70,7 +73,8 @@ public class ClaimExtendEvent extends ClaimChangeEvent
      * Note that this value is not necessarily final - it will be modified to
      * respect configuration and world limits.
      *
-     * @param newDepth the new depth
+     * @param newDepth
+     *            the new depth
      */
     public void setNewDepth(int newDepth)
     {

@@ -20,7 +20,8 @@ public class ClaimExpirationEvent extends ClaimEvent implements Cancellable
     /**
      * Construct a new {@code ClaimExpirationEvent}.
      *
-     * @param claim the {@link Claim} expiring
+     * @param claim
+     *            the {@link Claim} expiring
      */
     public ClaimExpirationEvent(@NotNull Claim claim)
     {

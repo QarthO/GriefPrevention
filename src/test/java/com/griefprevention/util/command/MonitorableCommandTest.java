@@ -35,7 +35,8 @@ class MonitorableCommandTest
 
     private static List<Arguments> getArgumentData()
     {
-        return List.of(Arguments.of("/cool command execution yeah", List.of("command", "execution", "yeah")),
+        return List.of(
+                Arguments.of("/cool command execution yeah", List.of("command", "execution", "yeah")),
                 Arguments.of("/single", List.of()));
     }
 
@@ -62,7 +63,8 @@ class MonitorableCommandTest
     private static List<Arguments> getCommandData()
     {
         return List.of(
-                Arguments.of("/cool command execution yeah",
+                Arguments.of(
+                        "/cool command execution yeah",
                         List.of("/cool", "/cool command", "/cool command execution", "/cool command execution yeah")),
                 Arguments.of("/single", List.of("/single")));
     }

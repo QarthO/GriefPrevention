@@ -33,7 +33,9 @@ import java.util.stream.Collectors;
 //runs every 1 minute in the main thread
 class FindUnusedClaimsTask implements Runnable
 {
+
     private List<UUID> claimOwnerUUIDs;
+
     private Iterator<UUID> claimOwnerIterator;
 
     FindUnusedClaimsTask()
@@ -54,7 +56,8 @@ class FindUnusedClaimsTask implements Runnable
             return;
         }
 
-        GriefPrevention.instance.getServer().getScheduler().runTaskAsynchronously(GriefPrevention.instance,
+        GriefPrevention.instance.getServer().getScheduler().runTaskAsynchronously(
+                GriefPrevention.instance,
                 new CleanupUnusedClaimPreTask(claimOwnerIterator.next()));
     }
 
@@ -72,7 +75,8 @@ class FindUnusedClaimsTask implements Runnable
 
         GriefPrevention.AddLogEntry(
                 "The following UUIDs own a claim and will be checked for inactivity in the following order:",
-                CustomLogEntryTypes.Debug, true);
+                CustomLogEntryTypes.Debug,
+                true);
 
         for (UUID uuid : claimOwnerUUIDs)
             GriefPrevention.AddLogEntry(uuid.toString(), CustomLogEntryTypes.Debug, true);

@@ -35,17 +35,23 @@ public abstract class BoundaryVisualization
 {
 
     private final Collection<Boundary> elements = new HashSet<>();
+
     protected final @NotNull World world;
+
     protected final @NotNull IntVector visualizeFrom;
+
     protected final int height;
 
     /**
      * Construct a new {@code BoundaryVisualization}.
      *
-     * @param world the {@link World} being visualized in
-     * @param visualizeFrom the {@link IntVector} representing the world coordinate
-     *            being visualized from
-     * @param height the height of the visualization
+     * @param world
+     *            the {@link World} being visualized in
+     * @param visualizeFrom
+     *            the {@link IntVector} representing the world coordinate being
+     *            visualized from
+     * @param height
+     *            the height of the visualization
      */
     protected BoundaryVisualization(@NotNull World world, @NotNull IntVector visualizeFrom, int height)
     {
@@ -57,7 +63,8 @@ public abstract class BoundaryVisualization
     /**
      * Check if a {@link Player} can visualize the {@code BoundaryVisualization}.
      *
-     * @param player the visualization target
+     * @param player
+     *            the visualization target
      * @return true if able to visualize
      */
     @Contract("null -> false")
@@ -69,8 +76,10 @@ public abstract class BoundaryVisualization
     /**
      * Apply the {@code BoundaryVisualization} to a {@link Player}.
      *
-     * @param player the visualization target
-     * @param playerData the {@link PlayerData} of the visualization target
+     * @param player
+     *            the visualization target
+     * @param playerData
+     *            the {@link PlayerData} of the visualization target
      */
     protected void apply(@NotNull Player player, @NotNull PlayerData playerData)
     {
@@ -87,8 +96,10 @@ public abstract class BoundaryVisualization
     /**
      * Draw a {@link Boundary} in the visualization for a {@link Player}.
      *
-     * @param player the visualization target
-     * @param boundary the {@code Boundary} to draw
+     * @param player
+     *            the visualization target
+     * @param boundary
+     *            the {@code Boundary} to draw
      */
     protected abstract void draw(@NotNull Player player, @NotNull Boundary boundary);
 
@@ -100,8 +111,10 @@ public abstract class BoundaryVisualization
      * wish to override this method to prevent extra task scheduling.
      * </p>
      *
-     * @param player the visualization target
-     * @param playerData the {@link PlayerData} of the visualization target
+     * @param player
+     *            the visualization target
+     * @param playerData
+     *            the {@link PlayerData} of the visualization target
      */
     protected void scheduleRevert(@NotNull Player player, @NotNull PlayerData playerData)
     {
@@ -114,7 +127,8 @@ public abstract class BoundaryVisualization
     /**
      * Revert the visualization for a {@link Player}.
      *
-     * @param player the visualization target
+     * @param player
+     *            the visualization target
      */
     public void revert(@Nullable Player player)
     {
@@ -130,19 +144,26 @@ public abstract class BoundaryVisualization
     /**
      * Erase a {@link Boundary} in the visualization for a {@link Player}.
      *
-     * @param player the visualization target
-     * @param boundary the {@code Boundary} to erase
+     * @param player
+     *            the visualization target
+     * @param boundary
+     *            the {@code Boundary} to erase
      */
     protected abstract void erase(@NotNull Player player, @NotNull Boundary boundary);
 
     /**
      * Helper method for quickly visualizing an area.
      *
-     * @param player the {@link Player} visualizing the area
-     * @param boundingBox the {@link BoundingBox} being visualized
-     * @param type the {@link VisualizationType type of visualization}
+     * @param player
+     *            the {@link Player} visualizing the area
+     * @param boundingBox
+     *            the {@link BoundingBox} being visualized
+     * @param type
+     *            the {@link VisualizationType type of visualization}
      */
-    public static void visualizeArea(@NotNull Player player, @NotNull BoundingBox boundingBox,
+    public static void visualizeArea(
+            @NotNull Player player,
+            @NotNull BoundingBox boundingBox,
             @NotNull VisualizationType type)
     {
         BoundaryVisualizationEvent event = new BoundaryVisualizationEvent(player,
@@ -153,9 +174,12 @@ public abstract class BoundaryVisualization
     /**
      * Helper method for quickly visualizing a claim and all its children.
      *
-     * @param player the {@link Player} visualizing the area
-     * @param claim the {@link Claim} being visualized
-     * @param type the {@link VisualizationType type of visualization}
+     * @param player
+     *            the {@link Player} visualizing the area
+     * @param claim
+     *            the {@link Claim} being visualized
+     * @param type
+     *            the {@link VisualizationType type of visualization}
      */
     public static void visualizeClaim(@NotNull Player player, @NotNull Claim claim, @NotNull VisualizationType type)
     {
@@ -165,12 +189,19 @@ public abstract class BoundaryVisualization
     /**
      * Helper method for quickly visualizing a claim and all its children.
      *
-     * @param player the {@link Player} visualizing the area
-     * @param claim the {@link Claim} being visualized
-     * @param type the {@link VisualizationType type of visualization}
-     * @param block the {@link Block} on which the visualization was initiated
+     * @param player
+     *            the {@link Player} visualizing the area
+     * @param claim
+     *            the {@link Claim} being visualized
+     * @param type
+     *            the {@link VisualizationType type of visualization}
+     * @param block
+     *            the {@link Block} on which the visualization was initiated
      */
-    public static void visualizeClaim(@NotNull Player player, @NotNull Claim claim, @NotNull VisualizationType type,
+    public static void visualizeClaim(
+            @NotNull Player player,
+            @NotNull Claim claim,
+            @NotNull VisualizationType type,
             @NotNull Block block)
     {
         visualizeClaim(player, claim, type, block.getY());
@@ -179,12 +210,19 @@ public abstract class BoundaryVisualization
     /**
      * Helper method for quickly visualizing a claim and all its children.
      *
-     * @param player the {@link Player} visualizing the area
-     * @param claim the {@link Claim} being visualized
-     * @param type the {@link VisualizationType}
-     * @param height the height at which the visualization was initiated
+     * @param player
+     *            the {@link Player} visualizing the area
+     * @param claim
+     *            the {@link Claim} being visualized
+     * @param type
+     *            the {@link VisualizationType}
+     * @param height
+     *            the height at which the visualization was initiated
      */
-    private static void visualizeClaim(@NotNull Player player, @NotNull Claim claim, @NotNull VisualizationType type,
+    private static void visualizeClaim(
+            @NotNull Player player,
+            @NotNull Claim claim,
+            @NotNull VisualizationType type,
             int height)
     {
         BoundaryVisualizationEvent event = new BoundaryVisualizationEvent(player, defineBoundaries(claim, type),
@@ -195,8 +233,10 @@ public abstract class BoundaryVisualization
     /**
      * Define {@link Boundary Boundaries} for a claim and its children.
      *
-     * @param claim the {@link Claim}
-     * @param type the {@link VisualizationType}
+     * @param claim
+     *            the {@link Claim}
+     * @param type
+     *            the {@link VisualizationType}
      * @return the resulting {@code Boundary} values
      */
     private static Collection<Boundary> defineBoundaries(Claim claim, VisualizationType type)
@@ -212,7 +252,8 @@ public abstract class BoundaryVisualization
         // Gather all boundaries. It's important that children override parent so
         // that users can always find children, no matter how oddly sized or positioned.
         return Stream
-                .concat(Stream.of(new Boundary(claim, type)),
+                .concat(
+                        Stream.of(new Boundary(claim, type)),
                         claim.children.stream().map(child -> new Boundary(child, VisualizationType.SUBDIVISION)))
                 .collect(Collectors.toSet());
     }
@@ -220,16 +261,20 @@ public abstract class BoundaryVisualization
     /**
      * Helper method for quickly visualizing a collection of nearby claims.
      *
-     * @param player the {@link Player} visualizing the area
-     * @param claims the {@link Claim Claims} being visualized
-     * @param height the height at which the visualization was initiated
+     * @param player
+     *            the {@link Player} visualizing the area
+     * @param claims
+     *            the {@link Claim Claims} being visualized
+     * @param height
+     *            the height at which the visualization was initiated
      */
     public static void visualizeNearbyClaims(@NotNull Player player, @NotNull Collection<Claim> claims, int height)
     {
         BoundaryVisualizationEvent event = new BoundaryVisualizationEvent(player,
                 claims.stream()
-                        .map(claim -> new Boundary(claim,
-                                claim.isAdminClaim() ? VisualizationType.ADMIN_CLAIM : VisualizationType.CLAIM))
+                        .map(
+                                claim -> new Boundary(claim,
+                                        claim.isAdminClaim() ? VisualizationType.ADMIN_CLAIM : VisualizationType.CLAIM))
                         .collect(Collectors.toSet()),
                 height);
         callAndVisualize(event);
@@ -239,7 +284,8 @@ public abstract class BoundaryVisualization
      * Call a {@link BoundaryVisualizationEvent} and use the resulting values to
      * create and apply a visualization.
      *
-     * @param event the {@code BoundaryVisualizationEvent}
+     * @param event
+     *            the {@code BoundaryVisualizationEvent}
      */
     public static void callAndVisualize(@NotNull BoundaryVisualizationEvent event)
     {
@@ -260,8 +306,8 @@ public abstract class BoundaryVisualization
             return;
         }
 
-        BoundaryVisualization visualization = event.getProvider().create(player.getWorld(), event.getCenter(),
-                event.getHeight());
+        BoundaryVisualization visualization = event.getProvider()
+                .create(player.getWorld(), event.getCenter(), event.getHeight());
         visualization.elements.addAll(boundaries);
 
         // If they have a visualization active, clear it first.
@@ -271,8 +317,10 @@ public abstract class BoundaryVisualization
         // visualization next tick.
         if (visualization.canVisualize(player))
         {
-            GriefPrevention.instance.getServer().getScheduler().scheduleSyncDelayedTask(GriefPrevention.instance,
-                    new DelayedVisualizationTask(visualization, playerData, event), 1L);
+            GriefPrevention.instance.getServer().getScheduler().scheduleSyncDelayedTask(
+                    GriefPrevention.instance,
+                    new DelayedVisualizationTask(visualization, playerData, event),
+                    1L);
         }
     }
 
@@ -296,11 +344,15 @@ public abstract class BoundaryVisualization
                 }
 
                 // Otherwise, add an extra hint that the problem is not with GP.
-                GriefPrevention.AddLogEntry(String.format("External visualization provider %s caused %s: %s",
-                        event.getProvider().getClass().getName(), exception.getClass().getName(), exception.getCause()),
+                GriefPrevention.AddLogEntry(
+                        String.format(
+                                "External visualization provider %s caused %s: %s",
+                                event.getProvider().getClass().getName(),
+                                exception.getClass().getName(),
+                                exception.getCause()),
                         CustomLogEntryTypes.Exception);
-                GriefPrevention.instance.getLogger().log(Level.WARNING,
-                        "Exception visualizing claim using external provider", exception);
+                GriefPrevention.instance.getLogger()
+                        .log(Level.WARNING, "Exception visualizing claim using external provider", exception);
 
                 // Fall through to default provider.
                 BoundaryVisualization fallback = BoundaryVisualizationEvent.DEFAULT_PROVIDER

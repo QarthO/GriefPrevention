@@ -36,7 +36,8 @@ public class BoundingBox implements Cloneable
     /**
      * Construct a new bounding box containing all the given blocks.
      *
-     * @param blocks a collection of blocks to construct a bounding box around
+     * @param blocks
+     *            a collection of blocks to construct a bounding box around
      * @return the bounding box
      */
     public static @NotNull BoundingBox ofBlocks(@NotNull Collection<Block> blocks)
@@ -60,7 +61,8 @@ public class BoundingBox implements Cloneable
     /**
      * Construct a new bounding box containing all the given block states.
      *
-     * @param blocks a collection of blocks to construct a bounding box around
+     * @param blocks
+     *            a collection of blocks to construct a bounding box around
      * @return the bounding box
      */
     public static @NotNull BoundingBox ofStates(@NotNull Collection<BlockState> blocks)
@@ -84,23 +86,35 @@ public class BoundingBox implements Cloneable
     }
 
     private int minX;
+
     private int minY;
+
     private int minZ;
+
     private int maxX;
+
     private int maxY;
+
     private int maxZ;
 
     /**
      * Construct a new bounding box with the given corners.
      *
-     * @param x1 the X coordinate of the first corner
-     * @param y1 the Y coordinate of the first corner
-     * @param z1 the Z coordinate of the first corner
-     * @param x2 the X coordinate of the second corner
-     * @param y2 the Y coordinate of the second corner
-     * @param z2 the Z coordinate of the second corner
-     * @param verify whether or not to verify that the provided corners are in fact
-     *            the minimum corners
+     * @param x1
+     *            the X coordinate of the first corner
+     * @param y1
+     *            the Y coordinate of the first corner
+     * @param z1
+     *            the Z coordinate of the first corner
+     * @param x2
+     *            the X coordinate of the second corner
+     * @param y2
+     *            the Y coordinate of the second corner
+     * @param z2
+     *            the Z coordinate of the second corner
+     * @param verify
+     *            whether or not to verify that the provided corners are in fact the
+     *            minimum corners
      */
     protected BoundingBox(int x1, int y1, int z1, int x2, int y2, int z2, boolean verify)
     {
@@ -122,12 +136,18 @@ public class BoundingBox implements Cloneable
     /**
      * Construct a new bounding box with the given corners.
      *
-     * @param x1 the X coordinate of the first corner
-     * @param y1 the Y coordinate of the first corner
-     * @param z1 the Z coordinate of the first corner
-     * @param x2 the X coordinate of the second corner
-     * @param y2 the Y coordinate of the second corner
-     * @param z2 the Z coordinate of the second corner
+     * @param x1
+     *            the X coordinate of the first corner
+     * @param y1
+     *            the Y coordinate of the first corner
+     * @param z1
+     *            the Z coordinate of the first corner
+     * @param x2
+     *            the X coordinate of the second corner
+     * @param y2
+     *            the Y coordinate of the second corner
+     * @param z2
+     *            the Z coordinate of the second corner
      */
     public BoundingBox(int x1, int y1, int z1, int x2, int y2, int z2)
     {
@@ -137,10 +157,13 @@ public class BoundingBox implements Cloneable
     /**
      * Construct a new bounding box with the given corners.
      *
-     * @param pos1 the position of the first corner
-     * @param pos2 the position of the second corner
-     * @param verify whether or not to verify that the provided corners are in fact
-     *            the minimum corners
+     * @param pos1
+     *            the position of the first corner
+     * @param pos2
+     *            the position of the second corner
+     * @param verify
+     *            whether or not to verify that the provided corners are in fact the
+     *            minimum corners
      */
     private BoundingBox(@NotNull Location pos1, @NotNull Location pos2, boolean verify)
     {
@@ -151,8 +174,10 @@ public class BoundingBox implements Cloneable
     /**
      * Construct a new bounding box with the given corners.
      *
-     * @param pos1 the position of the first corner
-     * @param pos2 the position of the second corner
+     * @param pos1
+     *            the position of the first corner
+     * @param pos2
+     *            the position of the second corner
      */
     public BoundingBox(@NotNull Location pos1, @NotNull Location pos2)
     {
@@ -162,8 +187,10 @@ public class BoundingBox implements Cloneable
     /**
      * Construct a new bounding box with the given corners.
      *
-     * @param pos1 the position of the first corner
-     * @param pos2 the position of the second corner
+     * @param pos1
+     *            the position of the first corner
+     * @param pos2
+     *            the position of the second corner
      */
     public BoundingBox(@NotNull IntVector pos1, @NotNull IntVector pos2)
     {
@@ -173,8 +200,10 @@ public class BoundingBox implements Cloneable
     /**
      * Construct a new bounding box with the given corners.
      *
-     * @param pos1 the position of the first corner
-     * @param pos2 the position of the second corner
+     * @param pos1
+     *            the position of the first corner
+     * @param pos2
+     *            the position of the second corner
      */
     public BoundingBox(@NotNull Vector pos1, @NotNull Vector pos2)
     {
@@ -185,7 +214,8 @@ public class BoundingBox implements Cloneable
     /**
      * Construct a new bounding box representing the given claim.
      *
-     * @param claim the claim
+     * @param claim
+     *            the claim
      */
     public BoundingBox(@NotNull Claim claim)
     {
@@ -196,7 +226,8 @@ public class BoundingBox implements Cloneable
     /**
      * Construct a new bounding box representing the given block.
      *
-     * @param block the block
+     * @param block
+     *            the block
      */
     public BoundingBox(@NotNull Block block)
     {
@@ -207,7 +238,8 @@ public class BoundingBox implements Cloneable
      * Construct a new bounding box representing the given Bukkit
      * {@link org.bukkit.util.BoundingBox BoundingBox}.
      *
-     * @param boundingBox the Bukkit bounding box
+     * @param boundingBox
+     *            the Bukkit bounding box
      */
     public BoundingBox(@NotNull org.bukkit.util.BoundingBox boundingBox)
     {
@@ -226,12 +258,18 @@ public class BoundingBox implements Cloneable
      * Sets bounds of this bounding box to the specified values. Ensures that the
      * minimum and maximum corners are set from the correct respective values.
      *
-     * @param x1 the first X value
-     * @param y1 the first Y value
-     * @param z1 the first Z value
-     * @param x2 the second X value
-     * @param y2 the second Y value
-     * @param z2 the second Z value
+     * @param x1
+     *            the first X value
+     * @param y1
+     *            the first Y value
+     * @param z1
+     *            the first Z value
+     * @param x2
+     *            the second X value
+     * @param y2
+     *            the second Y value
+     * @param z2
+     *            the second Z value
      */
     private void verify(int x1, int y1, int z1, int x2, int y2, int z2)
     {
@@ -459,7 +497,8 @@ public class BoundingBox implements Cloneable
     /**
      * Copies the dimensions and location of another bounding box.
      *
-     * @param other the bounding box to copy
+     * @param other
+     *            the bounding box to copy
      */
     public void copy(@NotNull BoundingBox other)
     {
@@ -484,8 +523,10 @@ public class BoundingBox implements Cloneable
      * negative side length. In these cases, the lowest point is redefined by the
      * new location of the maximum corner instead.
      *
-     * @param direction the direction to change size in
-     * @param magnitude the magnitude of the resizing
+     * @param direction
+     *            the direction to change size in
+     * @param magnitude
+     *            the magnitude of the resizing
      */
     public void resize(@NotNull BlockFace direction, int magnitude)
     {
@@ -522,8 +563,9 @@ public class BoundingBox implements Cloneable
      * <p>
      * Note that a negative direction will move in the opposite direction to the
      * extent that the following example returns true:
-     * 
+     *
      * <pre>
+     *
      * public boolean testBoxMove(BoundingBox box, BlockFace face, int magnitude)
      * {
      *     BoundingBox box2 = box.clone();
@@ -533,8 +575,10 @@ public class BoundingBox implements Cloneable
      * }
      * </pre>
      *
-     * @param direction the direction to move in
-     * @param magnitude the magnitude of the move
+     * @param direction
+     *            the direction to move in
+     * @param magnitude
+     *            the magnitude of the move
      */
     public void move(@NotNull BlockFace direction, int magnitude)
     {
@@ -556,9 +600,12 @@ public class BoundingBox implements Cloneable
     /**
      * Expands the bounding box to contain the position specified.
      *
-     * @param x the X coordinate to include
-     * @param y the Y coordinate to include
-     * @param z the Z coordinate to include
+     * @param x
+     *            the X coordinate to include
+     * @param y
+     *            the Y coordinate to include
+     * @param z
+     *            the Z coordinate to include
      */
     public void union(int x, int y, int z)
     {
@@ -573,7 +620,8 @@ public class BoundingBox implements Cloneable
     /**
      * Expands the bounding box to contain the position specified.
      *
-     * @param position the position to include
+     * @param position
+     *            the position to include
      */
     public void union(@NotNull Block position)
     {
@@ -583,7 +631,8 @@ public class BoundingBox implements Cloneable
     /**
      * Expands the bounding box to contain the position specified.
      *
-     * @param position the position to include
+     * @param position
+     *            the position to include
      */
     public void union(@NotNull IntVector position)
     {
@@ -593,7 +642,8 @@ public class BoundingBox implements Cloneable
     /**
      * Expands the bounding box to contain the position specified.
      *
-     * @param position the position to include
+     * @param position
+     *            the position to include
      */
     public void union(@NotNull Vector position)
     {
@@ -603,7 +653,8 @@ public class BoundingBox implements Cloneable
     /**
      * Expands the bounding box to contain the position specified.
      *
-     * @param position the position to include
+     * @param position
+     *            the position to include
      */
     public void union(@NotNull Location position)
     {
@@ -613,7 +664,8 @@ public class BoundingBox implements Cloneable
     /**
      * Expands the bounding box to contain the bounding box specified.
      *
-     * @param other the bounding box to include
+     * @param other
+     *            the bounding box to include
      */
     public void union(@NotNull BoundingBox other)
     {
@@ -628,10 +680,14 @@ public class BoundingBox implements Cloneable
     /**
      * Internal containment check ignoring vertical differences.
      *
-     * @param minX the minimum X value to check for containment
-     * @param minZ the minimum Z value to check for containment
-     * @param maxX the maximum X value to check for containment
-     * @param maxZ the maximum X value to check for containment
+     * @param minX
+     *            the minimum X value to check for containment
+     * @param minZ
+     *            the minimum Z value to check for containment
+     * @param maxX
+     *            the maximum X value to check for containment
+     * @param maxZ
+     *            the maximum X value to check for containment
      * @return true if the specified values are inside the bounding box
      */
     private boolean contains2dInternal(int minX, int minZ, int maxX, int maxZ)
@@ -642,8 +698,10 @@ public class BoundingBox implements Cloneable
     /**
      * Checks if the bounding box contains the position specified.
      *
-     * @param x the X coordinate of the position
-     * @param z the Z coordinate of the position
+     * @param x
+     *            the X coordinate of the position
+     * @param z
+     *            the Z coordinate of the position
      * @return true if the specified position is inside the bounding box
      */
     public boolean contains2d(int x, int z)
@@ -654,7 +712,8 @@ public class BoundingBox implements Cloneable
     /**
      * Checks if the bounding box contains the position specified.
      *
-     * @param position the position
+     * @param position
+     *            the position
      * @return true if the specified position is inside the bounding box
      */
     public boolean contains2d(@NotNull IntVector position)
@@ -665,7 +724,8 @@ public class BoundingBox implements Cloneable
     /**
      * Checks if the bounding box contains the position specified.
      *
-     * @param position the position
+     * @param position
+     *            the position
      * @return true if the specified position is inside the bounding box
      */
     public boolean contains2d(@NotNull Vector position)
@@ -676,7 +736,8 @@ public class BoundingBox implements Cloneable
     /**
      * Checks if the bounding box contains the position specified.
      *
-     * @param position the position
+     * @param position
+     *            the position
      * @return true if the specified position is inside the bounding box
      */
     public boolean contains2d(@NotNull Location position)
@@ -687,7 +748,8 @@ public class BoundingBox implements Cloneable
     /**
      * Checks if the bounding box contains the position specified.
      *
-     * @param position the position
+     * @param position
+     *            the position
      * @return true if the specified position is inside the bounding box
      */
     public boolean contains2d(@NotNull Block position)
@@ -699,10 +761,14 @@ public class BoundingBox implements Cloneable
      * Checks if the bounding box contains another bounding box consisting of the
      * positions specified.
      *
-     * @param x1 the X coordinate of the first position
-     * @param z1 the Z coordinate of the first position
-     * @param x2 the X coordinate of the second position
-     * @param z2 the Z coordinate of the second position
+     * @param x1
+     *            the X coordinate of the first position
+     * @param z1
+     *            the Z coordinate of the first position
+     * @param x2
+     *            the X coordinate of the second position
+     * @param z2
+     *            the Z coordinate of the second position
      * @return true if the specified positions are inside the bounding box
      */
     public boolean contains2d(int x1, int z1, int x2, int z2)
@@ -738,7 +804,8 @@ public class BoundingBox implements Cloneable
     /**
      * Checks if the bounding box contains another bounding box.
      *
-     * @param other the other bounding box
+     * @param other
+     *            the other bounding box
      * @return true if the specified positions are inside the bounding box
      */
     public boolean contains2d(@NotNull BoundingBox other)
@@ -749,12 +816,18 @@ public class BoundingBox implements Cloneable
     /**
      * Internal containment check.
      *
-     * @param minX the minimum X value to check for containment
-     * @param minY the minimum Y value to check for containment
-     * @param minZ the minimum Z value to check for containment
-     * @param maxX the maximum X value to check for containment
-     * @param maxY the maximum X value to check for containment
-     * @param maxZ the maximum X value to check for containment
+     * @param minX
+     *            the minimum X value to check for containment
+     * @param minY
+     *            the minimum Y value to check for containment
+     * @param minZ
+     *            the minimum Z value to check for containment
+     * @param maxX
+     *            the maximum X value to check for containment
+     * @param maxY
+     *            the maximum X value to check for containment
+     * @param maxZ
+     *            the maximum X value to check for containment
      * @return true if the specified values are inside the bounding box
      */
     private boolean containsInternal(int minX, int minY, int minZ, int maxX, int maxY, int maxZ)
@@ -765,9 +838,12 @@ public class BoundingBox implements Cloneable
     /**
      * Checks if the bounding box contains the position specified.
      *
-     * @param x the X coordinate of the position
-     * @param y the Y coordinate of the position
-     * @param z the Z coordinate of the position
+     * @param x
+     *            the X coordinate of the position
+     * @param y
+     *            the Y coordinate of the position
+     * @param z
+     *            the Z coordinate of the position
      * @return true if the specified position is inside the bounding box
      */
     public boolean contains(int x, int y, int z)
@@ -778,7 +854,8 @@ public class BoundingBox implements Cloneable
     /**
      * Checks if the bounding box contains the position specified.
      *
-     * @param position the position
+     * @param position
+     *            the position
      * @return true if the specified position is inside the bounding box
      */
     public boolean contains(@NotNull IntVector position)
@@ -789,7 +866,8 @@ public class BoundingBox implements Cloneable
     /**
      * Checks if the bounding box contains the position specified.
      *
-     * @param position the position
+     * @param position
+     *            the position
      * @return true if the specified position is inside the bounding box
      */
     public boolean contains(@NotNull Vector position)
@@ -800,7 +878,8 @@ public class BoundingBox implements Cloneable
     /**
      * Checks if the bounding box contains the position specified.
      *
-     * @param position the position
+     * @param position
+     *            the position
      * @return true if the specified position is inside the bounding box
      */
     public boolean contains(@NotNull Location position)
@@ -811,7 +890,8 @@ public class BoundingBox implements Cloneable
     /**
      * Checks if the bounding box contains the position specified.
      *
-     * @param position the position
+     * @param position
+     *            the position
      * @return true if the specified position is inside the bounding box
      */
     public boolean contains(@NotNull Block position)
@@ -823,12 +903,18 @@ public class BoundingBox implements Cloneable
      * Checks if the bounding box contains another bounding box consisting of the
      * positions specified.
      *
-     * @param x1 the X coordinate of the first position
-     * @param y1 the Y coordinate of the first position
-     * @param z1 the Z coordinate of the first position
-     * @param x2 the X coordinate of the second position
-     * @param y2 the Y coordinate of the second position
-     * @param z2 the Z coordinate of the second position
+     * @param x1
+     *            the X coordinate of the first position
+     * @param y1
+     *            the Y coordinate of the first position
+     * @param z1
+     *            the Z coordinate of the first position
+     * @param x2
+     *            the X coordinate of the second position
+     * @param y2
+     *            the Y coordinate of the second position
+     * @param z2
+     *            the Z coordinate of the second position
      * @return true if the specified positions are inside the bounding box
      */
     public boolean contains(int x1, int y1, int z1, int x2, int y2, int z2)
@@ -839,7 +925,8 @@ public class BoundingBox implements Cloneable
     /**
      * Checks if the bounding box contains another bounding box.
      *
-     * @param other the other bounding box
+     * @param other
+     *            the other bounding box
      * @return true if the specified positions are inside the bounding box
      */
     public boolean contains(@NotNull BoundingBox other)
@@ -850,7 +937,8 @@ public class BoundingBox implements Cloneable
     /**
      * Checks if the bounding box intersects another bounding box.
      *
-     * @param other the other bounding box
+     * @param other
+     *            the other bounding box
      * @return true if the specified positions are inside the bounding box
      */
     public boolean intersects(@NotNull BoundingBox other)
@@ -865,7 +953,8 @@ public class BoundingBox implements Cloneable
      * Gets a bounding box containing the intersection of the bounding box with
      * another.
      *
-     * @param other the other bounding box
+     * @param other
+     *            the other bounding box
      * @return the bounding box representing overlapping area or null if the boxes
      *         do not overlap.
      */

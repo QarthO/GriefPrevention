@@ -21,7 +21,8 @@ public class SaveTrappedPlayerEvent extends ClaimEvent implements Cancellable
     /**
      * Construct a new {@code ClaimChangeEvent}.
      *
-     * @param claim {@link Claim} the user is to be rescued from
+     * @param claim
+     *            {@link Claim} the user is to be rescued from
      */
     public SaveTrappedPlayerEvent(@NotNull Claim claim)
     {
@@ -43,7 +44,8 @@ public class SaveTrappedPlayerEvent extends ClaimEvent implements Cancellable
      * Set the destination that the user will be sent to. If {@code null},
      * GriefPrevention will search for a location.
      *
-     * @param destination the destination to send the {@code Player} to
+     * @param destination
+     *            the destination to send the {@code Player} to
      */
     public void setDestination(@Nullable Location destination)
     {

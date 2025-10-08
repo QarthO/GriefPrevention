@@ -45,22 +45,35 @@ public class DatabaseDataStore extends DataStore
 {
 
     private static final String SQL_UPDATE_NAME = "UPDATE griefprevention_playerdata SET name = ? WHERE name = ?";
+
     private static final String SQL_INSERT_CLAIM = "INSERT INTO griefprevention_claimdata (id, owner, lessercorner, greatercorner, builders, containers, accessors, managers, inheritnothing, parentid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
     private static final String SQL_DELETE_CLAIM = "DELETE FROM griefprevention_claimdata WHERE id = ?";
+
     private static final String SQL_SELECT_PLAYER_DATA = "SELECT * FROM griefprevention_playerdata WHERE name = ?";
+
     private static final String SQL_DELETE_PLAYER_DATA = "DELETE FROM griefprevention_playerdata WHERE name = ?";
+
     private static final String SQL_INSERT_PLAYER_DATA = "INSERT INTO griefprevention_playerdata (name, lastlogin, accruedblocks, bonusblocks) VALUES (?, ?, ?, ?)";
+
     private static final String SQL_SET_NEXT_CLAIM_ID = "INSERT INTO griefprevention_nextclaimid VALUES (?)";
+
     private static final String SQL_DELETE_GROUP_DATA = "DELETE FROM griefprevention_playerdata WHERE name = ?";
+
     private static final String SQL_INSERT_SCHEMA_VERSION = "INSERT INTO griefprevention_schemaversion VALUES (?)";
+
     private static final String SQL_DELETE_NEXT_CLAIM_ID = "DELETE FROM griefprevention_nextclaimid";
+
     private static final String SQL_DELETE_SCHEMA_VERSION = "DELETE FROM griefprevention_schemaversion";
+
     private static final String SQL_SELECT_SCHEMA_VERSION = "SELECT * FROM griefprevention_schemaversion";
 
     private Connection databaseConnection = null;
 
     private final String databaseUrl;
+
     private final String userName;
+
     private final String password;
 
     DatabaseDataStore(String url, String userName, String password) throws Exception
@@ -292,9 +305,10 @@ public class DatabaseDataStore extends DataStore
                 {
                     if (e.getMessage() != null && e.getMessage().contains("World not found"))
                     {
-                        GriefPrevention.AddLogEntry("Failed to load a claim (ID:" + claimID
-                                + ") because its world isn't loaded (yet?).  Please delete the claim or contact the GriefPrevention developer with information about which plugin(s) you're using to load or create worlds.  "
-                                + lesserCornerString);
+                        GriefPrevention.AddLogEntry(
+                                "Failed to load a claim (ID:" + claimID
+                                        + ") because its world isn't loaded (yet?).  Please delete the claim or contact the GriefPrevention developer with information about which plugin(s) you're using to load or create worlds.  "
+                                        + lesserCornerString);
                         continue;
                     }
                     else
@@ -426,8 +440,9 @@ public class DatabaseDataStore extends DataStore
         }
         catch (SQLException e)
         {
-            GriefPrevention.AddLogEntry("Unable to save data for claim at "
-                    + this.locationToString(claim.lesserBoundaryCorner) + ".  Details:");
+            GriefPrevention.AddLogEntry(
+                    "Unable to save data for claim at " + this.locationToString(claim.lesserBoundaryCorner)
+                            + ".  Details:");
             GriefPrevention.AddLogEntry(e.getMessage());
         }
     }
@@ -471,8 +486,9 @@ public class DatabaseDataStore extends DataStore
         }
         catch (SQLException e)
         {
-            GriefPrevention.AddLogEntry("Unable to save data for claim at "
-                    + this.locationToString(claim.lesserBoundaryCorner) + ".  Details:");
+            GriefPrevention.AddLogEntry(
+                    "Unable to save data for claim at " + this.locationToString(claim.lesserBoundaryCorner)
+                            + ".  Details:");
             GriefPrevention.AddLogEntry(e.getMessage());
         }
     }
@@ -703,7 +719,8 @@ public class DatabaseDataStore extends DataStore
     /**
      * Concats an array to a string divided with the ; sign
      *
-     * @param input Arraylist with strings to concat
+     * @param input
+     *            Arraylist with strings to concat
      * @return String with all values from input array
      */
     private String storageStringBuilder(ArrayList<String> input)

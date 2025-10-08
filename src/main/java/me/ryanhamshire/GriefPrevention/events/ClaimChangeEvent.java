@@ -25,13 +25,16 @@ public class ClaimChangeEvent extends Event implements Cancellable
 {
 
     private final @NotNull Claim from;
+
     private final @NotNull Claim to;
 
     /**
      * Construct a new {@code ClaimChangeEvent}.
      *
-     * @param from the original {@link Claim}
-     * @param to the resulting {@code Claim}
+     * @param from
+     *            the original {@link Claim}
+     * @param to
+     *            the resulting {@code Claim}
      */
     public ClaimChangeEvent(@NotNull Claim from, @NotNull Claim to)
     {
