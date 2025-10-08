@@ -127,7 +127,8 @@ public class ClaimPermissionCheckEvent extends ClaimEvent implements Cancellable
         if (!cancelled)
         {
             this.cancelReason = null;
-        } else
+        }
+        else
         {
             this.cancelReason = () -> "";
         }

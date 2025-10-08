@@ -131,7 +131,8 @@ class UUIDFetcher
                     try
                     {
                         array = gson.fromJson(new InputStreamReader(connection.getInputStream()), JsonArray.class);
-                    } catch (Exception e)
+                    }
+                    catch (Exception e)
                     {
                         // in case of error 429 too many requests, pause and then retry later
                         if (e.getMessage().contains("429"))
@@ -156,7 +157,8 @@ class UUIDFetcher
                                         "Mojang says we're sending requests too fast.  Will retry every 30 seconds until we succeed...");
                                 Thread.sleep(30000);
                             }
-                        } else
+                        }
+                        else
                         {
                             throw e;
                         }

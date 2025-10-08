@@ -20,7 +20,8 @@ public class MetricsHandler
         try
         {
             addSimplePie("bukkit_implementation", plugin.getServer().getVersion().split("-")[1]);
-        } catch (Throwable ignored)
+        }
+        catch (Throwable ignored)
         {
         }
     }

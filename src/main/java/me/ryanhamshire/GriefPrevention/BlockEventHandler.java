@@ -241,7 +241,8 @@ public class BlockEventHandler implements Listener
         if (GriefPrevention.instance.pvpRulesApply(world))
         {
             return GriefPrevention.instance.config_pvp_allowFireNearPlayers;
-        } else
+        }
+        else
         {
             return GriefPrevention.instance.config_pvp_allowFireNearPlayers_NonPvp;
         }
@@ -423,7 +424,8 @@ public class BlockEventHandler implements Listener
 
                             // show the player the protected area
                             BoundaryVisualization.visualizeClaim(player, result.claim, VisualizationType.CLAIM, block);
-                        } else
+                        }
+                        else
                         {
                             // notify and explain to player
                             GriefPrevention.sendMessage(player, TextMode.Err,
@@ -648,7 +650,8 @@ public class BlockEventHandler implements Listener
             // Fast mode: Bounding box intersection always causes a conflict, even if blocks
             // do not conflict.
             intersectionHandler = denyOtherOwnerIntersection(pistonClaim);
-        } else
+        }
+        else
         {
             // Precise mode: Bounding box intersection may not yield a conflict. Individual
             // blocks must be considered.
@@ -885,7 +888,8 @@ public class BlockEventHandler implements Listener
                 }
                 return false;
             };
-        } else
+        }
+        else
         {
             // If no player is present (dispenser, natural growth, etc.), use owner
             // comparison.
@@ -1296,7 +1300,8 @@ public class BlockEventHandler implements Listener
         {
             // No entity always means denial.
             predicate = (claim, claimBoundingBox) -> true;
-        } else if (entity instanceof Player player)
+        }
+        else if (entity instanceof Player player)
         {
             predicate = (claim, claimBoundingBox) -> {
                 Supplier<String> noPortalReason = claim.checkPermission(player, ClaimPermission.Build, event);
@@ -1310,7 +1315,8 @@ public class BlockEventHandler implements Listener
 
                 return false;
             };
-        } else
+        }
+        else
         {
             predicate = (claim, claimBoundingBox) -> {
                 // Non-player entities are denied and set on portal cooldown to prevent repeated

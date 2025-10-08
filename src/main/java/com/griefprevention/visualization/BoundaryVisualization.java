@@ -285,7 +285,8 @@ public abstract class BoundaryVisualization
             try
             {
                 visualization.apply(event.getPlayer(), playerData);
-            } catch (Exception exception)
+            }
+            catch (Exception exception)
             {
                 if (event.getProvider() == BoundaryVisualizationEvent.DEFAULT_PROVIDER)
                 {

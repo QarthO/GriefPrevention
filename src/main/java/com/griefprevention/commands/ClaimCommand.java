@@ -71,7 +71,8 @@ public class ClaimCommand extends CommandHandler
             try
             {
                 radius = Integer.parseInt(args[0]);
-            } catch (NumberFormatException e)
+            }
+            catch (NumberFormatException e)
             {
                 return false;
             }
@@ -118,7 +119,8 @@ public class ClaimCommand extends CommandHandler
             lesserZ = Math.subtractExact(playerLoc.getBlockZ(), radius);
             greaterX = Math.addExact(playerLoc.getBlockX(), radius);
             greaterZ = Math.addExact(playerLoc.getBlockZ(), radius);
-        } catch (ArithmeticException e)
+        }
+        catch (ArithmeticException e)
         {
             GriefPrevention.sendMessage(player, TextMode.Err, Messages.CreateClaimInsufficientBlocks,
                     String.valueOf(Integer.MAX_VALUE));
@@ -132,7 +134,8 @@ public class ClaimCommand extends CommandHandler
         if (playerData.shovelMode == ShovelMode.Admin)
         {
             ownerId = null;
-        } else
+        }
+        else
         {
             // player must have sufficient unused claim blocks
             int area;
@@ -141,7 +144,8 @@ public class ClaimCommand extends CommandHandler
                 int dX = Math.addExact(Math.subtractExact(greater.getBlockX(), lesser.getBlockX()), 1);
                 int dZ = Math.addExact(Math.subtractExact(greater.getBlockZ(), lesser.getBlockZ()), 1);
                 area = Math.abs(Math.multiplyExact(dX, dZ));
-            } catch (ArithmeticException e)
+            }
+            catch (ArithmeticException e)
             {
                 GriefPrevention.sendMessage(player, TextMode.Err, Messages.CreateClaimInsufficientBlocks,
                         String.valueOf(Integer.MAX_VALUE));
@@ -177,11 +181,13 @@ public class ClaimCommand extends CommandHandler
                 GriefPrevention.sendMessage(player, TextMode.Err, Messages.CreateClaimFailOverlapShort);
 
                 BoundaryVisualization.visualizeClaim(player, result.claim, VisualizationType.CONFLICT_ZONE);
-            } else
+            }
+            else
             {
                 GriefPrevention.sendMessage(player, TextMode.Err, Messages.CreateClaimFailOverlapRegion);
             }
-        } else
+        }
+        else
         {
             GriefPrevention.sendMessage(player, TextMode.Success, Messages.CreateClaimSuccess);
 
@@ -190,7 +196,8 @@ public class ClaimCommand extends CommandHandler
             {
                 GriefPrevention.sendMessage(player, TextMode.Instr, Messages.CreativeBasicsVideo2,
                         DataStore.CREATIVE_VIDEO_URL);
-            } else if (plugin.claimsEnabledForWorld(world))
+            }
+            else if (plugin.claimsEnabledForWorld(world))
             {
                 GriefPrevention.sendMessage(player, TextMode.Instr, Messages.SurvivalBasicsVideo2,
                         DataStore.SURVIVAL_VIDEO_URL);

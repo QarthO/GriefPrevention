@@ -42,7 +42,8 @@ public class MonitoredCommands
             {
                 commandMap = (CommandMap) obj;
             }
-        } catch (ReflectiveOperationException e)
+        }
+        catch (ReflectiveOperationException e)
         {
             GriefPrevention.instance.getLogger().warning("""
                     Caught exception trying to access server command map!
@@ -190,7 +191,8 @@ public class MonitoredCommands
                         .forEach(alias -> monitoredCommands.add(prefix + alias + suffix));
                 return;
             }
-        } catch (ReflectiveOperationException ignored)
+        }
+        catch (ReflectiveOperationException ignored)
         {
             // Can really only happen if someone is doing something very weird or API has
             // changed.

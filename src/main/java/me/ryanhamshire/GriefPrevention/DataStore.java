@@ -125,7 +125,8 @@ public abstract class DataStore
         if (this.currentSchemaVersion >= 0)
         {
             return this.currentSchemaVersion;
-        } else
+        }
+        else
         {
             this.currentSchemaVersion = this.getSchemaVersionFromStorage();
             return this.currentSchemaVersion;
@@ -223,7 +224,8 @@ public abstract class DataStore
                     try
                     {
                         playerID = UUID.fromString(nextID);
-                    } catch (Exception e)
+                    }
+                    catch (Exception e)
                     {
                         playerID = null;
                         GriefPrevention.AddLogEntry("Failed to parse soft mute entry as a UUID: " + nextID);
@@ -238,7 +240,8 @@ public abstract class DataStore
                     // move to the next
                     nextID = inStream.readLine();
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 GriefPrevention.AddLogEntry("Failed to read from the soft mute data file: " + e);
                 e.printStackTrace();
@@ -247,7 +250,8 @@ public abstract class DataStore
             try
             {
                 if (inStream != null) inStream.close();
-            } catch (IOException exception)
+            }
+            catch (IOException exception)
             {
             }
         }
@@ -268,7 +272,8 @@ public abstract class DataStore
             }
 
             return Files.readLines(bannedWordsFile, StandardCharsets.UTF_8);
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             GriefPrevention.AddLogEntry("Failed to read from the banned words data file: " + e);
             e.printStackTrace();
@@ -329,7 +334,8 @@ public abstract class DataStore
         try
         {
             if (outStream != null) outStream.close();
-        } catch (IOException exception)
+        }
+        catch (IOException exception)
         {
         }
     }
@@ -792,7 +798,8 @@ public abstract class DataStore
         if (chunkClaims != null)
         {
             return Collections.unmodifiableCollection(chunkClaims);
-        } else
+        }
+        else
         {
             return Collections.unmodifiableCollection(new ArrayList<>());
         }
@@ -900,7 +907,8 @@ public abstract class DataStore
         {
             smallx = x1;
             bigx = x2;
-        } else
+        }
+        else
         {
             smallx = x2;
             bigx = x1;
@@ -910,7 +918,8 @@ public abstract class DataStore
         {
             smally = y1;
             bigy = y2;
-        } else
+        }
+        else
         {
             smally = y2;
             bigy = y1;
@@ -920,7 +929,8 @@ public abstract class DataStore
         {
             smallz = z1;
             bigz = z2;
-        } else
+        }
+        else
         {
             smallz = z2;
             bigz = z1;
@@ -966,7 +976,8 @@ public abstract class DataStore
         if (newClaim.parent != null)
         {
             claimsToCheck = newClaim.parent.children;
-        } else
+        }
+        else
         {
             claimsToCheck = this.claims;
         }
@@ -1191,7 +1202,8 @@ public abstract class DataStore
             {
                 newWidth = Math.abs(Math.subtractExact(newx1, newx2)) + 1;
                 newHeight = Math.abs(Math.subtractExact(newz1, newz2)) + 1;
-            } catch (ArithmeticException e)
+            }
+            catch (ArithmeticException e)
             {
                 GriefPrevention.sendMessage(player, TextMode.Err, Messages.ResizeNeedMoreBlocks,
                         String.valueOf(Integer.MAX_VALUE));
@@ -1216,7 +1228,8 @@ public abstract class DataStore
                 try
                 {
                     newArea = Math.multiplyExact(newWidth, newHeight);
-                } catch (ArithmeticException e)
+                }
+                catch (ArithmeticException e)
                 {
                     GriefPrevention.sendMessage(player, TextMode.Err, Messages.ResizeNeedMoreBlocks,
                             String.valueOf(Integer.MAX_VALUE));
@@ -1241,7 +1254,8 @@ public abstract class DataStore
                     newArea = Math.multiplyExact(newWidth, newHeight);
                     blocksRemainingAfter = playerData.getRemainingClaimBlocks()
                             + (playerData.claimResizing.getArea() - newArea);
-                } catch (ArithmeticException e)
+                }
+                catch (ArithmeticException e)
                 {
                     blocksRemainingAfter = Integer.MIN_VALUE + 1;
                 }
@@ -1292,7 +1306,8 @@ public abstract class DataStore
                 if (ownerID == player.getUniqueId())
                 {
                     claimBlocksRemaining = playerData.getRemainingClaimBlocks();
-                } else
+                }
+                else
                 {
                     PlayerData ownerData = this.getPlayerData(ownerID);
                     claimBlocksRemaining = ownerData.getRemainingClaimBlocks();
@@ -1332,7 +1347,8 @@ public abstract class DataStore
             // clean up
             playerData.claimResizing = null;
             playerData.lastShovelLocation = null;
-        } else
+        }
+        else
         {
             if (result.claim != null)
             {
@@ -1341,7 +1357,8 @@ public abstract class DataStore
 
                 // show the player the conflicting claim
                 BoundaryVisualization.visualizeClaim(player, result.claim, VisualizationType.CONFLICT_ZONE);
-            } else
+            }
+            else
             {
                 GriefPrevention.sendMessage(player, TextMode.Err, Messages.ResizeFailOverlapRegion);
             }
@@ -1355,10 +1372,12 @@ public abstract class DataStore
                 && player.hasPermission("griefprevention.adjustclaimblocks"))
         {
             GriefPrevention.sendMessage(player, TextMode.Info, Messages.AdvertiseACandACB);
-        } else if (player.hasPermission("griefprevention.adminclaims"))
+        }
+        else if (player.hasPermission("griefprevention.adminclaims"))
         {
             GriefPrevention.sendMessage(player, TextMode.Info, Messages.AdvertiseAdminClaims);
-        } else if (player.hasPermission("griefprevention.adjustclaimblocks"))
+        }
+        else if (player.hasPermission("griefprevention.adjustclaimblocks"))
         {
             GriefPrevention.sendMessage(player, TextMode.Info, Messages.AdvertiseACB);
         }
@@ -1415,7 +1434,8 @@ public abstract class DataStore
                     "After editing, back up your changes before reloading the server in case you made a syntax error.",
                     "Use dollar signs ($) for formatting codes, which are documented here: http://minecraft.wiki/Formatting_codes#Color_codes"));
             config.save(DataStore.messagesFilePath);
-        } catch (IOException exception)
+        }
+        catch (IOException exception)
         {
             GriefPrevention
                     .AddLogEntry("Unable to write to the configuration file at \"" + DataStore.messagesFilePath + "\"");
@@ -1459,7 +1479,8 @@ public abstract class DataStore
             try
             {
                 playerID = UUIDFetcher.getUUIDOf(name);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
             }
 

@@ -167,7 +167,8 @@ public class PlayerData
         {
             remainingBlocks = Math.addExact(Math.addExact(this.getAccruedClaimBlocks(), this.getBonusClaimBlocks()),
                     GriefPrevention.instance.dataStore.getGroupBonusBlocks(this.playerID));
-        } catch (ArithmeticException e)
+        }
+        catch (ArithmeticException e)
         {
             // If there is an overflow adding the player's available blocks, use max value.
             remainingBlocks = Integer.MAX_VALUE;
@@ -179,7 +180,8 @@ public class PlayerData
                 Claim claim = this.getClaims().get(i);
                 remainingBlocks = Math.subtractExact(remainingBlocks, claim.getArea());
             }
-        } catch (ArithmeticException e)
+        }
+        catch (ArithmeticException e)
         {
             // If there is an overflow subtracting the player's claims, they don't have any
             // blocks left.
@@ -253,7 +255,8 @@ public class PlayerData
                     this.accruedClaimBlocks = GriefPrevention.instance.config_claims_initialBlocks;
                 }
 
-            } else
+            }
+            else
             {
                 this.accruedClaimBlocks = GriefPrevention.instance.config_claims_initialBlocks;
             }
@@ -264,7 +267,8 @@ public class PlayerData
             if (storageData.bonusClaimBlocks != null)
             {
                 this.bonusClaimBlocks = storageData.bonusClaimBlocks;
-            } else
+            }
+            else
             {
                 this.bonusClaimBlocks = 0;
             }

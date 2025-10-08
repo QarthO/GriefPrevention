@@ -58,7 +58,8 @@ class SpamDetector
             chatterData.spamLevel += ++this.duplicateMessageCount;
             spam = true;
             result.muteReason = "repeat message";
-        } else
+        }
+        else
         {
             this.lastChatMessage = message;
             this.lastChatMessageTimestamp = timestamp;
@@ -143,7 +144,8 @@ class SpamDetector
             if (chatterData.spamLevel > 8 && chatterData.spamWarned)
             {
                 result.shouldBanChatter = true;
-            } else if (chatterData.spamLevel >= 4)
+            }
+            else if (chatterData.spamLevel >= 4)
             {
                 if (!chatterData.spamWarned)
                 {
@@ -184,7 +186,8 @@ class SpamDetector
         {
             shorterString = lastMessage;
             longerString = message;
-        } else
+        }
+        else
         {
             shorterString = message;
             longerString = lastMessage;

@@ -109,14 +109,17 @@ public class EntityEventHandler implements Listener
         if (!GriefPrevention.instance.config_endermenMoveBlocks && event.getEntityType() == EntityType.ENDERMAN)
         {
             event.setCancelled(true);
-        } else if (!GriefPrevention.instance.config_silverfishBreakBlocks
+        }
+        else if (!GriefPrevention.instance.config_silverfishBreakBlocks
                 && event.getEntityType() == EntityType.SILVERFISH)
         {
             event.setCancelled(true);
-        } else if (!GriefPrevention.instance.config_rabbitsEatCrops && event.getEntityType() == EntityType.RABBIT)
+        }
+        else if (!GriefPrevention.instance.config_rabbitsEatCrops && event.getEntityType() == EntityType.RABBIT)
         {
             event.setCancelled(true);
-        } else if (!GriefPrevention.instance.config_claims_ravagersBreakBlocks
+        }
+        else if (!GriefPrevention.instance.config_claims_ravagersBreakBlocks
                 && event.getEntityType() == EntityType.RAVAGER)
         {
             event.setCancelled(true);
@@ -154,7 +157,8 @@ public class EntityEventHandler implements Listener
             if (!(event.getEntity() instanceof Player player))
             {
                 event.setCancelled(true);
-            } else
+            }
+            else
             {
                 Block block = event.getBlock();
                 if (ProtectionHelper.checkPermission(player, block.getLocation(), ClaimPermission.Build, event) != null)
@@ -314,7 +318,8 @@ public class EntityEventHandler implements Listener
         if (event.getEntity() instanceof Player localPlayer)
         {
             player = localPlayer;
-        } else if (event.getEntity() instanceof Mob mob)
+        }
+        else if (event.getEntity() instanceof Mob mob)
         {
             // Handle players leading packs of zombies.
             if (mob.getTarget() instanceof Player localPlayer) player = localPlayer;
@@ -329,7 +334,8 @@ public class EntityEventHandler implements Listener
             {
                 event.setCancelled(true);
             }
-        } else
+        }
+        else
         {
             // Unhandled case, i.e. skeletons on fire due to sunlight lose target to search
             // for cover.
@@ -362,7 +368,8 @@ public class EntityEventHandler implements Listener
             if (!GriefPrevention.instance.config_creaturesTrampleCrops)
             {
                 event.setCancelled(true);
-            } else
+            }
+            else
             {
                 Entity rider = event.getEntity().getPassenger();
                 if (rider != null && rider.getType() == EntityType.PLAYER)

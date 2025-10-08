@@ -11,7 +11,8 @@ public enum PistonMode {
         try
         {
             return valueOf(value.toUpperCase());
-        } catch (IllegalArgumentException e)
+        }
+        catch (IllegalArgumentException e)
         {
             return CLAIMS_ONLY;
         }

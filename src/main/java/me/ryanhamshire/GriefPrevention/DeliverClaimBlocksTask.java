@@ -109,7 +109,8 @@ class DeliverClaimBlocksTask implements Runnable
             // many other operations will cause this player's data to save, including his
             // eventual logout
             // dataStore.savePlayerData(player.getUniqueIdentifier(), playerData);
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             GriefPrevention.AddLogEntry("Problem delivering claim blocks to player " + player.getName() + ":");
             e.printStackTrace();

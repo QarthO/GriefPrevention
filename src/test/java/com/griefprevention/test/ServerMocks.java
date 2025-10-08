@@ -63,7 +63,8 @@ public final class ServerMocks
             Field server = Bukkit.class.getDeclaredField("server");
             server.setAccessible(true);
             server.set(null, null);
-        } catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException e)
+        }
+        catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException e)
         {
             throw new RuntimeException(e);
         }

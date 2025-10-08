@@ -205,7 +205,8 @@ class PlayerEventHandler implements Listener
                 if (this.dataStore.isSoftMuted(recipient.getUniqueId()))
                 {
                     recipientsToKeep.add(recipient);
-                } else if (recipient.hasPermission("griefprevention.eavesdrop"))
+                }
+                else if (recipient.hasPermission("griefprevention.eavesdrop"))
                 {
                     recipient.sendMessage(ChatColor.GRAY + notificationMessage);
                 }
@@ -277,7 +278,8 @@ class PlayerEventHandler implements Listener
                         if (playerData.ignoredPlayers.containsKey(recipient.getUniqueId()))
                         {
                             recipientsToRemove.add(recipient);
-                        } else
+                        }
+                        else
                         {
                             PlayerData targetPlayerData = this.dataStore.getPlayerData(recipient.getUniqueId());
                             if (targetPlayerData.ignoredPlayers.containsKey(player.getUniqueId()))
@@ -311,7 +313,8 @@ class PlayerEventHandler implements Listener
             {
                 GriefPrevention.sendMessage(player, TextMode.Info, Messages.CreativeBasicsVideo2, 10L,
                         DataStore.CREATIVE_VIDEO_URL);
-            } else
+            }
+            else
             {
                 GriefPrevention.sendMessage(player, TextMode.Info, Messages.SurvivalBasicsVideo2, 10L,
                         DataStore.SURVIVAL_VIDEO_URL);
@@ -362,7 +365,8 @@ class PlayerEventHandler implements Listener
             {
                 GriefPrevention.sendMessage(player, TextMode.Err, Messages.NoChatUntilMove, 10L);
                 result.muteReason = "pre-movement chat";
-            } else
+            }
+            else
             {
                 playerData.noChatLocation = null;
             }
@@ -391,7 +395,8 @@ class PlayerEventHandler implements Listener
                 PlayerKickBanTask task = new PlayerKickBanTask(player, instance.config_spam_banMessage,
                         "GriefPrevention Anti-Spam", true);
                 instance.getServer().getScheduler().scheduleSyncDelayedTask(instance, task, 1L);
-            } else
+            }
+            else
             {
                 // log entry
                 GriefPrevention.AddLogEntry("Kicking " + player.getName() + " for spam.",
@@ -401,7 +406,8 @@ class PlayerEventHandler implements Listener
                 PlayerKickBanTask task = new PlayerKickBanTask(player, "", "GriefPrevention Anti-Spam", false);
                 instance.getServer().getScheduler().scheduleSyncDelayedTask(instance, task, 1L);
             }
-        } else if (result.shouldWarnChatter)
+        }
+        else if (result.shouldWarnChatter)
         {
             // warn and log
             GriefPrevention.sendMessage(player, TextMode.Warn, instance.config_spam_warningMessage, 10L);
@@ -914,7 +920,8 @@ class PlayerEventHandler implements Listener
         if (playerData.wasKicked)
         {
             isBanned = player.isBanned();
-        } else
+        }
+        else
         {
             isBanned = false;
         }
@@ -989,7 +996,8 @@ class PlayerEventHandler implements Listener
             if (now - notificationTimestamp > ONE_MINUTE)
             {
                 this.recentLoginLogoutNotifications.remove(i--);
-            } else
+            }
+            else
             {
                 break;
             }
@@ -1147,7 +1155,8 @@ class PlayerEventHandler implements Listener
                         return;
                     }
                 }
-            } else // world repair code for a now-fixed GP bug //TODO: necessary anymore?
+            }
+            else // world repair code for a now-fixed GP bug //TODO: necessary anymore?
             {
                 // ensure this entity can be tamed by players
                 tameable.setOwner(null);
@@ -1487,7 +1496,8 @@ class PlayerEventHandler implements Listener
         if (GriefPrevention.instance.pvpRulesApply(world))
         {
             return GriefPrevention.instance.config_pvp_allowLavaNearPlayers;
-        } else
+        }
+        else
         {
             return GriefPrevention.instance.config_pvp_allowLavaNearPlayers_NonPvp;
         }
@@ -1563,7 +1573,8 @@ class PlayerEventHandler implements Listener
         if (clickedBlock != null)
         {
             clickedBlockType = clickedBlock.getType();
-        } else
+        }
+        else
         {
             clickedBlockType = Material.AIR;
         }
@@ -1769,7 +1780,8 @@ class PlayerEventHandler implements Listener
                 }
 
                 return;
-            } else if (clickedBlock != null && Tag.ITEMS_BOATS.isTagged(materialInHand))
+            }
+            else if (clickedBlock != null && Tag.ITEMS_BOATS.isTagged(materialInHand))
             {
                 if (playerData == null) playerData = this.dataStore.getPlayerData(player.getUniqueId());
                 Claim claim = this.dataStore.getClaimAt(clickedBlock.getLocation(), false, playerData.lastClaim);
@@ -1971,7 +1983,8 @@ class PlayerEventHandler implements Listener
                 {
                     newx1 = clickedBlock.getX();
                     newx2 = playerData.claimResizing.getGreaterBoundaryCorner().getBlockX();
-                } else
+                }
+                else
                 {
                     newx1 = playerData.claimResizing.getLesserBoundaryCorner().getBlockX();
                     newx2 = clickedBlock.getX();
@@ -1982,7 +1995,8 @@ class PlayerEventHandler implements Listener
                 {
                     newz1 = clickedBlock.getZ();
                     newz2 = playerData.claimResizing.getGreaterBoundaryCorner().getBlockZ();
-                } else
+                }
+                else
                 {
                     newz1 = playerData.claimResizing.getLesserBoundaryCorner().getBlockZ();
                     newz2 = clickedBlock.getZ();
@@ -2080,7 +2094,8 @@ class PlayerEventHandler implements Listener
                                             Messages.CreateSubdivisionOverlap);
                                     BoundaryVisualization.visualizeClaim(player, result.claim,
                                             VisualizationType.CONFLICT_ZONE, clickedBlock);
-                                } else
+                                }
+                                else
                                 {
                                     GriefPrevention.sendMessage(player, TextMode.Err,
                                             Messages.CreateClaimFailOverlapRegion);
@@ -2222,7 +2237,8 @@ class PlayerEventHandler implements Listener
                         instance.dataStore.tryAdvertiseAdminAlternatives(player);
                         return;
                     }
-                } else
+                }
+                else
                 {
                     playerID = null;
                 }
@@ -2242,7 +2258,8 @@ class PlayerEventHandler implements Listener
                         GriefPrevention.sendMessage(player, TextMode.Err, Messages.CreateClaimFailOverlapShort);
                         BoundaryVisualization.visualizeClaim(player, result.claim, VisualizationType.CONFLICT_ZONE,
                                 clickedBlock);
-                    } else
+                    }
+                    else
                     {
                         GriefPrevention.sendMessage(player, TextMode.Err, Messages.CreateClaimFailOverlapRegion);
                     }
@@ -2303,7 +2320,8 @@ class PlayerEventHandler implements Listener
         if (cachedValue != null)
         {
             return cachedValue;
-        } else
+        }
+        else
         {
             boolean isHolder = clickedBlock.getState() instanceof InventoryHolder;
             this.inventoryHolderCache.put(cacheKey, isHolder);

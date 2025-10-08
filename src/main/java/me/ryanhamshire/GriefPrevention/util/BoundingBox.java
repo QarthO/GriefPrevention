@@ -107,7 +107,8 @@ public class BoundingBox implements Cloneable
         if (verify)
         {
             verify(x1, y1, z1, x2, y2, z2);
-        } else
+        }
+        else
         {
             this.minX = x1;
             this.maxX = x2;
@@ -238,7 +239,8 @@ public class BoundingBox implements Cloneable
         {
             this.minX = x1;
             this.maxX = x2;
-        } else
+        }
+        else
         {
             this.minX = x2;
             this.maxX = x1;
@@ -247,7 +249,8 @@ public class BoundingBox implements Cloneable
         {
             this.minY = y1;
             this.maxY = y2;
-        } else
+        }
+        else
         {
             this.minY = y2;
             this.maxY = y1;
@@ -256,7 +259,8 @@ public class BoundingBox implements Cloneable
         {
             this.minZ = z1;
             this.maxZ = z2;
-        } else
+        }
+        else
         {
             this.minZ = z2;
             this.maxZ = z1;
@@ -709,7 +713,8 @@ public class BoundingBox implements Cloneable
         {
             minX = x1;
             maxX = x2;
-        } else
+        }
+        else
         {
             minX = x2;
             maxX = x1;
@@ -720,7 +725,8 @@ public class BoundingBox implements Cloneable
         {
             minZ = z1;
             maxZ = z2;
-        } else
+        }
+        else
         {
             minZ = z2;
             maxZ = z1;
@@ -901,7 +907,8 @@ public class BoundingBox implements Cloneable
         try
         {
             return (BoundingBox) super.clone();
-        } catch (CloneNotSupportedException e)
+        }
+        catch (CloneNotSupportedException e)
         {
             throw new Error(e);
         }

@@ -79,7 +79,8 @@ public class Metrics
             try
             {
                 config.save(configFile);
-            } catch (IOException ignored)
+            }
+            catch (IOException ignored)
             {
             }
         }
@@ -141,7 +142,8 @@ public class Metrics
             return onlinePlayersMethod.getReturnType().equals(Collection.class)
                     ? ((Collection<?>) onlinePlayersMethod.invoke(Bukkit.getServer())).size()
                     : ((Player[]) onlinePlayersMethod.invoke(Bukkit.getServer())).length;
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             // Just use the new method if the reflection failed
             return Bukkit.getOnlinePlayers().size();
@@ -268,7 +270,8 @@ public class Metrics
                 if (submitTaskConsumer != null)
                 {
                     submitTaskConsumer.accept(this::submitData);
-                } else
+                }
+                else
                 {
                     this.submitData();
                 }
@@ -308,7 +311,8 @@ public class Metrics
                 {
                     // Send the data
                     sendData(data);
-                } catch (Exception e)
+                }
+                catch (Exception e)
                 {
                     // Something went wrong! :(
                     if (logErrors)
@@ -679,7 +683,8 @@ public class Metrics
                     return null;
                 }
                 builder.appendField("data", data);
-            } catch (Throwable t)
+            }
+            catch (Throwable t)
             {
                 if (logErrors)
                 {
@@ -900,16 +905,20 @@ public class Metrics
                 if (c == '"')
                 {
                     builder.append("\\\"");
-                } else if (c == '\\')
+                }
+                else if (c == '\\')
                 {
                     builder.append("\\\\");
-                } else if (c <= '\u000F')
+                }
+                else if (c <= '\u000F')
                 {
                     builder.append("\\u000").append(Integer.toHexString(c));
-                } else if (c <= '\u001F')
+                }
+                else if (c <= '\u001F')
                 {
                     builder.append("\\u00").append(Integer.toHexString(c));
-                } else
+                }
+                else
                 {
                     builder.append(c);
                 }

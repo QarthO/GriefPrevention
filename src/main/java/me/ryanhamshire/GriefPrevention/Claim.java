@@ -223,7 +223,8 @@ public class Claim
             int dZ = Math.addExact(
                     Math.subtractExact(greaterBoundaryCorner.getBlockZ(), lesserBoundaryCorner.getBlockZ()), 1);
             return Math.multiplyExact(dX, dZ);
-        } catch (ArithmeticException e)
+        }
+        catch (ArithmeticException e)
         {
             // If a claim's area exceeds the max value an int can hold, return max value.
             return Integer.MAX_VALUE;
@@ -478,7 +479,8 @@ public class Claim
         if (player != null)
         {
             if (this.hasExplicitPermission(player, permission)) return null;
-        } else
+        }
+        else
         {
             if (this.hasExplicitPermission(uuid, permission)) return null;
         }
@@ -653,10 +655,12 @@ public class Claim
             if (entry.getValue() == ClaimPermission.Build)
             {
                 builders.add(entry.getKey());
-            } else if (entry.getValue() == ClaimPermission.Inventory)
+            }
+            else if (entry.getValue() == ClaimPermission.Inventory)
             {
                 containers.add(entry.getKey());
-            } else
+            }
+            else
             {
                 accessors.add(entry.getKey());
             }

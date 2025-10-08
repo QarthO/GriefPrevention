@@ -108,7 +108,8 @@ public class FlatFileDataStore extends DataStore
                 int groupBonusBlocks = Integer.parseInt(line);
 
                 this.permissionToBonusBlocksMap.put(groupName, groupBonusBlocks);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 StringWriter errors = new StringWriter();
                 e.printStackTrace(new PrintWriter(errors));
@@ -118,7 +119,8 @@ public class FlatFileDataStore extends DataStore
             try
             {
                 if (inStream != null) inStream.close();
-            } catch (IOException exception)
+            }
+            catch (IOException exception)
             {
             }
         }
@@ -137,14 +139,16 @@ public class FlatFileDataStore extends DataStore
 
                 // try to parse into a long value
                 this.nextClaimID = Long.parseLong(line);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
             }
 
             try
             {
                 if (inStream != null) inStream.close();
-            } catch (IOException exception)
+            }
+            catch (IOException exception)
             {
             }
         }
@@ -166,7 +170,8 @@ public class FlatFileDataStore extends DataStore
             {
                 UUIDFetcher fetcher = new UUIDFetcher(namesToConvert);
                 fetcher.call();
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 GriefPrevention.AddLogEntry("Failed to resolve a batch of names to UUIDs.  Details:" + e.getMessage());
                 e.printStackTrace();
@@ -200,7 +205,8 @@ public class FlatFileDataStore extends DataStore
                     {
                         playerFile.renameTo(new File(playerDataFolder, playerID.toString()));
                     }
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                 }
             }
@@ -213,7 +219,8 @@ public class FlatFileDataStore extends DataStore
         if (this.getSchemaVersion() <= 1)
         {
             this.loadClaimData_Legacy(files);
-        } else
+        }
+        else
         {
             this.loadClaimData(files);
         }
@@ -292,23 +299,27 @@ public class FlatFileDataStore extends DataStore
                         if (ownerName.isEmpty() || ownerName.startsWith("--"))
                         {
                             ownerID = null; // administrative land claim or subdivision
-                        } else if (this.getSchemaVersion() == 0)
+                        }
+                        else if (this.getSchemaVersion() == 0)
                         {
                             try
                             {
                                 ownerID = UUIDFetcher.getUUIDOf(ownerName);
-                            } catch (Exception ex)
+                            }
+                            catch (Exception ex)
                             {
                                 GriefPrevention.AddLogEntry("Couldn't resolve this name to a UUID: " + ownerName + ".");
                                 GriefPrevention.AddLogEntry("  Converted land claim to administrative @ "
                                         + lesserBoundaryCorner.toString());
                             }
-                        } else
+                        }
+                        else
                         {
                             try
                             {
                                 ownerID = UUID.fromString(ownerName);
-                            } catch (Exception ex)
+                            }
+                            catch (Exception ex)
                             {
                                 GriefPrevention.AddLogEntry("Error - this is not a valid UUID: " + ownerName + ".");
                                 GriefPrevention.AddLogEntry("  Converted land claim to administrative @ "
@@ -386,7 +397,8 @@ public class FlatFileDataStore extends DataStore
                                 + lesserCornerString);
                         inStream.close();
 
-                    } else
+                    }
+                    else
                     {
                         StringWriter errors = new StringWriter();
                         e.printStackTrace(new PrintWriter(errors));
@@ -400,7 +412,8 @@ public class FlatFileDataStore extends DataStore
                 try
                 {
                     if (inStream != null) inStream.close();
-                } catch (IOException exception)
+                }
+                catch (IOException exception)
                 {
                 }
             }
@@ -452,7 +465,8 @@ public class FlatFileDataStore extends DataStore
                     if (out_parentID.isEmpty() || out_parentID.get(0) == -1)
                     {
                         this.addClaim(claim, false);
-                    } else
+                    }
+                    else
                     {
                         orphans.put(claim, out_parentID.get(0));
                     }
@@ -466,7 +480,8 @@ public class FlatFileDataStore extends DataStore
                     {
                         GriefPrevention.AddLogEntry("Failed to load a claim (ID:" + claimID
                                 + ") because its world isn't loaded (yet?).  If this is not expected, delete this claim.");
-                    } else
+                    }
+                    else
                     {
                         StringWriter errors = new StringWriter();
                         e.printStackTrace(new PrintWriter(errors));
@@ -522,7 +537,8 @@ public class FlatFileDataStore extends DataStore
             try
             {
                 ownerID = UUID.fromString(ownerIdentifier);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 GriefPrevention.AddLogEntry("Error - this is not a valid UUID: " + ownerIdentifier + ".");
                 GriefPrevention
@@ -696,7 +712,8 @@ public class FlatFileDataStore extends DataStore
                 try
                 {
                     if (needRetry) Thread.sleep(5);
-                } catch (InterruptedException exception)
+                }
+                catch (InterruptedException exception)
                 {
                 }
 
@@ -789,7 +806,8 @@ public class FlatFileDataStore extends DataStore
         try
         {
             if (outStream != null) outStream.close();
-        } catch (IOException exception)
+        }
+        catch (IOException exception)
         {
         }
     }
@@ -827,7 +845,8 @@ public class FlatFileDataStore extends DataStore
             {
                 outStream.close();
             }
-        } catch (IOException exception)
+        }
+        catch (IOException exception)
         {
         }
     }
@@ -929,19 +948,22 @@ public class FlatFileDataStore extends DataStore
 
                 // try to parse into an int value
                 schemaVersion = Integer.parseInt(line);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
             }
 
             try
             {
                 if (inStream != null) inStream.close();
-            } catch (IOException exception)
+            }
+            catch (IOException exception)
             {
             }
 
             return schemaVersion;
-        } else
+        }
+        else
         {
             this.updateSchemaVersionInStorage(0);
             return 0;
@@ -973,7 +995,8 @@ public class FlatFileDataStore extends DataStore
         try
         {
             if (outStream != null) outStream.close();
-        } catch (IOException exception)
+        }
+        catch (IOException exception)
         {
         }
 

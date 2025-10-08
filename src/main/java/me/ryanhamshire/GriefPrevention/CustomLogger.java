@@ -118,7 +118,8 @@ class CustomLogger
             // in case of a failure to write the above due to exception,
             // the unwritten entries will remain the buffer for the next write to retry
             this.queuedEntries.setLength(0);
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }
@@ -156,7 +157,8 @@ class CustomLogger
                     {
                         file.delete();
                     }
-                } catch (NumberFormatException e)
+                }
+                catch (NumberFormatException e)
                 {
                     // throw this away - effectively ignoring any files without the correct filename
                     // format
@@ -165,7 +167,8 @@ class CustomLogger
                             CustomLogEntryTypes.Debug, true);
                 }
             }
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }

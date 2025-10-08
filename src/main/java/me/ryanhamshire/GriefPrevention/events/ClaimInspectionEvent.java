@@ -43,7 +43,8 @@ public class ClaimInspectionEvent extends PlayerEvent implements Cancellable
         if (claim != null)
         {
             this.claims = Collections.singleton(claim);
-        } else
+        }
+        else
         {
             this.claims = Collections.emptyList();
         }

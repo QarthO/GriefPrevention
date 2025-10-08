@@ -157,7 +157,8 @@ public class EntityDamageHandler implements Listener
         if (damageSource instanceof Player damager)
         {
             attacker = damager;
-        } else if (damageSource instanceof Projectile projectile)
+        }
+        else if (damageSource instanceof Projectile projectile)
         {
             arrow = projectile;
             if (arrow.getShooter() instanceof Player shooter)
@@ -180,7 +181,8 @@ public class EntityDamageHandler implements Listener
                 // Handle regular PVP with an attacker and defender.
                 if (attacker != null && handlePvpDamageByPlayer(event, attacker, defender, sendMessages))
                 { return; }
-            } else if (event.damaged() instanceof Tameable tameable)
+            }
+            else if (event.damaged() instanceof Tameable tameable)
             {
                 if (attacker != null && handlePvpPetDamageByPlayer(event, tameable, attacker, sendMessages))
                 { return; }
@@ -460,7 +462,8 @@ public class EntityDamageHandler implements Listener
                 return true;
             }
             attackerData.lastClaim = claim;
-        } else
+        }
+        else
         {
             // Create a dummy claim to signify blanket pet protection.
             claim = new Claim(event.damaged().getLocation(), event.damaged().getLocation(), null, new ArrayList<>(),
@@ -766,7 +769,8 @@ public class EntityDamageHandler implements Listener
         if (damageSource instanceof Player damager)
         {
             attacker = damager;
-        } else if (damageSource instanceof Projectile arrow && arrow.getShooter() instanceof Player shooter)
+        }
+        else if (damageSource instanceof Projectile arrow && arrow.getShooter() instanceof Player shooter)
         {
             attacker = shooter;
         }
@@ -809,7 +813,8 @@ public class EntityDamageHandler implements Listener
             if (damageSource instanceof Player player)
             {
                 attacker = player;
-            } else if (damageSource instanceof Projectile projectile)
+            }
+            else if (damageSource instanceof Projectile projectile)
             {
                 arrow = projectile;
                 if (arrow.getShooter() instanceof Player shooter)
@@ -916,7 +921,8 @@ public class EntityDamageHandler implements Listener
                                     // disallow.
                                     event.setIntensity(affected, 0);
                                 }
-                            } else
+                            }
+                            else
                             {
                                 // Source is a player. Determine if they have permission to access entities in
                                 // the claim.
