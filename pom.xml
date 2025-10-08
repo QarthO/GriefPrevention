@@ -128,6 +128,13 @@
                             <order>java,javax,org.bukkit,org,com.griefprevention,com.destroystokyo,com,io.papermc,io</order>
                             <semanticSort>false</semanticSort>
                         </importOrder>
+                        <replaceRegex>
+                            <name>remove-whitespace-only-lines</name>
+                            <searchRegex>^[ \t]+(\r?\n)</searchRegex>
+                            <replacement>$1</replacement>
+                        </replaceRegex>
+                        <trimTrailingWhitespace/>
+                        <endWithNewline/>
                     </java>
                 </configuration>
                 <executions>
