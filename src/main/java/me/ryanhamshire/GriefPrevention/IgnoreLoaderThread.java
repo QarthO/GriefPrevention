@@ -1,19 +1,18 @@
 package me.ryanhamshire.GriefPrevention;
 
+import com.google.common.io.Files;
+
 import java.io.File;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.google.common.io.Files;
-
 //loads ignore data from file into a hash map
 class IgnoreLoaderThread extends Thread
 {
-
     private final UUID playerToLoad;
-
     private final ConcurrentHashMap<UUID, Boolean> destinationMap;
 
     IgnoreLoaderThread(UUID playerToLoad, ConcurrentHashMap<UUID, Boolean> destinationMap)
@@ -28,7 +27,7 @@ class IgnoreLoaderThread extends Thread
     {
         File ignoreFile = new File(DataStore.playerDataFolderPath + File.separator + this.playerToLoad + ".ignore");
 
-        // if the file doesn't exist, there's nothing to do here
+        //if the file doesn't exist, there's nothing to do here
         if (!ignoreFile.exists()) return;
 
         boolean needRetry = false;
@@ -40,10 +39,10 @@ class IgnoreLoaderThread extends Thread
             {
                 needRetry = false;
 
-                // read the file content and immediately close it
+                //read the file content and immediately close it
                 List<String> lines = Files.readLines(ignoreFile, StandardCharsets.UTF_8);
 
-                // each line is one ignore. asterisks indicate administrative ignores
+                //each line is one ignore.  asterisks indicate administrative ignores
                 for (String line : lines)
                 {
                     boolean adminIgnore = false;
@@ -57,14 +56,11 @@ class IgnoreLoaderThread extends Thread
                         UUID ignoredUUID = UUID.fromString(line);
                         this.destinationMap.put(ignoredUUID, adminIgnore);
                     }
-                    catch (IllegalArgumentException e)
-                    {
-                    } // if a bad UUID, ignore the line
+                    catch (IllegalArgumentException e) {}  //if a bad UUID, ignore the line
                 }
             }
 
-            // if there's any problem with the file's content, retry up to 5 times with 5
-            // milliseconds between
+            //if there's any problem with the file's content, retry up to 5 times with 5 milliseconds between
             catch (Exception e)
             {
                 latestException = e;
@@ -76,18 +72,14 @@ class IgnoreLoaderThread extends Thread
             {
                 if (needRetry) Thread.sleep(5);
             }
-            catch (InterruptedException exception)
-            {
-            }
+            catch (InterruptedException exception) {}
 
         } while (needRetry && retriesRemaining >= 0);
 
-        // if last attempt failed, log information about the problem
+        //if last attempt failed, log information about the problem
         if (needRetry)
         {
-            GriefPrevention.AddLogEntry(
-                    "Retry attempts exhausted.  Unable to load ignore data for player \"" + playerToLoad.toString()
-                            + "\": " + latestException);
+            GriefPrevention.AddLogEntry("Retry attempts exhausted.  Unable to load ignore data for player \"" + playerToLoad.toString() + "\": " + latestException);
             latestException.printStackTrace();
         }
     }

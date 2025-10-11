@@ -18,24 +18,21 @@
 
 package me.ryanhamshire.GriefPrevention;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.stream.Collectors;
-
+import com.griefprevention.visualization.Boundary;
+import com.griefprevention.visualization.BoundaryVisualization;
+import com.griefprevention.visualization.VisualizationType;
+import com.griefprevention.events.BoundaryVisualizationEvent;
+import me.ryanhamshire.GriefPrevention.util.BoundingBox;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import com.griefprevention.events.BoundaryVisualizationEvent;
-import com.griefprevention.visualization.Boundary;
-import com.griefprevention.visualization.BoundaryVisualization;
-import com.griefprevention.visualization.VisualizationType;
-
-import me.ryanhamshire.GriefPrevention.util.BoundingBox;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 //represents a visualization sent to a player
 //FEATURE: to show players visually where claim boundaries are, we send them fake block change packets
@@ -50,23 +47,18 @@ public class Visualization
 
     @Deprecated(forRemoval = true, since = "16.18")
     public ArrayList<VisualizationElement> elements = new ArrayList<>();
-
     private final Collection<Boundary> boundaries = new ArrayList<>();
 
     @Deprecated(forRemoval = true, since = "16.18")
-    public Visualization()
-    {
-    }
+    public Visualization() {}
 
     /**
      * Send a visualization to a {@link Player}.
      *
      * @deprecated Create a {@link BoundaryVisualizationEvent} and call
-     *             {@link BoundaryVisualization#callAndVisualize(BoundaryVisualizationEvent)}
-     * @param player
-     *            the {@code Player}
-     * @param visualization
-     *            the {@code Visualization}
+     * {@link BoundaryVisualization#callAndVisualize(BoundaryVisualizationEvent)}
+     * @param player the {@code Player}
+     * @param visualization the {@code Visualization}
      */
     @Deprecated(forRemoval = true, since = "16.18")
     public static void Apply(Player player, Visualization visualization)
@@ -77,11 +69,9 @@ public class Visualization
     /**
      * Revert the active visualization for a {@link Player}.
      *
-     * @deprecated Use
-     *             {@link PlayerData#setVisibleBoundaries(BoundaryVisualization)}
-     *             with a {@code null} parameter to revert current visualization.
-     * @param player
-     *            the {@code Player}
+     * @deprecated Use {@link PlayerData#setVisibleBoundaries(BoundaryVisualization)} with a {@code null} parameter to
+     * revert current visualization.
+     * @param player the {@code Player}
      */
     @Deprecated(forRemoval = true, since = "16.18")
     public static void Revert(Player player)
@@ -91,20 +81,13 @@ public class Visualization
     }
 
     /**
-     * convenience method to build a visualization from a claim visualizationType
-     * determines the style (gold blocks, silver, red, diamond, etc)
-     *
-     * @deprecated Use
-     *             {@link BoundaryVisualization#visualizeClaim(Player, Claim, VisualizationType)}
-     *             or
-     *             {@link BoundaryVisualization#visualizeClaim(Player, Claim, VisualizationType, Block)}
+     * convenience method to build a visualization from a claim
+     * visualizationType determines the style (gold blocks, silver, red, diamond, etc)
+     * @deprecated Use {@link BoundaryVisualization#visualizeClaim(Player, Claim, VisualizationType)} or
+     * {@link BoundaryVisualization#visualizeClaim(Player, Claim, VisualizationType, Block)}
      */
     @Deprecated(forRemoval = true, since = "16.18")
-    public static Visualization FromClaim(
-            Claim claim,
-            int height,
-            me.ryanhamshire.GriefPrevention.VisualizationType visualizationType,
-            Location locality)
+    public static Visualization FromClaim(Claim claim, int height, me.ryanhamshire.GriefPrevention.VisualizationType visualizationType, Location locality)
     {
         if (claim.parent != null) claim = claim.parent;
 
@@ -114,8 +97,8 @@ public class Visualization
         Visualization visualization = new Visualization();
         visualization.boundaries.add(new Boundary(claim, type));
         visualization.boundaries.addAll(
-                claim.children.stream().map(
-                        child -> new Boundary(child, com.griefprevention.visualization.VisualizationType.SUBDIVISION))
+                claim.children.stream()
+                        .map(child -> new Boundary(child, com.griefprevention.visualization.VisualizationType.SUBDIVISION))
                         .collect(Collectors.toUnmodifiableSet()));
 
         return visualization;
@@ -125,11 +108,9 @@ public class Visualization
      * Send a visualization to a {@link Player}.
      *
      * @deprecated Create a {@link BoundaryVisualizationEvent} and call
-     *             {@link BoundaryVisualization#callAndVisualize(BoundaryVisualizationEvent)}
-     * @param player
-     *            the {@code Player}
-     * @param visualization
-     *            the {@code Visualization}
+     * {@link BoundaryVisualization#callAndVisualize(BoundaryVisualizationEvent)}
+     * @param player the {@code Player}
+     * @param visualization the {@code Visualization}
      */
     @Deprecated(forRemoval = true, since = "16.18")
     public static void apply(@NotNull Player player, @Nullable Visualization visualization)
@@ -149,60 +130,34 @@ public class Visualization
     }
 
     /**
-     * adds a claim's visualization to the current visualization handy for combining
-     * several visualizations together, as when visualization a top level claim with
-     * several subdivisions inside locality is a performance consideration. only
-     * create visualization blocks for around 100 blocks of the locality
-     *
-     * @deprecated Add all desired elements to the list of boundaries
-     *             ({@link BoundaryVisualizationEvent#getBoundaries()})
+     * adds a claim's visualization to the current visualization
+     * handy for combining several visualizations together, as when visualization a top level claim with several subdivisions inside
+     * locality is a performance consideration.  only create visualization blocks for around 100 blocks of the locality
+     * @deprecated Add all desired elements to the list of boundaries ({@link BoundaryVisualizationEvent#getBoundaries()})
      */
     @Deprecated(forRemoval = true, since = "16.18")
-    public void addClaimElements(
-            Claim claim,
-            int height,
-            me.ryanhamshire.GriefPrevention.VisualizationType visualizationType,
-            Location locality)
+    public void addClaimElements(Claim claim, int height, me.ryanhamshire.GriefPrevention.VisualizationType visualizationType, Location locality)
     {
         this.boundaries.add(new Boundary(claim, visualizationType.convert()));
     }
 
     /**
-     * adds a claim's visualization to the current visualization handy for combining
-     * several visualizations together, as when visualization a top level claim with
-     * several subdivisions inside locality is a performance consideration. only
-     * create visualization blocks for around 100 blocks of the locality
-     *
-     * @deprecated Add all desired elements to the list of boundaries
-     *             ({@link BoundaryVisualizationEvent#getBoundaries()})
+     * adds a claim's visualization to the current visualization
+     * handy for combining several visualizations together, as when visualization a top level claim with several subdivisions inside
+     * locality is a performance consideration.  only create visualization blocks for around 100 blocks of the locality
+     * @deprecated Add all desired elements to the list of boundaries ({@link BoundaryVisualizationEvent#getBoundaries()})
      */
     @Deprecated(forRemoval = true, since = "16.18")
-    // adds a general claim cuboid (represented by min and max) visualization to the
-    // current visualization
-    public void addClaimElements(
-            Location min,
-            Location max,
-            Location locality,
-            int height,
-            BlockData cornerBlockData,
-            BlockData accentBlockData,
-            int STEP)
-    {
-        this.boundaries.add(
-                new Boundary(new BoundingBox(min, max),
-                        me.ryanhamshire.GriefPrevention.VisualizationType.ofBlockData(accentBlockData)));
+    //adds a general claim cuboid (represented by min and max) visualization to the current visualization
+    public void addClaimElements(Location min, Location max, Location locality, int height, BlockData cornerBlockData, BlockData accentBlockData, int STEP) {
+        this.boundaries.add(new Boundary(new BoundingBox(min, max), me.ryanhamshire.GriefPrevention.VisualizationType.ofBlockData(accentBlockData)));
     }
 
     /**
-     * @deprecated Add all desired elements to the list of boundaries
-     *             ({@link BoundaryVisualizationEvent#getBoundaries()})
+     * @deprecated Add all desired elements to the list of boundaries ({@link BoundaryVisualizationEvent#getBoundaries()})
      */
     @Deprecated(forRemoval = true, since = "16.18")
-    public static Visualization fromClaims(
-            Iterable<Claim> claims,
-            int height,
-            me.ryanhamshire.GriefPrevention.VisualizationType type,
-            Location locality)
+    public static Visualization fromClaims(Iterable<Claim> claims, int height, me.ryanhamshire.GriefPrevention.VisualizationType type, Location locality)
     {
         Visualization visualization = new Visualization();
         claims.forEach(claim -> visualization.addClaimElements(claim, height, type, locality));

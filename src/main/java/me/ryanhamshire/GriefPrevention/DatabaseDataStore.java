@@ -18,6 +18,11 @@
 
 package me.ryanhamshire.GriefPrevention;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.World;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.Connection;
@@ -35,45 +40,39 @@ import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.World;
-
 //manages data stored in the file system
 public class DatabaseDataStore extends DataStore
 {
 
-    private static final String SQL_UPDATE_NAME = "UPDATE griefprevention_playerdata SET name = ? WHERE name = ?";
-
-    private static final String SQL_INSERT_CLAIM = "INSERT INTO griefprevention_claimdata (id, owner, lessercorner, greatercorner, builders, containers, accessors, managers, inheritnothing, parentid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-    private static final String SQL_DELETE_CLAIM = "DELETE FROM griefprevention_claimdata WHERE id = ?";
-
-    private static final String SQL_SELECT_PLAYER_DATA = "SELECT * FROM griefprevention_playerdata WHERE name = ?";
-
-    private static final String SQL_DELETE_PLAYER_DATA = "DELETE FROM griefprevention_playerdata WHERE name = ?";
-
-    private static final String SQL_INSERT_PLAYER_DATA = "INSERT INTO griefprevention_playerdata (name, lastlogin, accruedblocks, bonusblocks) VALUES (?, ?, ?, ?)";
-
-    private static final String SQL_SET_NEXT_CLAIM_ID = "INSERT INTO griefprevention_nextclaimid VALUES (?)";
-
-    private static final String SQL_DELETE_GROUP_DATA = "DELETE FROM griefprevention_playerdata WHERE name = ?";
-
-    private static final String SQL_INSERT_SCHEMA_VERSION = "INSERT INTO griefprevention_schemaversion VALUES (?)";
-
-    private static final String SQL_DELETE_NEXT_CLAIM_ID = "DELETE FROM griefprevention_nextclaimid";
-
-    private static final String SQL_DELETE_SCHEMA_VERSION = "DELETE FROM griefprevention_schemaversion";
-
-    private static final String SQL_SELECT_SCHEMA_VERSION = "SELECT * FROM griefprevention_schemaversion";
+    private static final String SQL_UPDATE_NAME =
+            "UPDATE griefprevention_playerdata SET name = ? WHERE name = ?";
+    private static final String SQL_INSERT_CLAIM =
+            "INSERT INTO griefprevention_claimdata (id, owner, lessercorner, greatercorner, builders, containers, accessors, managers, inheritnothing, parentid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_DELETE_CLAIM =
+            "DELETE FROM griefprevention_claimdata WHERE id = ?";
+    private static final String SQL_SELECT_PLAYER_DATA =
+            "SELECT * FROM griefprevention_playerdata WHERE name = ?";
+    private static final String SQL_DELETE_PLAYER_DATA =
+            "DELETE FROM griefprevention_playerdata WHERE name = ?";
+    private static final String SQL_INSERT_PLAYER_DATA =
+            "INSERT INTO griefprevention_playerdata (name, lastlogin, accruedblocks, bonusblocks) VALUES (?, ?, ?, ?)";
+    private static final String SQL_SET_NEXT_CLAIM_ID =
+            "INSERT INTO griefprevention_nextclaimid VALUES (?)";
+    private static final String SQL_DELETE_GROUP_DATA =
+            "DELETE FROM griefprevention_playerdata WHERE name = ?";
+    private static final String SQL_INSERT_SCHEMA_VERSION =
+            "INSERT INTO griefprevention_schemaversion VALUES (?)";
+    private static final String SQL_DELETE_NEXT_CLAIM_ID =
+            "DELETE FROM griefprevention_nextclaimid";
+    private static final String SQL_DELETE_SCHEMA_VERSION =
+            "DELETE FROM griefprevention_schemaversion";
+    private static final String SQL_SELECT_SCHEMA_VERSION =
+            "SELECT * FROM griefprevention_schemaversion";
 
     private Connection databaseConnection = null;
 
     private final String databaseUrl;
-
     private final String userName;
-
     private final String password;
 
     DatabaseDataStore(String url, String userName, String password) throws Exception
@@ -100,18 +99,14 @@ public class DatabaseDataStore extends DataStore
 
         try (Statement statement = databaseConnection.createStatement())
         {
-            // ensure the data tables exist
+            //ensure the data tables exist
             statement.execute("CREATE TABLE IF NOT EXISTS griefprevention_nextclaimid (nextid INTEGER)");
-            statement.execute(
-                    "CREATE TABLE IF NOT EXISTS griefprevention_claimdata (id INTEGER, owner VARCHAR(50), lessercorner VARCHAR(100), greatercorner VARCHAR(100), builders TEXT, containers TEXT, accessors TEXT, managers TEXT, inheritnothing BOOLEAN, parentid INTEGER)");
-            statement.execute(
-                    "CREATE TABLE IF NOT EXISTS griefprevention_playerdata (name VARCHAR(50), lastlogin DATETIME, accruedblocks INTEGER, bonusblocks INTEGER)");
+            statement.execute("CREATE TABLE IF NOT EXISTS griefprevention_claimdata (id INTEGER, owner VARCHAR(50), lessercorner VARCHAR(100), greatercorner VARCHAR(100), builders TEXT, containers TEXT, accessors TEXT, managers TEXT, inheritnothing BOOLEAN, parentid INTEGER)");
+            statement.execute("CREATE TABLE IF NOT EXISTS griefprevention_playerdata (name VARCHAR(50), lastlogin DATETIME, accruedblocks INTEGER, bonusblocks INTEGER)");
             statement.execute("CREATE TABLE IF NOT EXISTS griefprevention_schemaversion (version INTEGER)");
 
-            // By making this run only for MySQL, we technically support SQLite too, as this
-            // is the only invalid
-            // SQL we use that SQLite does not support. Seeing as its only use is to update
-            // VERY old, existing, MySQL
+            // By making this run only for MySQL, we technically support SQLite too, as this is the only invalid
+            // SQL we use that SQLite does not support. Seeing as its only use is to update VERY old, existing, MySQL
             // databases, this is of no concern.
             if (databaseUrl.startsWith("jdbc:mysql://"))
             {
@@ -121,10 +116,8 @@ public class DatabaseDataStore extends DataStore
                 statement.execute("ALTER TABLE griefprevention_claimdata MODIFY managers TEXT");
             }
 
-            // if the next claim id table is empty, this is a brand new database which will
-            // write using the latest schema
-            // otherwise, schema version is determined by schemaversion table (or =0 if
-            // table is empty, see getSchemaVersion())
+            //if the next claim id table is empty, this is a brand new database which will write using the latest schema
+            //otherwise, schema version is determined by schemaversion table (or =0 if table is empty, see getSchemaVersion())
             ResultSet results = statement.executeQuery("SELECT * FROM griefprevention_nextclaimid");
             if (!results.next())
             {
@@ -139,7 +132,7 @@ public class DatabaseDataStore extends DataStore
             throw e3;
         }
 
-        // load group data into memory
+        //load group data into memory
         Statement statement = databaseConnection.createStatement();
         ResultSet results = statement.executeQuery("SELECT * FROM griefprevention_playerdata");
 
@@ -147,28 +140,28 @@ public class DatabaseDataStore extends DataStore
         {
             String name = results.getString("name");
 
-            // ignore non-groups. all group names start with a dollar sign.
+            //ignore non-groups.  all group names start with a dollar sign.
             if (!name.startsWith("$")) continue;
 
             String groupName = name.substring(1);
-            if (groupName == null || groupName.isEmpty()) continue; // defensive coding, avoid unlikely cases
+            if (groupName == null || groupName.isEmpty()) continue;  //defensive coding, avoid unlikely cases
 
             int groupBonusBlocks = results.getInt("bonusblocks");
 
             this.permissionToBonusBlocksMap.put(groupName, groupBonusBlocks);
         }
 
-        // load next claim number into memory
+        //load next claim number into memory
         results = statement.executeQuery("SELECT * FROM griefprevention_nextclaimid");
 
-        // if there's nothing yet, add it
+        //if there's nothing yet, add it
         if (!results.next())
         {
             statement.execute("INSERT INTO griefprevention_nextclaimid VALUES (0)");
             this.nextClaimID = (long) 0;
         }
 
-        // otherwise load it
+        //otherwise load it
         else
         {
             this.nextClaimID = results.getLong("nextid");
@@ -180,24 +173,24 @@ public class DatabaseDataStore extends DataStore
             {
                 this.refreshDataConnection();
 
-                // pull ALL player data from the database
+                //pull ALL player data from the database
                 statement = this.databaseConnection.createStatement();
                 results = statement.executeQuery("SELECT * FROM griefprevention_playerdata");
 
-                // make a list of changes to be made
+                //make a list of changes to be made
                 HashMap<String, UUID> changes = new HashMap<>();
 
                 ArrayList<String> namesToConvert = new ArrayList<>();
                 while (results.next())
                 {
-                    // get the id
+                    //get the id
                     String playerName = results.getString("name");
 
-                    // add to list of names to convert to UUID
+                    //add to list of names to convert to UUID
                     namesToConvert.add(playerName);
                 }
 
-                // resolve and cache as many as possible through various means
+                //resolve and cache as many as possible through various means
                 try
                 {
                     UUIDFetcher fetcher = new UUIDFetcher(namesToConvert);
@@ -205,40 +198,35 @@ public class DatabaseDataStore extends DataStore
                 }
                 catch (Exception e)
                 {
-                    GriefPrevention
-                            .AddLogEntry("Failed to resolve a batch of names to UUIDs.  Details:" + e.getMessage());
+                    GriefPrevention.AddLogEntry("Failed to resolve a batch of names to UUIDs.  Details:" + e.getMessage());
                     e.printStackTrace();
                 }
 
-                // reset results cursor
+                //reset results cursor
                 results.beforeFirst();
 
-                // for each result
+                //for each result
                 while (results.next())
                 {
-                    // get the id
+                    //get the id
                     String playerName = results.getString("name");
 
-                    // try to convert player name to UUID
+                    //try to convert player name to UUID
                     try
                     {
                         UUID playerID = UUIDFetcher.getUUIDOf(playerName);
 
-                        // if successful, update the playerdata row by replacing the player's name with
-                        // the player's UUID
+                        //if successful, update the playerdata row by replacing the player's name with the player's UUID
                         if (playerID != null)
                         {
                             changes.put(playerName, playerID);
                         }
                     }
-                    // otherwise leave it as-is. no harm done - it won't be requested by name, and
-                    // this update only happens once.
-                    catch (Exception ex)
-                    {
-                    }
+                    //otherwise leave it as-is. no harm done - it won't be requested by name, and this update only happens once.
+                    catch (Exception ex) { }
                 }
 
-                // refresh data connection in case data migration took a long time
+                //refresh data connection in case data migration took a long time
                 this.refreshDataConnection();
 
                 for (String name : changes.keySet())
@@ -267,11 +255,10 @@ public class DatabaseDataStore extends DataStore
         if (this.getSchemaVersion() <= 2)
         {
             statement = this.databaseConnection.createStatement();
-            statement.execute(
-                    "ALTER TABLE griefprevention_claimdata ADD inheritNothing BOOLEAN DEFAULT 0 AFTER managers");
+            statement.execute("ALTER TABLE griefprevention_claimdata ADD inheritNothing BOOLEAN DEFAULT 0 AFTER managers");
         }
 
-        // load claims data into memory
+        //load claims data into memory
 
         results = statement.executeQuery("SELECT * FROM griefprevention_claimdata");
 
@@ -284,8 +271,7 @@ public class DatabaseDataStore extends DataStore
         {
             try
             {
-                // problematic claims will be removed from secondary storage, and never added to
-                // in-memory data store
+                //problematic claims will be removed from secondary storage, and never added to in-memory data store
                 boolean removeClaim = false;
 
                 long parentId = results.getLong("parentid");
@@ -305,10 +291,7 @@ public class DatabaseDataStore extends DataStore
                 {
                     if (e.getMessage() != null && e.getMessage().contains("World not found"))
                     {
-                        GriefPrevention.AddLogEntry(
-                                "Failed to load a claim (ID:" + claimID
-                                        + ") because its world isn't loaded (yet?).  Please delete the claim or contact the GriefPrevention developer with information about which plugin(s) you're using to load or create worlds.  "
-                                        + lesserCornerString);
+                        GriefPrevention.AddLogEntry("Failed to load a claim (ID:" + claimID + ") because its world isn't loaded (yet?).  Please delete the claim or contact the GriefPrevention developer with information about which plugin(s) you're using to load or create worlds.  " + lesserCornerString);
                         continue;
                     }
                     else
@@ -321,7 +304,7 @@ public class DatabaseDataStore extends DataStore
                 UUID ownerID = null;
                 if (ownerName.isEmpty() || ownerName.startsWith("--"))
                 {
-                    ownerID = null; // administrative land claim or subdivision
+                    ownerID = null;  //administrative land claim or subdivision
                 }
                 else if (this.getSchemaVersion() < 1)
                 {
@@ -332,8 +315,7 @@ public class DatabaseDataStore extends DataStore
                     catch (Exception ex)
                     {
                         GriefPrevention.AddLogEntry("This owner name did not convert to a UUID: " + ownerName + ".");
-                        GriefPrevention.AddLogEntry(
-                                "  Converted land claim to administrative @ " + lesserBoundaryCorner.toString());
+                        GriefPrevention.AddLogEntry("  Converted land claim to administrative @ " + lesserBoundaryCorner.toString());
                     }
                 }
                 else
@@ -345,8 +327,7 @@ public class DatabaseDataStore extends DataStore
                     catch (Exception ex)
                     {
                         GriefPrevention.AddLogEntry("This owner entry is not a UUID: " + ownerName + ".");
-                        GriefPrevention.AddLogEntry(
-                                "  Converted land claim to administrative @ " + lesserBoundaryCorner.toString());
+                        GriefPrevention.AddLogEntry("  Converted land claim to administrative @ " + lesserBoundaryCorner.toString());
                     }
                 }
 
@@ -365,8 +346,7 @@ public class DatabaseDataStore extends DataStore
                 String managersString = results.getString("managers");
                 List<String> managerNames = Arrays.asList(managersString.split(";"));
                 managerNames = this.convertNameListToUUIDList(managerNames);
-                Claim claim = new Claim(lesserBoundaryCorner, greaterBoundaryCorner, ownerID, builderNames,
-                        containerNames, accessorNames, managerNames, inheritNothing, claimID);
+                Claim claim = new Claim(lesserBoundaryCorner, greaterBoundaryCorner, ownerID, builderNames, containerNames, accessorNames, managerNames, inheritNothing, claimID);
 
                 if (removeClaim)
                 {
@@ -374,12 +354,12 @@ public class DatabaseDataStore extends DataStore
                 }
                 else if (parentId == -1)
                 {
-                    // top level claim
+                    //top level claim
                     this.addClaim(claim, false);
                 }
                 else
                 {
-                    // subdivision
+                    //subdivision
                     subdivisionsToLoad.add(claim);
                 }
             }
@@ -390,21 +370,20 @@ public class DatabaseDataStore extends DataStore
             }
         }
 
-        // add subdivisions to their parent claims
+        //add subdivisions to their parent claims
         for (Claim childClaim : subdivisionsToLoad)
         {
-            // find top level claim parent
+            //find top level claim parent
             Claim topLevelClaim = this.getClaimAt(childClaim.getLesserBoundaryCorner(), true, null);
 
             if (topLevelClaim == null)
             {
                 claimsToRemove.add(childClaim);
-                GriefPrevention.AddLogEntry(
-                        "Removing orphaned claim subdivision: " + childClaim.getLesserBoundaryCorner().toString());
+                GriefPrevention.AddLogEntry("Removing orphaned claim subdivision: " + childClaim.getLesserBoundaryCorner().toString());
                 continue;
             }
 
-            // add this claim to the list of children of the current top level claim
+            //add this claim to the list of children of the current top level claim
             childClaim.parent = topLevelClaim;
             topLevelClaim.children.add(childClaim);
             childClaim.inDataStore = true;
@@ -426,28 +405,26 @@ public class DatabaseDataStore extends DataStore
     }
 
     @Override
-    synchronized void writeClaimToStorage(Claim claim) // see datastore.cs. this will ALWAYS be a top level claim
+    synchronized void writeClaimToStorage(Claim claim)  //see datastore.cs.  this will ALWAYS be a top level claim
     {
         try
         {
             this.refreshDataConnection();
 
-            // wipe out any existing data about this claim
+            //wipe out any existing data about this claim
             this.deleteClaimFromSecondaryStorage(claim);
 
-            // write claim data to the database
+            //write claim data to the database
             this.writeClaimData(claim);
         }
         catch (SQLException e)
         {
-            GriefPrevention.AddLogEntry(
-                    "Unable to save data for claim at " + this.locationToString(claim.lesserBoundaryCorner)
-                            + ".  Details:");
+            GriefPrevention.AddLogEntry("Unable to save data for claim at " + this.locationToString(claim.lesserBoundaryCorner) + ".  Details:");
             GriefPrevention.AddLogEntry(e.getMessage());
         }
     }
 
-    // actually writes claim data to the database
+    //actually writes claim data to the database
     synchronized private void writeClaimData(Claim claim) throws SQLException
     {
         String lesserCornerString = this.locationToString(claim.getLesserBoundaryCorner());
@@ -486,14 +463,12 @@ public class DatabaseDataStore extends DataStore
         }
         catch (SQLException e)
         {
-            GriefPrevention.AddLogEntry(
-                    "Unable to save data for claim at " + this.locationToString(claim.lesserBoundaryCorner)
-                            + ".  Details:");
+            GriefPrevention.AddLogEntry("Unable to save data for claim at " + this.locationToString(claim.lesserBoundaryCorner) + ".  Details:");
             GriefPrevention.AddLogEntry(e.getMessage());
         }
     }
 
-    // deletes a claim from the database
+    //deletes a claim from the database
     @Override
     synchronized void deleteClaimFromSecondaryStorage(Claim claim)
     {
@@ -521,7 +496,7 @@ public class DatabaseDataStore extends DataStore
             selectStmnt.setString(1, playerID.toString());
             ResultSet results = selectStmnt.executeQuery();
 
-            // if data for this player exists, use it
+            //if data for this player exists, use it
             if (results.next())
             {
                 playerData.setAccruedClaimBlocks(results.getInt("accruedblocks"));
@@ -538,13 +513,11 @@ public class DatabaseDataStore extends DataStore
         return playerData;
     }
 
-    // saves changes to player data. MUST be called after you're done making
-    // changes, otherwise a reload will lose them
+    //saves changes to player data.  MUST be called after you're done making changes, otherwise a reload will lose them
     @Override
     public void overrideSavePlayerData(UUID playerID, PlayerData playerData)
     {
-        // never save data for the "administrative" account. an empty string for player
-        // name indicates administrative account
+        //never save data for the "administrative" account.  an empty string for player name indicates administrative account
         if (playerID == null) return;
 
         this.savePlayerData(playerID.toString(), playerData);
@@ -553,7 +526,7 @@ public class DatabaseDataStore extends DataStore
     private void savePlayerData(String playerID, PlayerData playerData)
     {
         try (PreparedStatement deleteStmnt = this.databaseConnection.prepareStatement(SQL_DELETE_PLAYER_DATA);
-                PreparedStatement insertStmnt = this.databaseConnection.prepareStatement(SQL_INSERT_PLAYER_DATA))
+             PreparedStatement insertStmnt = this.databaseConnection.prepareStatement(SQL_INSERT_PLAYER_DATA))
         {
             OfflinePlayer player = Bukkit.getOfflinePlayer(UUID.fromString(playerID));
 
@@ -582,14 +555,13 @@ public class DatabaseDataStore extends DataStore
         this.setNextClaimID(this.nextClaimID + 1);
     }
 
-    // sets the next claim ID. used by incrementNextClaimID() above, and also while
-    // migrating data from a flat file data store
+    //sets the next claim ID.  used by incrementNextClaimID() above, and also while migrating data from a flat file data store
     synchronized void setNextClaimID(long nextID)
     {
         this.nextClaimID = nextID;
 
         try (PreparedStatement deleteStmnt = this.databaseConnection.prepareStatement(SQL_DELETE_NEXT_CLAIM_ID);
-                PreparedStatement insertStmnt = this.databaseConnection.prepareStatement(SQL_SET_NEXT_CLAIM_ID))
+             PreparedStatement insertStmnt = this.databaseConnection.prepareStatement(SQL_SET_NEXT_CLAIM_ID))
         {
             deleteStmnt.execute();
             insertStmnt.setLong(1, nextID);
@@ -602,14 +574,13 @@ public class DatabaseDataStore extends DataStore
         }
     }
 
-    // updates the database with a group's bonus blocks
+    //updates the database with a group's bonus blocks
     @Override
     synchronized void saveGroupBonusBlocks(String groupName, int currentValue)
     {
-        // group bonus blocks are stored in the player data table, with player name =
-        // $groupName
+        //group bonus blocks are stored in the player data table, with player name = $groupName
         try (PreparedStatement deleteStmnt = this.databaseConnection.prepareStatement(SQL_DELETE_GROUP_DATA);
-                PreparedStatement insertStmnt = this.databaseConnection.prepareStatement(SQL_INSERT_PLAYER_DATA))
+             PreparedStatement insertStmnt = this.databaseConnection.prepareStatement(SQL_INSERT_PLAYER_DATA))
         {
             SimpleDateFormat sqlFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String dateString = sqlFormat.format(new Date());
@@ -641,9 +612,7 @@ public class DatabaseDataStore extends DataStore
                     this.databaseConnection.close();
                 }
             }
-            catch (SQLException e)
-            {
-            }
+            catch (SQLException e) {}
         }
 
         this.databaseConnection = null;
@@ -658,14 +627,14 @@ public class DatabaseDataStore extends DataStore
                 this.databaseConnection.close();
             }
 
-            // set username/pass properties
+            //set username/pass properties
             Properties connectionProps = new Properties();
             connectionProps.put("user", this.userName);
             connectionProps.put("password", this.password);
             connectionProps.put("autoReconnect", "true");
             connectionProps.put("maxReconnects", String.valueOf(Integer.MAX_VALUE));
 
-            // establish connection
+            //establish connection
             this.databaseConnection = DriverManager.getConnection(this.databaseUrl, connectionProps);
         }
     }
@@ -677,13 +646,13 @@ public class DatabaseDataStore extends DataStore
         {
             ResultSet results = selectStmnt.executeQuery();
 
-            // if there's nothing yet, assume 0 and add it
+            //if there's nothing yet, assume 0 and add it
             if (!results.next())
             {
                 this.setSchemaVersion(0);
                 return 0;
             }
-            // otherwise return the value that's in the table
+            //otherwise return the value that's in the table
             else
             {
                 return results.getInt("version");
@@ -702,7 +671,7 @@ public class DatabaseDataStore extends DataStore
     protected void updateSchemaVersionInStorage(int versionToSet)
     {
         try (PreparedStatement deleteStmnt = this.databaseConnection.prepareStatement(SQL_DELETE_SCHEMA_VERSION);
-                PreparedStatement insertStmnt = this.databaseConnection.prepareStatement(SQL_INSERT_SCHEMA_VERSION))
+             PreparedStatement insertStmnt = this.databaseConnection.prepareStatement(SQL_INSERT_SCHEMA_VERSION))
         {
             deleteStmnt.execute();
 
@@ -719,8 +688,7 @@ public class DatabaseDataStore extends DataStore
     /**
      * Concats an array to a string divided with the ; sign
      *
-     * @param input
-     *            Arraylist with strings to concat
+     * @param input Arraylist with strings to concat
      * @return String with all values from input array
      */
     private String storageStringBuilder(ArrayList<String> input)

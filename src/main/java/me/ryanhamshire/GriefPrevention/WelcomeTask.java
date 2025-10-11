@@ -9,7 +9,6 @@ import org.bukkit.inventory.meta.BookMeta;
 
 public class WelcomeTask implements Runnable
 {
-
     private final Player player;
 
     public WelcomeTask(Player player)
@@ -20,15 +19,14 @@ public class WelcomeTask implements Runnable
     @Override
     public void run()
     {
-        // abort if player has logged out since this task was scheduled
+        //abort if player has logged out since this task was scheduled
         if (!this.player.isOnline()) return;
 
-        // offer advice and a helpful link
+        //offer advice and a helpful link
         GriefPrevention.sendMessage(player, TextMode.Instr, Messages.AvoidGriefClaimLand);
-        GriefPrevention
-                .sendMessage(player, TextMode.Instr, Messages.SurvivalBasicsVideo2, DataStore.SURVIVAL_VIDEO_URL);
+        GriefPrevention.sendMessage(player, TextMode.Instr, Messages.SurvivalBasicsVideo2, DataStore.SURVIVAL_VIDEO_URL);
 
-        // give the player a reference book for later
+        //give the player a reference book for later
         if (GriefPrevention.instance.config_claims_supplyPlayerManual)
         {
             ItemFactory factory = Bukkit.getItemFactory();
@@ -44,10 +42,8 @@ public class WelcomeTask implements Runnable
 
             page1.append(URL).append("\n\n");
             page1.append(intro).append("\n\n");
-            String editToolName = GriefPrevention.instance.config_claims_modificationTool.name().replace('_', ' ')
-                    .toLowerCase();
-            String infoToolName = GriefPrevention.instance.config_claims_investigationTool.name().replace('_', ' ')
-                    .toLowerCase();
+            String editToolName = GriefPrevention.instance.config_claims_modificationTool.name().replace('_', ' ').toLowerCase();
+            String infoToolName = GriefPrevention.instance.config_claims_investigationTool.name().replace('_', ' ').toLowerCase();
             String configClaimTools = datastore.getMessage(Messages.BookTools, editToolName, infoToolName);
             page1.append(configClaimTools);
             if (GriefPrevention.instance.config_claims_automaticClaimsForNewPlayersRadius < 0)
@@ -76,5 +72,6 @@ public class WelcomeTask implements Runnable
         }
 
     }
+
 
 }

@@ -1,18 +1,14 @@
 package me.ryanhamshire.GriefPrevention.events;
 
+import me.ryanhamshire.GriefPrevention.Claim;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
-
 import org.jetbrains.annotations.NotNull;
 
-import me.ryanhamshire.GriefPrevention.Claim;
-
 /**
- * An {@link org.bukkit.event.Event Event} for when a {@link Claim} is deleted
- * due to owner inactivity.
+ * An {@link org.bukkit.event.Event Event} for when a {@link Claim} is deleted due to owner inactivity.
  *
- * <p>
- * If cancelled, deletion will be prevented.
+ * <p>If cancelled, deletion will be prevented.
  */
 public class ClaimExpirationEvent extends ClaimEvent implements Cancellable
 {
@@ -20,8 +16,7 @@ public class ClaimExpirationEvent extends ClaimEvent implements Cancellable
     /**
      * Construct a new {@code ClaimExpirationEvent}.
      *
-     * @param claim
-     *            the {@link Claim} expiring
+     * @param claim the {@link Claim} expiring
      */
     public ClaimExpirationEvent(@NotNull Claim claim)
     {

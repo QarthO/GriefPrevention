@@ -1,14 +1,12 @@
 package me.ryanhamshire.GriefPrevention.events;
 
-import java.util.Collection;
-import java.util.HashSet;
-
+import me.ryanhamshire.GriefPrevention.Claim;
 import org.bukkit.event.Event;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import me.ryanhamshire.GriefPrevention.Claim;
+import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * An {@link Event} involving multiple {@link Claim Claims}.

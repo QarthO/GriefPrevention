@@ -1,21 +1,7 @@
 package com.griefprevention.commands;
 
-import java.util.List;
-import java.util.UUID;
-
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import com.griefprevention.visualization.BoundaryVisualization;
 import com.griefprevention.visualization.VisualizationType;
-
 import me.ryanhamshire.GriefPrevention.AutoExtendClaimTask;
 import me.ryanhamshire.GriefPrevention.CreateClaimResult;
 import me.ryanhamshire.GriefPrevention.DataStore;
@@ -24,10 +10,20 @@ import me.ryanhamshire.GriefPrevention.Messages;
 import me.ryanhamshire.GriefPrevention.PlayerData;
 import me.ryanhamshire.GriefPrevention.ShovelMode;
 import me.ryanhamshire.GriefPrevention.TextMode;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.UUID;
 
 public class ClaimCommand extends CommandHandler
 {
-
     public ClaimCommand(@NotNull GriefPrevention plugin)
     {
         super(plugin, "claim");
@@ -40,7 +36,8 @@ public class ClaimCommand extends CommandHandler
             @NotNull String label,
             @NotNull String[] args)
     {
-        if (!(sender instanceof Player player)) return false;
+        if (!(sender instanceof Player player))
+            return false;
 
         World world = player.getWorld();
         if (!plugin.claimsEnabledForWorld(world))
@@ -51,11 +48,10 @@ public class ClaimCommand extends CommandHandler
 
         PlayerData playerData = plugin.dataStore.getPlayerData(player.getUniqueId());
 
-        // if he's at the claim count per player limit already and doesn't have
-        // permission to bypass, display an error message
-        if (plugin.config_claims_maxClaimsPerPlayer > 0
-                && !player.hasPermission("griefprevention.overrideclaimcountlimit")
-                && playerData.getClaims().size() >= plugin.config_claims_maxClaimsPerPlayer)
+        //if he's at the claim count per player limit already and doesn't have permission to bypass, display an error message
+        if (plugin.config_claims_maxClaimsPerPlayer > 0 &&
+                !player.hasPermission("griefprevention.overrideclaimcountlimit") &&
+                playerData.getClaims().size() >= plugin.config_claims_maxClaimsPerPlayer)
         {
             GriefPrevention.sendMessage(player, TextMode.Err, Messages.ClaimCreationFailedOverClaimCountLimit);
             return true;
@@ -63,7 +59,7 @@ public class ClaimCommand extends CommandHandler
 
         int radius;
 
-        // allow for specifying the radius
+        //allow for specifying the radius
         if (args.length > 0)
         {
             if (needsShovel(playerData, player))
@@ -89,18 +85,16 @@ public class ClaimCommand extends CommandHandler
             }
         }
 
-        // If the player has no claims, allow them to create their starter claim via
-        // command instead of chest placement.
+        // If the player has no claims, allow them to create their starter claim via command instead of chest placement.
         else if (playerData.getClaims().isEmpty() && plugin.config_claims_automaticClaimsForNewPlayersRadius >= 0)
         {
             radius = plugin.config_claims_automaticClaimsForNewPlayersRadius;
         }
 
-        // if player has any claims, respect claim minimum size setting
+        //if player has any claims, respect claim minimum size setting
         else
         {
-            // if player has exactly one land claim, this requires the claim modification
-            // tool to be in hand (or creative mode player)
+            //if player has exactly one land claim, this requires the claim modification tool to be in hand (or creative mode player)
             if (needsShovel(playerData, player))
             {
                 GriefPrevention.sendMessage(player, TextMode.Err, Messages.MustHoldModificationToolForThat);
@@ -126,11 +120,7 @@ public class ClaimCommand extends CommandHandler
         }
         catch (ArithmeticException e)
         {
-            GriefPrevention.sendMessage(
-                    player,
-                    TextMode.Err,
-                    Messages.CreateClaimInsufficientBlocks,
-                    String.valueOf(Integer.MAX_VALUE));
+            GriefPrevention.sendMessage(player, TextMode.Err, Messages.CreateClaimInsufficientBlocks, String.valueOf(Integer.MAX_VALUE));
             return true;
         }
 
@@ -141,10 +131,9 @@ public class ClaimCommand extends CommandHandler
         if (playerData.shovelMode == ShovelMode.Admin)
         {
             ownerId = null;
-        }
-        else
+        } else
         {
-            // player must have sufficient unused claim blocks
+            //player must have sufficient unused claim blocks
             int area;
             try
             {
@@ -154,21 +143,13 @@ public class ClaimCommand extends CommandHandler
             }
             catch (ArithmeticException e)
             {
-                GriefPrevention.sendMessage(
-                        player,
-                        TextMode.Err,
-                        Messages.CreateClaimInsufficientBlocks,
-                        String.valueOf(Integer.MAX_VALUE));
+                GriefPrevention.sendMessage(player, TextMode.Err, Messages.CreateClaimInsufficientBlocks, String.valueOf(Integer.MAX_VALUE));
                 return true;
             }
             int remaining = playerData.getRemainingClaimBlocks();
             if (remaining < area)
             {
-                GriefPrevention.sendMessage(
-                        player,
-                        TextMode.Err,
-                        Messages.CreateClaimInsufficientBlocks,
-                        String.valueOf(area - remaining));
+                GriefPrevention.sendMessage(player, TextMode.Err, Messages.CreateClaimInsufficientBlocks, String.valueOf(area - remaining));
                 plugin.dataStore.tryAdvertiseAdminAlternatives(player);
                 return true;
             }
@@ -187,18 +168,12 @@ public class ClaimCommand extends CommandHandler
             @Nullable UUID ownerId)
     {
         World world = player.getWorld();
-        CreateClaimResult result = plugin.dataStore.createClaim(
-                world,
-                lesser.getBlockX(),
-                greater.getBlockX(),
+        CreateClaimResult result = plugin.dataStore.createClaim(world,
+                lesser.getBlockX(), greater.getBlockX(),
                 lesser.getBlockY() - plugin.config_claims_claimsExtendIntoGroundDistance - 1,
                 world.getHighestBlockYAt(greater) - plugin.config_claims_claimsExtendIntoGroundDistance - 1,
-                lesser.getBlockZ(),
-                greater.getBlockZ(),
-                ownerId,
-                null,
-                null,
-                player);
+                lesser.getBlockZ(), greater.getBlockZ(),
+                ownerId, null, null, player);
         if (!result.succeeded || result.claim == null)
         {
             if (result.claim != null)
@@ -216,22 +191,14 @@ public class ClaimCommand extends CommandHandler
         {
             GriefPrevention.sendMessage(player, TextMode.Success, Messages.CreateClaimSuccess);
 
-            // link to a video demo of land claiming, based on world type
+            //link to a video demo of land claiming, based on world type
             if (plugin.creativeRulesApply(player.getLocation()))
             {
-                GriefPrevention.sendMessage(
-                        player,
-                        TextMode.Instr,
-                        Messages.CreativeBasicsVideo2,
-                        DataStore.CREATIVE_VIDEO_URL);
+                GriefPrevention.sendMessage(player, TextMode.Instr, Messages.CreativeBasicsVideo2, DataStore.CREATIVE_VIDEO_URL);
             }
             else if (plugin.claimsEnabledForWorld(world))
             {
-                GriefPrevention.sendMessage(
-                        player,
-                        TextMode.Instr,
-                        Messages.SurvivalBasicsVideo2,
-                        DataStore.SURVIVAL_VIDEO_URL);
+                GriefPrevention.sendMessage(player, TextMode.Instr, Messages.SurvivalBasicsVideo2, DataStore.SURVIVAL_VIDEO_URL);
             }
             BoundaryVisualization.visualizeClaim(player, result.claim, VisualizationType.CLAIM);
             playerData.claimResizing = null;
@@ -244,7 +211,8 @@ public class ClaimCommand extends CommandHandler
 
     private boolean needsShovel(@NotNull PlayerData playerData, @NotNull Player player)
     {
-        return playerData.getClaims().size() < 2 && player.getGameMode() != GameMode.CREATIVE
+        return playerData.getClaims().size() < 2
+                && player.getGameMode() != GameMode.CREATIVE
                 && player.getInventory().getItemInMainHand().getType() != plugin.config_claims_modificationTool;
     }
 
@@ -254,13 +222,10 @@ public class ClaimCommand extends CommandHandler
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(
-            @NotNull CommandSender sender,
-            @NotNull Command command,
-            @NotNull String alias,
-            @NotNull String[] args)
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args)
     {
-        if (args.length != 1) return List.of();
+        if (args.length != 1)
+            return List.of();
         return TabCompletions.integer(args, 3, false);
     }
 

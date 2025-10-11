@@ -21,31 +21,30 @@ package me.ryanhamshire.GriefPrevention;
 /**
  * Enum representing the permissions available in a {@link Claim}.
  */
-public enum ClaimPermission {
-
+public enum ClaimPermission
+{
     /**
-     * ClaimPermission used for owner-based checks. Cannot be granted and grants all
-     * other permissions.
+     * ClaimPermission used for owner-based checks. Cannot be granted and grants all other permissions.
      */
     Edit(Messages.OnlyOwnersModifyClaims),
     /**
-     * ClaimPermission that allows users to grant ClaimPermissions. Grants
-     * {@link #Build}, {@link #Inventory}, and {@link #Access}. Command:
-     * /permissiontrust or /managetrust
+     * ClaimPermission that allows users to grant ClaimPermissions. Grants {@link #Build}, {@link #Inventory}, and {@link #Access}.
+     * Command: /permissiontrust or /managetrust
      */
     Manage(Messages.NoPermissionTrust),
     /**
-     * ClaimPermission used for building checks. Grants {@link #Inventory} and
-     * {@link #Access}. Command: /trust
+     * ClaimPermission used for building checks. Grants {@link #Inventory} and {@link #Access}.
+     * Command: /trust
      */
     Build(Messages.NoBuildPermission),
     /**
-     * ClaimPermission used for inventory management, such as containers and
-     * farming. Grants {@link #Access}. Command: /containertrust
+     * ClaimPermission used for inventory management, such as containers and farming. Grants {@link #Access}.
+     * Command: /containertrust
      */
     Inventory(Messages.NoContainersPermission),
     /**
-     * ClaimPermission used for basic access. Command: /accesstrust
+     * ClaimPermission used for basic access.
+     * Command: /accesstrust
      */
     Access(Messages.NoAccessPermission);
 
@@ -57,8 +56,7 @@ public enum ClaimPermission {
     }
 
     /**
-     * @return the {@link Messages Message} used when alerting a user that they lack
-     *         the ClaimPermission
+     * @return the {@link Messages Message} used when alerting a user that they lack the ClaimPermission
      */
     public Messages getDenialMessage()
     {
@@ -68,15 +66,12 @@ public enum ClaimPermission {
     /**
      * Check if a ClaimPermission is granted by another ClaimPermission.
      *
-     * @param other
-     *            the ClaimPermission to compare against
-     * @return true if this ClaimPermission is equal or lesser than the provided
-     *         ClaimPermission
+     * @param other the ClaimPermission to compare against
+     * @return true if this ClaimPermission is equal or lesser than the provided ClaimPermission
      */
     public boolean isGrantedBy(ClaimPermission other)
     {
-        // This uses declaration order to compare! If trust levels are reordered this
-        // method must be rewritten.
+        // This uses declaration order to compare! If trust levels are reordered this method must be rewritten.
         return other != null && other.ordinal() <= this.ordinal();
     }
 

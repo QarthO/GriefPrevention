@@ -1,40 +1,31 @@
 package me.ryanhamshire.GriefPrevention.events;
 
+import me.ryanhamshire.GriefPrevention.Claim;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-
 import org.jetbrains.annotations.NotNull;
-
-import me.ryanhamshire.GriefPrevention.Claim;
 
 /**
  * An {@link Event} called when a {@link Claim} is changed.
  *
- * <p>
- * If cancelled, the resulting changes will not be made.
+ * <p>If cancelled, the resulting changes will not be made.
  *
- * <p>
- * Note that the {@link #getTo() new claim} will not necessarily be added to the
- * datastore! Most implementations apply changes to the {@link #getFrom()
- * existing claim} for better compatibility with add-ons holding instances.
- * Additionally, while the new claim is modifiable, modifications will not
- * necessarily be respected by implementations.
+ * <p>Note that the {@link #getTo() new claim} will not necessarily be added to the datastore! Most implementations
+ * apply changes to the {@link #getFrom() existing claim} for better compatibility with add-ons holding instances.
+ * Additionally, while the new claim is modifiable, modifications will not necessarily be respected by implementations.
  */
 public class ClaimChangeEvent extends Event implements Cancellable
 {
 
     private final @NotNull Claim from;
-
     private final @NotNull Claim to;
 
     /**
      * Construct a new {@code ClaimChangeEvent}.
      *
-     * @param from
-     *            the original {@link Claim}
-     * @param to
-     *            the resulting {@code Claim}
+     * @param from the original {@link Claim}
+     * @param to the resulting {@code Claim}
      */
     public ClaimChangeEvent(@NotNull Claim from, @NotNull Claim to)
     {

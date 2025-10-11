@@ -1,15 +1,12 @@
 package me.ryanhamshire.GriefPrevention.events;
 
+import me.ryanhamshire.GriefPrevention.Claim;
 import org.bukkit.command.CommandSender;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import me.ryanhamshire.GriefPrevention.Claim;
-
 /**
- * An {@link org.bukkit.event.Event Event} called when a {@link Claim} is
- * resized.
+ * An {@link org.bukkit.event.Event Event} called when a {@link Claim} is resized.
  */
 public class ClaimResizeEvent extends ClaimChangeEvent
 {
@@ -19,15 +16,11 @@ public class ClaimResizeEvent extends ClaimChangeEvent
     /**
      * Construct a new {@code ClaimResizeEvent}.
      *
-     * <p>
-     * The actor causing modification may not be present if done by plugins.
+     * <p>The actor causing modification may not be present if done by plugins.
      *
-     * @param from
-     *            the unmodified {@link Claim}
-     * @param to
-     *            the resulting {@code Claim}
-     * @param modifier
-     *            the {@link CommandSender} causing modification
+     * @param from the unmodified {@link Claim}
+     * @param to the resulting {@code Claim}
+     * @param modifier the {@link CommandSender} causing modification
      */
     public ClaimResizeEvent(@NotNull Claim from, @NotNull Claim to, @Nullable CommandSender modifier)
     {
@@ -36,8 +29,7 @@ public class ClaimResizeEvent extends ClaimChangeEvent
     }
 
     /**
-     * Get the {@link CommandSender} modifying the {@link Claim}. May be
-     * {@code null} if caused by a plugin.
+     * Get the {@link CommandSender} modifying the {@link Claim}. May be {@code null} if caused by a plugin.
      *
      * @return the actor causing creation
      */

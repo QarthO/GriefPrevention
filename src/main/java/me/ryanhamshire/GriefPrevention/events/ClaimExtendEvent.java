@@ -1,18 +1,14 @@
 package me.ryanhamshire.GriefPrevention.events;
 
+import me.ryanhamshire.GriefPrevention.Claim;
 import org.bukkit.Location;
-
 import org.jetbrains.annotations.NotNull;
 
-import me.ryanhamshire.GriefPrevention.Claim;
-
 /**
- * An {@link org.bukkit.event.Event Event} for when a {@link Claim Claim's}
- * depth (lower Y bound) is to be extended.
+ * An {@link org.bukkit.event.Event Event} for when a {@link Claim Claim's} depth (lower Y bound) is to be extended.
  *
- * <p>
- * Note that changes to the {@link #getTo() new claim} other than
- * {@link #setNewDepth(int) setting new depth} will not be respected.
+ * <p>Note that changes to the {@link #getTo() new claim} other than {@link #setNewDepth(int) setting new depth} will
+ * not be respected.
  *
  * @author FrankHeijden
  */
@@ -24,15 +20,12 @@ public class ClaimExtendEvent extends ClaimChangeEvent
     /**
      * Construct a new {@code ClaimExtendEvent}.
      *
-     * @param claim
-     *            the {@link Claim} extending downwards
-     * @param newDepth
-     *            the new depth of the {@code Claim}
+     * @param claim the {@link Claim} extending downwards
+     * @param newDepth the new depth of the {@code Claim}
      */
     public ClaimExtendEvent(@NotNull Claim claim, int newDepth)
     {
         super(claim, new Claim(claim) {
-
             @Override
             public Location getLesserBoundaryCorner()
             {
@@ -69,15 +62,11 @@ public class ClaimExtendEvent extends ClaimChangeEvent
     /**
      * Set the new lowest depth that the {@link Claim} will encompass in the Y axis.
      *
-     * <p>
-     * Note that this value is not necessarily final - it will be modified to
-     * respect configuration and world limits.
+     * <p>Note that this value is not necessarily final - it will be modified to respect configuration and world limits.
      *
-     * @param newDepth
-     *            the new depth
+     * @param newDepth the new depth
      */
-    public void setNewDepth(int newDepth)
-    {
+    public void setNewDepth(int newDepth) {
         this.newDepth = newDepth;
     }
 

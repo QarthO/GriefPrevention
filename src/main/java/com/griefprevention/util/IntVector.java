@@ -5,7 +5,6 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
-
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -13,13 +12,13 @@ import org.jetbrains.annotations.Nullable;
 /**
  * An immutable integer-based vector.
  */
-public record IntVector(int x, int y, int z) {
+public record IntVector(int x, int y, int z)
+{
 
     /**
      * Construct a new {@code IntVector} representing the specified {@link Block}.
      *
-     * @param block
-     *            the {@code Block}
+     * @param block the {@code Block}
      */
     public IntVector(@NotNull Block block)
     {
@@ -27,11 +26,9 @@ public record IntVector(int x, int y, int z) {
     }
 
     /**
-     * Construct a new {@code IntVector} representing the specified
-     * {@link Location}.
+     * Construct a new {@code IntVector} representing the specified {@link Location}.
      *
-     * @param location
-     *            the {@code Location}
+     * @param location the {@code Location}
      */
     public IntVector(@NotNull Location location)
     {
@@ -41,8 +38,7 @@ public record IntVector(int x, int y, int z) {
     /**
      * Construct a new {@code IntVector} representing the specified {@link Vector}.
      *
-     * @param vector
-     *            the {@code Vector}
+     * @param vector the {@code Vector}
      */
     public IntVector(@NotNull Vector vector)
     {
@@ -50,11 +46,9 @@ public record IntVector(int x, int y, int z) {
     }
 
     /**
-     * Get a {@link Block} representing the {@code IntVector} in the specified
-     * {@link World}.
+     * Get a {@link Block} representing the {@code IntVector} in the specified {@link World}.
      *
-     * @param world
-     *            the {@code World}
+     * @param world the {@code World}
      * @return the corresponding {@code Block}
      */
     public @NotNull Block toBlock(@NotNull World world)
@@ -63,11 +57,9 @@ public record IntVector(int x, int y, int z) {
     }
 
     /**
-     * Get a {@link Location} representing the {@code IntVector} in the specified
-     * {@link World}, if any.
+     * Get a {@link Location} representing the {@code IntVector} in the specified {@link World}, if any.
      *
-     * @param world
-     *            the optional {@code World}
+     * @param world the optional {@code World}
      * @return the corresponding {@code Location}
      */
     @Contract("_ -> new")
@@ -90,12 +82,9 @@ public record IntVector(int x, int y, int z) {
     /**
      * Create a new {@code IntVector} with the specified offset.
      *
-     * @param dX
-     *            the X coordinate offset
-     * @param dY
-     *            the Y coordinate offset
-     * @param dZ
-     *            the Z coordinate offset
+     * @param dX the X coordinate offset
+     * @param dY the Y coordinate offset
+     * @param dZ the Z coordinate offset
      * @return the {@code IntVector} created
      */
     @Contract("_, _, _ -> new")
@@ -107,8 +96,7 @@ public record IntVector(int x, int y, int z) {
     /**
      * Create a new {@code IntVector} with the specified offset.
      *
-     * @param other
-     *            the offset {@code IntVector}
+     * @param other the offset {@code IntVector}
      * @return the {@code IntVector} created
      */
     @Contract("_ -> new")
@@ -120,8 +108,7 @@ public record IntVector(int x, int y, int z) {
     /**
      * Calculate the squared distance to another {@code IntVector}.
      *
-     * @param other
-     *            the other {@code IntVector}
+     * @param other the other {@code IntVector}
      * @return the squared distance
      */
     public int distanceSquared(@NotNull IntVector other)
@@ -133,11 +120,10 @@ public record IntVector(int x, int y, int z) {
     }
 
     /**
-     * Check if the {@link org.bukkit.Chunk Chunk} containing the {@link Block} at
-     * the {@code IntVector's} coordinates is loaded.
+     * Check if the {@link org.bukkit.Chunk Chunk} containing the {@link Block} at the {@code IntVector's} coordinates
+     * is loaded.
      *
-     * @param world
-     *            the {@link World}
+     * @param world the {@link World}
      * @return true if the block is loaded
      */
     public boolean isChunkLoaded(@NotNull World world)

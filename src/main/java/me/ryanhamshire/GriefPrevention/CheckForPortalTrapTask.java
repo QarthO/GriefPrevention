@@ -28,13 +28,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 //if that happens, we detect the problem and send them back through the portal.
 class CheckForPortalTrapTask extends BukkitRunnable
 {
-
     GriefPrevention instance;
-
-    // player who recently teleported via nether portal
+    //player who recently teleported via nether portal
     private final Player player;
 
-    // where to send the player back to if he hasn't left the portal frame
+    //where to send the player back to if he hasn't left the portal frame
     private final Location returnLocation;
 
     public CheckForPortalTrapTask(Player player, GriefPrevention plugin, Location locationToReturn)
@@ -50,11 +48,7 @@ class CheckForPortalTrapTask extends BukkitRunnable
     {
         if (player.isOnline() && player.getPortalCooldown() >= 10 && player.hasMetadata("GP_PORTALRESCUE"))
         {
-            GriefPrevention.AddLogEntry(
-                    "Rescued " + player.getName() + " from a nether portal.\nTeleported from "
-                            + GriefPrevention.getfriendlyLocationString(player.getLocation()) + " to "
-                            + GriefPrevention.getfriendlyLocationString(returnLocation),
-                    CustomLogEntryTypes.Debug);
+            GriefPrevention.AddLogEntry("Rescued " + player.getName() + " from a nether portal.\nTeleported from " + GriefPrevention.getfriendlyLocationString(player.getLocation()) + " to " + GriefPrevention.getfriendlyLocationString(returnLocation), CustomLogEntryTypes.Debug);
             player.teleport(returnLocation);
             player.removeMetadata("GP_PORTALRESCUE", instance);
         }

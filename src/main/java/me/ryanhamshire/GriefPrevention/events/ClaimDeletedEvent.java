@@ -1,17 +1,13 @@
 package me.ryanhamshire.GriefPrevention.events;
 
+import me.ryanhamshire.GriefPrevention.Claim;
 import org.bukkit.event.HandlerList;
-
 import org.jetbrains.annotations.NotNull;
 
-import me.ryanhamshire.GriefPrevention.Claim;
-
 /**
- * An {@link org.bukkit.event.Event Event} called when a {@link Claim} is
- * deleted.
+ * An {@link org.bukkit.event.Event Event} called when a {@link Claim} is deleted.
  *
- * <p>
- * This event is not called when a claim is resized.
+ * <p>This event is not called when a claim is resized.
  *
  * @author Tux2
  */
@@ -21,8 +17,7 @@ public class ClaimDeletedEvent extends ClaimEvent
     /**
      * Construct a new {@code ClaimDeletedEvent}.
      *
-     * @param claim
-     *            the {@link Claim} being deleted
+     * @param claim the {@link Claim} being deleted
      */
     public ClaimDeletedEvent(@NotNull Claim claim)
     {

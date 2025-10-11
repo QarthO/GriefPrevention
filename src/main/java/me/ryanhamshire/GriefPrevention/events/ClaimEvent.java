@@ -1,10 +1,8 @@
 package me.ryanhamshire.GriefPrevention.events;
 
-import org.bukkit.event.Event;
-
-import org.jetbrains.annotations.NotNull;
-
 import me.ryanhamshire.GriefPrevention.Claim;
+import org.bukkit.event.Event;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * An {@link Event} involving a {@link Claim}.
@@ -17,8 +15,7 @@ public abstract class ClaimEvent extends Event
     /**
      * Construct a new {@code ClaimEvent}.
      *
-     * @param claim
-     *            the {@link Claim} involved
+     * @param claim the {@link Claim} involved
      */
     protected ClaimEvent(@NotNull Claim claim)
     {

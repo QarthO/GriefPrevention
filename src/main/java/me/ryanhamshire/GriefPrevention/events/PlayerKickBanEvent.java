@@ -4,12 +4,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
-
 import org.jetbrains.annotations.NotNull;
 
 /**
- * An {@link org.bukkit.event.Event Event} called when GriefPrevention kicks or
- * bans a {@link Player}.
+ * An {@link org.bukkit.event.Event Event} called when GriefPrevention kicks or bans a {@link Player}.
  *
  * @author BillyGalbreath on 03/10/2017
  */
@@ -17,22 +15,16 @@ public class PlayerKickBanEvent extends PlayerEvent implements Cancellable
 {
 
     private final @NotNull String reason;
-
     private final @NotNull String source;
-
     private final boolean ban;
 
     /**
      * Construct a new {@code PlayerKickBanEvent}.
      *
-     * @param player
-     *            the affected {@link Player}
-     * @param reason
-     *            the reason for the kick/ban
-     * @param source
-     *            the source of the kick/ban
-     * @param ban
-     *            whether the {@code Player} will be banned
+     * @param player the affected {@link Player}
+     * @param reason the reason for the kick/ban
+     * @param source the source of the kick/ban
+     * @param ban whether the {@code Player} will be banned
      */
     public PlayerKickBanEvent(Player player, @NotNull String reason, @NotNull String source, boolean ban)
     {

@@ -1,13 +1,11 @@
 package com.griefprevention.visualization.impl;
 
+import com.griefprevention.visualization.BlockElement;
+import com.griefprevention.util.IntVector;
 import org.bukkit.World;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
-
 import org.jetbrains.annotations.NotNull;
-
-import com.griefprevention.util.IntVector;
-import com.griefprevention.visualization.BlockElement;
 
 /**
  * A {@link BlockElement} that displays itself as a clientside block.
@@ -16,10 +14,12 @@ final class FakeBlockElement extends BlockElement
 {
 
     private final @NotNull BlockData realBlock;
-
     private final @NotNull BlockData visualizedBlock;
 
-    FakeBlockElement(@NotNull IntVector intVector, @NotNull BlockData realBlock, @NotNull BlockData visualizedBlock)
+    FakeBlockElement(
+            @NotNull IntVector intVector,
+            @NotNull BlockData realBlock,
+            @NotNull BlockData visualizedBlock)
     {
         super(intVector);
         this.realBlock = realBlock;
@@ -55,9 +55,10 @@ final class FakeBlockElement extends BlockElement
     public int hashCode()
     {
         /*
-         * We specifically use the BlockElement hashcode because we want elements at
-         * conflicting locations to be overwritten by the last element added - elements
-         * are stored in a Set and corners are added last.
+         * We specifically use the BlockElement hashcode because we
+         * want elements at conflicting locations to be overwritten
+         * by the last element added - elements are stored in a Set
+         * and corners are added last.
          */
         return super.hashCode();
     }

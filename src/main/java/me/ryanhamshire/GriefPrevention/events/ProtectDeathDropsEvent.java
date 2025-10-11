@@ -1,17 +1,15 @@
 package me.ryanhamshire.GriefPrevention.events;
 
+import me.ryanhamshire.GriefPrevention.Claim;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import me.ryanhamshire.GriefPrevention.Claim;
-
 /**
- * An {@link Event} called when GriefPrevention protects items after a death. If
- * cancelled, GriefPrevention will allow the event to complete normally.
+ * An {@link Event} called when GriefPrevention protects items after a death.
+ * If cancelled, GriefPrevention will allow the event to complete normally.
  */
 public class ProtectDeathDropsEvent extends Event implements Cancellable
 {
@@ -21,8 +19,7 @@ public class ProtectDeathDropsEvent extends Event implements Cancellable
     /**
      * Construct a new {@code ProtectDeathDropsEvent}.
      *
-     * @param claim
-     *            the claim in which the death occurred
+     * @param claim the claim in which the death occurred
      */
     public ProtectDeathDropsEvent(@Nullable Claim claim)
     {

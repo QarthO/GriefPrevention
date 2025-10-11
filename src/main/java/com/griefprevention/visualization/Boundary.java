@@ -1,24 +1,24 @@
 package com.griefprevention.visualization;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.util.BoundingBox;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A data holder defining an area to be visualized.
  */
-public record Boundary(@NotNull BoundingBox bounds, @NotNull VisualizationType type, @Nullable Claim claim) {
+public record Boundary(
+        @NotNull BoundingBox bounds,
+        @NotNull VisualizationType type,
+        @Nullable Claim claim)
+{
 
     /**
-     * Construct a new {@code Boundary} for a {@link BoundingBox} with the given
-     * visualization style.
+     * Construct a new {@code Boundary} for a {@link BoundingBox} with the given visualization style.
      *
-     * @param bounds
-     *            the {@code BoundingBox}
-     * @param type
-     *            the {@link VisualizationType}
+     * @param bounds the {@code BoundingBox}
+     * @param type the {@link VisualizationType}
      */
     public Boundary(@NotNull BoundingBox bounds, @NotNull VisualizationType type)
     {
@@ -26,13 +26,10 @@ public record Boundary(@NotNull BoundingBox bounds, @NotNull VisualizationType t
     }
 
     /**
-     * Construct a new {@code Boundary} for a {@link Claim} with the given
-     * visualization style.
+     * Construct a new {@code Boundary} for a {@link Claim} with the given visualization style.
      *
-     * @param claim
-     *            the {@code Claim}
-     * @param type
-     *            the {@link VisualizationType}
+     * @param claim the {@code Claim}
+     * @param type the {@link VisualizationType}
      */
     public Boundary(@NotNull Claim claim, @NotNull VisualizationType type)
     {

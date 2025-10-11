@@ -1,18 +1,6 @@
 package me.ryanhamshire.GriefPrevention;
 
-import static org.mockito.ArgumentMatchers.notNull;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
+import com.griefprevention.test.ServerMocks;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.Tag;
@@ -23,23 +11,33 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.Plugin;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.griefprevention.test.ServerMocks;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
+import static org.mockito.ArgumentMatchers.notNull;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class BlockEventHandlerTest
 {
-
     private static final UUID PLAYER_UUID = UUID.fromString("fa8d60a7-9645-4a9f-b74d-173966174739");
 
     @BeforeAll
     static void beforeAll()
     {
         Server server = ServerMocks.newServer();
-        doAnswer(invocation -> {
+        doAnswer(invocation ->
+        {
             Tag<?> tag = mock();
             doReturn(Set.of()).when(tag).getValues();
             return tag;
@@ -47,7 +45,7 @@ public class BlockEventHandlerTest
         Bukkit.setServer(server);
 
         // Touch class to load material list.
-        // noinspection ResultOfMethodCallIgnored
+        //noinspection ResultOfMethodCallIgnored
         BlockEventHandler.class.getName();
     }
 

@@ -1,17 +1,14 @@
 package me.ryanhamshire.GriefPrevention.events;
 
+import me.ryanhamshire.GriefPrevention.Claim;
 import org.bukkit.Location;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import me.ryanhamshire.GriefPrevention.Claim;
-
 /**
- * An {@link org.bukkit.event.Event Event} called when a user is rescued from a
- * {@link Claim}.
+ * An {@link org.bukkit.event.Event Event} called when a user is rescued from a {@link Claim}.
  */
 public class SaveTrappedPlayerEvent extends ClaimEvent implements Cancellable
 {
@@ -21,8 +18,7 @@ public class SaveTrappedPlayerEvent extends ClaimEvent implements Cancellable
     /**
      * Construct a new {@code ClaimChangeEvent}.
      *
-     * @param claim
-     *            {@link Claim} the user is to be rescued from
+     * @param claim {@link Claim} the user is to be rescued from
      */
     public SaveTrappedPlayerEvent(@NotNull Claim claim)
     {
@@ -30,8 +26,8 @@ public class SaveTrappedPlayerEvent extends ClaimEvent implements Cancellable
     }
 
     /**
-     * Get the destination that the user will be sent to. This is {@code null} by
-     * default, indicating that GriefPrevention will search for a safe location.
+     * Get the destination that the user will be sent to. This is {@code null} by default,
+     * indicating that GriefPrevention will search for a safe location.
      *
      * @return the destination to send the {@code Player} to
      */
@@ -44,8 +40,7 @@ public class SaveTrappedPlayerEvent extends ClaimEvent implements Cancellable
      * Set the destination that the user will be sent to. If {@code null},
      * GriefPrevention will search for a location.
      *
-     * @param destination
-     *            the destination to send the {@code Player} to
+     * @param destination the destination to send the {@code Player} to
      */
     public void setDestination(@Nullable Location destination)
     {
