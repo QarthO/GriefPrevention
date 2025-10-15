@@ -133,6 +133,16 @@
                             <searchRegex>^[ \t]+(\r?\n)</searchRegex>
                             <replacement>$1</replacement>
                         </replaceRegex>
+                        <replaceRegex>
+                            <name>collapseEmptyBlocks</name>
+                            <searchRegex>(?s)[\s\r\n]*\{[\s\r\n]*\}</searchRegex>
+                            <replacement>__FORMATTER_SPACE__ { }</replacement>
+                        </replaceRegex>
+                        <replaceRegex>
+                            <name>collapseEmptyBlocks</name>
+                            <searchRegex>__FORMATTER_SPACE__</searchRegex>
+                            <replacement></replacement>
+                        </replaceRegex>
                         <trimTrailingWhitespace/>
                         <endWithNewline/>
                     </java>
