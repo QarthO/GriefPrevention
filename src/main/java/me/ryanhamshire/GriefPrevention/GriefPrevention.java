@@ -487,9 +487,7 @@ public class GriefPrevention extends JavaPlugin
         {
             new MetricsHandler(this);
         }
-        catch (Throwable ignored)
-        {
-        }
+        catch (Throwable ignored) { }
     }
 
     private void loadConfig()

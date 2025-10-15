@@ -79,9 +79,7 @@ public class Metrics
             {
                 config.save(configFile);
             }
-            catch (IOException ignored)
-            {
-            }
+            catch (IOException ignored) { }
         }
         // Load the data
         boolean enabled = config.getBoolean("enabled", true);

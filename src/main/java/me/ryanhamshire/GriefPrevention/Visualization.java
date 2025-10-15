@@ -54,9 +54,7 @@ public class Visualization
     private final Collection<Boundary> boundaries = new ArrayList<>();
 
     @Deprecated(forRemoval = true, since = "16.18")
-    public Visualization()
-    {
-    }
+    public Visualization() { }
 
     /**
      * Send a visualization to a {@link Player}.

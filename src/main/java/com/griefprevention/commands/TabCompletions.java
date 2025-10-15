@@ -137,8 +137,6 @@ final class TabCompletions
         return args.length == 0 ? "" : args[args.length - 1];
     }
 
-    private TabCompletions()
-    {
-    }
+    private TabCompletions() { }
 
 }

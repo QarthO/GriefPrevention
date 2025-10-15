@@ -10,6 +10,7 @@
     <setting id="org.eclipse.jdt.core.formatter.brace_position_for_switch" value="next_line" />
     
     <!-- keep empty blocks on one line -->
+    <!-- this doesn't always work, so we also use a replaceRegex in the pom.xml -->
     <setting id="org.eclipse.jdt.core.formatter.keep_empty_block_on_one_line" value="true" />
 
     <!-- Require braces except simple one‑liners -->

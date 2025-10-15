@@ -57,9 +57,7 @@ class IgnoreLoaderThread extends Thread
                         UUID ignoredUUID = UUID.fromString(line);
                         this.destinationMap.put(ignoredUUID, adminIgnore);
                     }
-                    catch (IllegalArgumentException e)
-                    {
-                    } //if a bad UUID, ignore the line
+                    catch (IllegalArgumentException e) { } //if a bad UUID, ignore the line
                 }
             }
 
@@ -75,9 +73,7 @@ class IgnoreLoaderThread extends Thread
             {
                 if (needRetry) Thread.sleep(5);
             }
-            catch (InterruptedException exception)
-            {
-            }
+            catch (InterruptedException exception) { }
 
         } while (needRetry && retriesRemaining >= 0);
 

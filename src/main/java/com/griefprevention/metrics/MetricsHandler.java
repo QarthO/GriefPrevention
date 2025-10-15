@@ -22,9 +22,7 @@ public class MetricsHandler
         {
             addSimplePie("bukkit_implementation", plugin.getServer().getVersion().split("-")[1]);
         }
-        catch (Throwable ignored)
-        {
-        }
+        catch (Throwable ignored) { }
     }
 
     private void addSimplePie(String id, boolean value)

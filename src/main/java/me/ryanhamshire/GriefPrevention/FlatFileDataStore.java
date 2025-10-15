@@ -121,9 +121,7 @@ public class FlatFileDataStore extends DataStore
             {
                 if (inStream != null) inStream.close();
             }
-            catch (IOException exception)
-            {
-            }
+            catch (IOException exception) { }
         }
 
         //load next claim number from file
@@ -141,17 +139,13 @@ public class FlatFileDataStore extends DataStore
                 //try to parse into a long value
                 this.nextClaimID = Long.parseLong(line);
             }
-            catch (Exception e)
-            {
-            }
+            catch (Exception e) { }
 
             try
             {
                 if (inStream != null) inStream.close();
             }
-            catch (IOException exception)
-            {
-            }
+            catch (IOException exception) { }
         }
 
         //if converting up from schema version 0, rename player data files using UUIDs instead of player names
@@ -205,9 +199,7 @@ public class FlatFileDataStore extends DataStore
                         playerFile.renameTo(new File(playerDataFolder, playerID.toString()));
                     }
                 }
-                catch (Exception ex)
-                {
-                }
+                catch (Exception ex) { }
             }
         }
 
@@ -413,9 +405,7 @@ public class FlatFileDataStore extends DataStore
                 {
                     if (inStream != null) inStream.close();
                 }
-                catch (IOException exception)
-                {
-                }
+                catch (IOException exception) { }
             }
         }
     }
@@ -716,9 +706,7 @@ public class FlatFileDataStore extends DataStore
                 {
                     if (needRetry) Thread.sleep(5);
                 }
-                catch (InterruptedException exception)
-                {
-                }
+                catch (InterruptedException exception) { }
 
             } while (needRetry && retriesRemaining >= 0);
 
@@ -812,9 +800,7 @@ public class FlatFileDataStore extends DataStore
         {
             if (outStream != null) outStream.close();
         }
-        catch (IOException exception)
-        {
-        }
+        catch (IOException exception) { }
     }
 
     //grants a group (players with a specific permission) bonus claim blocks as long as they're still members of the group
@@ -850,9 +836,7 @@ public class FlatFileDataStore extends DataStore
                 outStream.close();
             }
         }
-        catch (IOException exception)
-        {
-        }
+        catch (IOException exception) { }
     }
 
     synchronized void migrateData(DatabaseDataStore databaseStore)
@@ -931,9 +915,7 @@ public class FlatFileDataStore extends DataStore
     }
 
     @Override
-    synchronized void close()
-    {
-    }
+    synchronized void close() { }
 
     @Override
     int getSchemaVersionFromStorage()
@@ -953,17 +935,13 @@ public class FlatFileDataStore extends DataStore
                 //try to parse into an int value
                 schemaVersion = Integer.parseInt(line);
             }
-            catch (Exception e)
-            {
-            }
+            catch (Exception e) { }
 
             try
             {
                 if (inStream != null) inStream.close();
             }
-            catch (IOException exception)
-            {
-            }
+            catch (IOException exception) { }
 
             return schemaVersion;
         }
@@ -1000,9 +978,7 @@ public class FlatFileDataStore extends DataStore
         {
             if (outStream != null) outStream.close();
         }
-        catch (IOException exception)
-        {
-        }
+        catch (IOException exception) { }
 
     }
 }

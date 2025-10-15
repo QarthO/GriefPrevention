@@ -29,9 +29,7 @@ import me.ryanhamshire.GriefPrevention.events.PreventBlockBreakEvent;
 public final class ProtectionHelper
 {
 
-    private ProtectionHelper()
-    {
-    }
+    private ProtectionHelper() { }
 
     /**
      * Check the {@link ClaimPermission} state for a {@link Player} at a particular {@link Location}.

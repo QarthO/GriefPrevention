@@ -260,9 +260,7 @@ public abstract class DataStore
             {
                 if (inStream != null) inStream.close();
             }
-            catch (IOException exception)
-            {
-            }
+            catch (IOException exception) { }
         }
     }
 
@@ -344,9 +342,7 @@ public abstract class DataStore
         {
             if (outStream != null) outStream.close();
         }
-        catch (IOException exception)
-        {
-        }
+        catch (IOException exception) { }
     }
 
     //removes cached player data from memory
@@ -1544,9 +1540,7 @@ public abstract class DataStore
             {
                 playerID = UUIDFetcher.getUUIDOf(name);
             }
-            catch (Exception ex)
-            {
-            }
+            catch (Exception ex) { }
 
             //if successful, replace player name with corresponding UUID
             if (playerID != null)

@@ -64,8 +64,6 @@ public final class ServerMocks
         }
     }
 
-    private ServerMocks()
-    {
-    }
+    private ServerMocks() { }
 
 }

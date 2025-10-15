@@ -227,9 +227,7 @@ public class DatabaseDataStore extends DataStore
                         }
                     }
                     //otherwise leave it as-is. no harm done - it won't be requested by name, and this update only happens once.
-                    catch (Exception ex)
-                    {
-                    }
+                    catch (Exception ex) { }
                 }
 
                 //refresh data connection in case data migration took a long time
@@ -630,9 +628,7 @@ public class DatabaseDataStore extends DataStore
                     this.databaseConnection.close();
                 }
             }
-            catch (SQLException e)
-            {
-            }
+            catch (SQLException e) { }
         }
 
         this.databaseConnection = null;
